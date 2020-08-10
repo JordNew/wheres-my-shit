@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0; }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit; }
+  
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%; }
+    @media only screen and (max-width: 68.75em) {
+      html {
+        font-size: 50%; } }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #655A56;
+    background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 2 * 4vw); }
+
+h1 {
+    font-size: 2.8em;  
+    position: relative;
+    top: 0.8em;
+    text-transform: uppercase;
+    transform: skewY(-2deg);
+  }
+
+h2 {
+    font-size: 1.7em;  
+    position: relative;
+    top: 0.7em;
+    left: 0.7em;
+    padding: 15px;
+  }
+
+.topleft {
+    overflow: auto;
+}
+
+.container {
+    max-width: 120rem;
+    margin: 4vw auto;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2rem 6rem 0.5rem rgba(101, 90, 86, 0.2);
+    display: grid;
+    grid-template-rows: 12rem minmax(100rem, auto);
+    grid-template-columns: 1.2fr 0.9fr 1.2fr;
+    grid-template-areas: "head head head" "add byMe fromMe"; }
+    @media only screen and (max-width: 68.75em) {
+      .container {
+        width: 100%;
+        margin: 0;
+        border-radius: 0; } }
+    
+.header {
+    grid-area: head;
+    background-color: #F9F5F3;
+    display: flex;
+    align-items: center; }
+    .header__logo {
+      height: 11rem;
+      float: left; 
+      padding: 5px;
+      margin-right: 5px;}
+
+.heading-2 {
+    position: relative;
+    float: left;
+    text-align: center;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+
+.btn {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+    text-decoration:none;
+    text-transform: uppercase;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.btn:hover {
+	background-color:#5cbf2a;
+}
+.btn:active {
+	position:relative;
+	top:1px;
+}
+
+.btn__addItem {
+    margin: 20px;
+}
+
+.copyright {
+    color: #968B87;
+    font-size: 1.2rem;
+    margin-top: auto; }
