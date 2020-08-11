@@ -25,7 +25,7 @@
     min-height: calc(100vh - 2 * 4vw); }
 
 h1 {
-    font-size: 2.8em;  
+    font-size: 2.7em;  
     position: relative;
     top: 0.8em;
     text-transform: uppercase;
@@ -53,7 +53,7 @@ h2 {
     box-shadow: 0 2rem 6rem 0.5rem rgba(101, 90, 86, 0.2);
     display: grid;
     grid-template-rows: 12rem minmax(100rem, auto);
-    grid-template-columns: 1.2fr 0.9fr 1.2fr;
+    grid-template-columns: 1.1fr 1fr 1fr;
     grid-template-areas: "head head head" "add byMe fromMe"; }
     @media only screen and (max-width: 68.75em) {
       .container {
@@ -78,18 +78,41 @@ h2 {
     text-align: center;
     font-size: 1.3em;
     text-transform: uppercase;
+    background-color: #f7ddd6;
+}
+
+.heading-3 {
+    position: relative;
+    float: left;
+    text-align: center;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    background-color: #cbeeb9;
+}
+
+.copyright {
+    color: #968B87;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: auto; }
+
+.addItem {
+    position: relative;
+    background-color:#f8f5f4;
+    overflow: auto;
 }
 
 .btn {
 	background-color:#44c767;
 	border-radius:28px;
 	border:1px solid #18ab29;
-	display:inline-block;
+	display: inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding:16px 31px;
+    padding:16px 31px;
+    text-align: center;
     text-decoration:none;
     text-transform: uppercase;
 	text-shadow:0px 1px 0px #2f6627;
@@ -103,11 +126,56 @@ h2 {
 }
 
 .btn__addItem {
-    margin: 20px;
+    position: absolute;
+    text-align: center;
+    display: inline-flexbox;
+    margin-left: 10rem;
+    margin-top: 5rem;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
-.copyright {
-    color: #968B87;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: auto; }
+.btn-tiny {
+    height: 1.75rem;
+    width: 1.75rem;
+    border: none;
+    background: none;
+    cursor: pointer; }
+    .btn-tiny svg {
+      height: 100%;
+      width: 100%;
+      fill: #F59A83;
+      transition: all .3s; }
+    .btn-tiny:focus {
+      outline: none; }
+    .btn-tiny:hover svg {
+      fill: #F48982;
+      transform: translateY(-1px); }
+    .btn-tiny:active svg {
+      fill: #F48982;
+      transform: translateY(0); }
+    .btn-tiny:not(:last-child) {
+      margin-right: .3rem; }
+
+.question {
+    color: #968B87;   
+}
+
+.borrowed__item {
+    display: flex;
+    font-size: 2em;
+    align-items: center;
+    padding: 2rem 2rem 2rem 4rem; 
+}
+
+.borrowedByMe {
+    background-color: #f7ddd6;
+}
+
+.borrowedFromMe {
+    background-color: #cbeeb9;
+}
+
+.form {
+    float: none;
+}

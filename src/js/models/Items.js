@@ -4,8 +4,8 @@ export default class Items {
         this.borrowedFromMe = [];
     }
 
-    addItem( id, borrower, owner, when, whenBack) {
-        const item = { id, borrower, owner, when, whenBack };
+    addItem(id, desc, borrower, owner, when, whenBack) {
+        const item = { id, desc, borrower, owner, when, whenBack };
     
         if (borrower === 'me') {
             this.borrowedByMe.push(item);
@@ -55,7 +55,7 @@ export default class Items {
         const storage1 = JSON.parse(localStorage.getItem('borrowedByMe'));
         const storage2 = JSON.parse(localStorage.getItem('borrowedFromMe'));
         
-        // Restore likes from the localStorage
+        // Restore borrowed items from the localStorage
         if (storage1) this.borrowedByMe = storage1;
         if (storage2) this.borrowedFromMe = storage2;
     }

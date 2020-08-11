@@ -1,4 +1,5 @@
-import { elements } from './views/base';
+import { elements, renderItem, deleteItem } from './views/base';
+import * as addItemView from './views/addItemView';
 
 /** Global state of the app
  * - Add object 
@@ -12,8 +13,8 @@ const state = {};
  * ADD CONTROLLER 
  */
 
-elements.addItem.addEventListener('click', e => {
-    alert('Yeehaw!');
+elements.buttonAddItem.addEventListener('click', e => {
+    addItemView.renderTextQuestion();
 });
 
 
