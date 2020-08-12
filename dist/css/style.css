@@ -25,7 +25,7 @@
     min-height: calc(100vh - 2 * 4vw); }
 
 h1 {
-    font-size: 2.7em;  
+    font-size: 2.6em;  
     position: relative;
     top: 0.8em;
     text-transform: uppercase;
@@ -39,6 +39,17 @@ h2 {
     left: 0.7em;
     padding: 15px;
   }
+
+label {
+    margin-left: 1.7em;
+}
+
+textarea {
+    position: relative;
+    margin-left: 2em;
+    width: 350px;
+    height: 60px;
+}
 
 .topleft {
     overflow: auto;
@@ -67,7 +78,7 @@ h2 {
     display: flex;
     align-items: center; }
     .header__logo {
-      height: 11rem;
+      height: 12rem;
       float: left; 
       padding: 5px;
       margin-right: 5px;}
@@ -115,14 +126,14 @@ h2 {
     text-align: center;
     text-decoration:none;
     text-transform: uppercase;
-	text-shadow:0px 1px 0px #2f6627;
+    text-shadow:0px 1px 0px #2f6627;
 }
 .btn:hover {
 	background-color:#5cbf2a;
 }
 .btn:active {
 	position:relative;
-	top:1px;
+    top:2px;
 }
 
 .btn__addItem {
@@ -133,6 +144,31 @@ h2 {
     margin-top: 5rem;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+.btn__goback {
+    background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display: inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+    padding:8px 15px;
+    margin-left: 1.7em;;
+    text-align: center;
+    text-decoration:none;
+    text-transform: uppercase;
+    text-shadow:0px 1px 0px #2f6627;   
+}
+
+.btn__goback:hover {
+	background-color:#5cbf2a;
+}
+.btn__goback:active {
+	position:relative;
+    top:2px;
 }
 
 .btn-tiny {
@@ -158,7 +194,9 @@ h2 {
       margin-right: .3rem; }
 
 .question {
-    color: #968B87;   
+    color: #96906C;
+    margin-top: 10px;
+    font-size: 2em;
 }
 
 .borrowed__item {
@@ -178,4 +216,8 @@ h2 {
 
 .form {
     float: none;
+}
+
+.required {
+    color: red;
 }

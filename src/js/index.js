@@ -1,4 +1,4 @@
-import { elements, renderItem, deleteItem } from './views/base';
+import { elements, questions, renderItem, deleteItem } from './views/base';
 import * as addItemView from './views/addItemView';
 
 /** Global state of the app
@@ -14,7 +14,13 @@ const state = {};
  */
 
 elements.buttonAddItem.addEventListener('click', e => {
-    addItemView.renderTextQuestion();
+
+    addItemView.renderQuestions();    
+    elements.buttonAddItem.disabled = true;
+    // elements.buttonAddItem.style.backgroundColor = '#849C81';
+    // elements.buttonAddItem.style.border = '#849C81';
+    // elements.buttonAddItem.style.color = '#A8B2A6';
+    elements.buttonAddItem.style.display = 'none';
 });
 
 

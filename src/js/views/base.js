@@ -1,7 +1,16 @@
 export const elements = {
     addItem: document.querySelector('.addItem'),
+    goBack: document.querySelector('.btn__goback'),
     buttonAddItem: document.querySelector('.btn__addItem')
 };
+
+export const questions = [
+        "What got borrowed?",
+        "Who is borrowing?",
+        "Who owns that shit?",
+        "When was this borrowed?",
+        "When to return it?"
+    ];
 
 export const renderItem = item => {
     const markup = `
