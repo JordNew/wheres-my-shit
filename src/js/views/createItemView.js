@@ -1,0 +1,73 @@
+import { elements } from './base';
+
+export const renderForm = () => {
+    
+    const markup = `
+        <br><br>
+        <label class="question__top">So ... </label><br>
+        <br><br>
+        <form class="create__form">
+            <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
+            <textarea id="what" rows="4" cols="50"></textarea><br><br>
+            <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
+            <textarea id="borrower" rows="4" cols="50"></textarea><br><br>
+            <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
+            <textarea id="owner" rows="4" cols="50"></textarea><br><br>
+            <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
+            <textarea id="when" rows="4" cols="50"></textarea><br><br>
+            <label class="question">When to return it?<span class="required"> *</span></label><br>
+            <textarea id="whenBack" rows="4" cols="50"></textarea><br><br>
+        </form>
+        <button class="btn__goback" onclick="location.reload();"><<</button>
+        <button type="submit" class="btn btn__saveItem" />Save</button>
+        `;
+    elements.createItem.insertAdjacentHTML('beforeend', markup);
+};
+
+// export const renderForm = () => {
+    
+//     const markup = `
+//         <br><br><br>
+//         <label class="question__top">So ... </label><br>
+//         <br><br>
+//         <form><div class="create__form"></div></form>
+//         `;
+//     elements.createItem.insertAdjacentHTML('beforeend', markup);
+// };
+
+// export const renderQuestions = () => {
+    
+//     const questions = [
+//         " ... what got borrowed?",
+//         "Who is borrowing?",
+//         "Who owns that shit?",
+//         "When was it borrowed?",
+//         "When to return it?"
+//     ];
+    
+//     const formElements = [];
+
+//     // Render questions onto form
+//     questions.forEach(el => {
+//         const markup = `
+//         <label class="question">${el}<span class="required"> *</span></label><br>
+//         <textarea rows="4" cols="50"></textarea><br><br>
+//         `;
+    
+//     // elements.createForm.insertAdjacentHTML('beforeend', markup);
+    
+//     formElements.push(markup);
+//     }); 
+
+//     // Inject questions into form
+//     formElements.forEach(el => {
+//         elements.createItem.insertAdjacentHTML('beforeend', el);
+//     });
+
+//     // Render Back button and Save button
+//     const save = `
+//         <button class="btn__goback" onclick="location.reload();"><<</button>
+//         <button type="submit" class="btn btn__saveItem" />Save</button>
+//     `;
+//     elements.createForm.insertAdjacentHTML('beforeend', save);
+// }

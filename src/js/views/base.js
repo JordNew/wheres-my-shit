@@ -1,7 +1,15 @@
 export const elements = {
-    addItem: document.querySelector('.addItem'),
+    createItem: document.querySelector('.create__item'),
+    createForm: document.querySelector('.create__form'),
+    what: document.getElementById('#what'),
+    borrower: document.getElementById('#borrower'),
+    owner: document.getElementById('#owner'),
+    when: document.getElementById('#when'),
+    whenBack: document.getElementById('#whenBack'),
     goBack: document.querySelector('.btn__goback'),
-    buttonAddItem: document.querySelector('.btn__addItem')
+    buttonCreateItem: document.querySelector('.btn__createItem'),
+    buttonAddQ: document.querySelector('.btn__addQ'),
+    buttonSaveItem: document.querySelector('.btn__saveItem')
 };
 
 export const questions = [

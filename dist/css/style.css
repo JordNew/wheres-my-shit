@@ -107,7 +107,7 @@ textarea {
     text-align: center;
     margin-top: auto; }
 
-.addItem {
+.create__item {
     position: relative;
     background-color:#f8f5f4;
     overflow: auto;
@@ -136,7 +136,7 @@ textarea {
     top:2px;
 }
 
-.btn__addItem {
+.btn__createItem, .btn__saveItem {
     position: absolute;
     text-align: center;
     display: inline-flexbox;
@@ -147,14 +147,14 @@ textarea {
 }
 
 .btn__goback {
-    background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
+    background-color:#e79418;
+	border-radius: 12px;
+	border:1px solid #e79418;
 	display: inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:17px;
+	font-size:15x;
     padding:8px 15px;
     margin-left: 1.7em;;
     text-align: center;
@@ -167,8 +167,7 @@ textarea {
 	background-color:#5cbf2a;
 }
 .btn__goback:active {
-	position:relative;
-    top:2px;
+	position: relative;
 }
 
 .btn-tiny {
@@ -197,6 +196,12 @@ textarea {
     color: #96906C;
     margin-top: 10px;
     font-size: 2em;
+}
+
+.question__top {
+    color: #96906C;
+    margin-top: 10px;
+    font-size: 2.5em;
 }
 
 .borrowed__item {

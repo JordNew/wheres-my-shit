@@ -1,5 +1,5 @@
 import { elements, questions, renderItem, deleteItem } from './views/base';
-import * as addItemView from './views/addItemView';
+import * as createItemView from './views/createItemView';
 
 /** Global state of the app
  * - Add object 
@@ -13,15 +13,24 @@ const state = {};
  * ADD CONTROLLER 
  */
 
-elements.buttonAddItem.addEventListener('click', e => {
+elements.buttonCreateItem.addEventListener('click', e => {
+    
+    elements.buttonCreateItem.disabled = true;
+    elements.buttonCreateItem.style.display = 'none';
 
-    addItemView.renderQuestions();    
-    elements.buttonAddItem.disabled = true;
-    // elements.buttonAddItem.style.backgroundColor = '#849C81';
-    // elements.buttonAddItem.style.border = '#849C81';
-    // elements.buttonAddItem.style.color = '#A8B2A6';
-    elements.buttonAddItem.style.display = 'none';
+    createItemView.renderForm();
 });
+
+elements.buttonSaveItem.addEventListener('click', e => {
+
+    console.log('holy smokes batman!');
+
+    if (elements.what.innerHTML === '') {
+        console.log('cowabunga!!');
+    }
+
+});
+
 
 
  /** 
