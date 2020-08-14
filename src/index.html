@@ -27,6 +27,25 @@
         <div class="create__item">
             <!-- <a href="#" class="btn btn__addItem">Add new item</a> -->
             <button class="btn btn__createItem">Add new item</button>
+            <div class="form" style="display: none;">
+                <br><br>
+                <label class="question__top">So ... </label><br>
+                <br><br>
+                <form class="create__form">
+                    <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
+                    <textarea id="what" rows="4" cols="50"></textarea><br><br>
+                    <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
+                    <textarea id="borrower" rows="4" cols="50"></textarea><br><br>
+                    <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
+                    <textarea id="owner" rows="4" cols="50"></textarea><br><br>
+                    <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
+                    <textarea id="when" rows="4" cols="50"></textarea><br><br>
+                    <label class="question">When to return it?<span class="required"> *</span></label><br>
+                    <textarea id="whenBack" rows="4" cols="50"></textarea><br><br>
+                </form>
+            </div>
+            <button class="btn__goback" onclick="location.reload();" style="display: none;">Go Back</button>
+            <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button>
         </div>
         <div>
             <ul class="borrowedByMe">

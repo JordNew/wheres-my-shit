@@ -14,22 +14,32 @@ const state = {};
  */
 
 elements.buttonCreateItem.addEventListener('click', e => {
-    
-    elements.buttonCreateItem.disabled = true;
-    elements.buttonCreateItem.style.display = 'none';
 
-    createItemView.renderForm();
+    createItemView.displayForm();
+
 });
 
 elements.buttonSaveItem.addEventListener('click', e => {
-
-    console.log('holy smokes batman!');
-
-    if (elements.what.innerHTML === '') {
-        console.log('cowabunga!!');
-    }
+   
+    createItemView.checkRequiredFields();
 
 });
+
+// TEST FUNCTION
+// const checkSaveBtn = () => {
+//     if (elements.buttonSaveItem) {
+//         elements.buttonSaveItem.addEventListener('click', e => {
+//             if (elements.what.value === '') {
+//                 console.log('This field is read and it is empty');
+//             } else {
+//                 console.log(elements.what.value);
+//             }
+//         });
+//     } else {
+//         console.log('No Save Button detected');
+//     }
+// };
+// checkSaveBtn();
 
 
 

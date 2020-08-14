@@ -219,10 +219,6 @@ textarea {
     background-color: #cbeeb9;
 }
 
-.form {
-    float: none;
-}
-
 .required {
     color: red;
 }

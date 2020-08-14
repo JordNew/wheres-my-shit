@@ -1,28 +1,57 @@
 import { elements } from './base';
 
-export const renderForm = () => {
+export const displayForm = () => {
     
-    const markup = `
-        <br><br>
-        <label class="question__top">So ... </label><br>
-        <br><br>
-        <form class="create__form">
-            <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
-            <textarea id="what" rows="4" cols="50"></textarea><br><br>
-            <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
-            <textarea id="borrower" rows="4" cols="50"></textarea><br><br>
-            <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
-            <textarea id="owner" rows="4" cols="50"></textarea><br><br>
-            <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
-            <textarea id="when" rows="4" cols="50"></textarea><br><br>
-            <label class="question">When to return it?<span class="required"> *</span></label><br>
-            <textarea id="whenBack" rows="4" cols="50"></textarea><br><br>
-        </form>
-        <button class="btn__goback" onclick="location.reload();"><<</button>
-        <button type="submit" class="btn btn__saveItem" />Save</button>
-        `;
-    elements.createItem.insertAdjacentHTML('beforeend', markup);
-};
+    elements.buttonCreateItem.disabled = true;
+    elements.buttonCreateItem.style.display = 'none';
+    elements.form.style.display = 'block';
+    elements.buttonSaveItem.style.display = 'block';
+    elements.goBack.style.display = 'block';
+
+}
+
+export const checkRequiredFields = () => {
+
+    if (elements.what.value === '') {
+        alert('The "what" field is required');
+    } else if (elements.borrower.value === '') {
+        alert('The "who" field is required');
+    } else if (elements.owner.value === '') {
+        alert('The "owner" field is required');
+    } else if (elements.when.value === '') {
+        alert('The "when" field is required');
+    } else if (elements.whenBack.value === '') {
+        alert('The "whenBack" field is required');
+    } else {
+        console.log('all fields were filled in successfully');
+    }
+
+}
+
+export const saveItem = () => {
+    checkRequiredFields();
+}
+
+//     const markup = `
+//         <br><br>
+//         <label class="question__top">So ... </label><br>
+//         <br><br>
+//         <form class="create__form">
+//             <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
+//             <textarea id="what" rows="4" cols="50"></textarea><br><br>
+//             <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
+//             <textarea id="borrower" rows="4" cols="50"></textarea><br><br>
+//             <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
+//             <textarea id="owner" rows="4" cols="50"></textarea><br><br>
+//             <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
+//             <textarea id="when" rows="4" cols="50"></textarea><br><br>
+//             <label class="question">When to return it?<span class="required"> *</span></label><br>
+//             <textarea id="whenBack" rows="4" cols="50"></textarea><br><br>
+//         </form>
+        
+//         `;
+//     elements.createItem.insertAdjacentHTML('afterbegin', markup);
+// };
 
 // export const renderForm = () => {
     
@@ -70,4 +99,3 @@ export const renderForm = () => {
 //         <button type="submit" class="btn btn__saveItem" />Save</button>
 //     `;
 //     elements.createForm.insertAdjacentHTML('beforeend', save);
-// }
