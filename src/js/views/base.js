@@ -2,7 +2,7 @@ export const elements = {
     createItem: document.querySelector('.create__item'),
     createForm: document.querySelector('.create__form'),
     form: document.querySelector('.form'),
-    what: document.getElementById('what'),
+    desc: document.getElementById('what'),
     borrower: document.getElementById('borrower'),
     owner: document.getElementById('owner'),
     when: document.getElementById('when'),

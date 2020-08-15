@@ -1,4 +1,5 @@
 import { elements } from './base';
+import Item from '../models/Item';
 
 export const displayForm = () => {
     
@@ -12,25 +13,32 @@ export const displayForm = () => {
 
 export const checkRequiredFields = () => {
 
-    if (elements.what.value === '') {
+    let check = false;
+
+    if (elements.desc.value === '') {
         alert('The "what" field is required');
+        return check;
     } else if (elements.borrower.value === '') {
         alert('The "who" field is required');
+        return check;
     } else if (elements.owner.value === '') {
         alert('The "owner" field is required');
+        return check;
     } else if (elements.when.value === '') {
         alert('The "when" field is required');
+        return check;
     } else if (elements.whenBack.value === '') {
         alert('The "whenBack" field is required');
+        return check;
     } else {
         console.log('all fields were filled in successfully');
+        check = true;
+        return check;
     }
-
+    // check = true;
+    // return check;
 }
 
-export const saveItem = () => {
-    checkRequiredFields();
-}
 
 //     const markup = `
 //         <br><br>

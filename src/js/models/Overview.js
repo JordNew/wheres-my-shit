@@ -1,4 +1,4 @@
-export default class Items {
+export default class Overview {
     constructor() {
         this.borrowedByMe = [];
         this.borrowedFromMe = [];
