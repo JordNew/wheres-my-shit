@@ -1,6 +1,7 @@
 import { elements, questions, renderItem, deleteItem } from './views/base';
-import * as createItemView from './views/createItemView';
-import * as Item from './models/Item';
+import ItemList from './models/ItemList';
+import Overview from './models/Overview';
+import * as itemView from './views/itemView';
 
 /** Global state of the app
  * - Add object 
@@ -16,32 +17,35 @@ const state = {};
 
 elements.buttonCreateItem.addEventListener('click', e => {
 
-    createItemView.displayForm();
+    itemView.displayForm();
 
 });
 
 elements.buttonSaveItem.addEventListener('click', e => {
 
-    if (createItemView.checkRequiredFields()) {
-        
-        state.items = new Item();
+    if (itemView.checkRequiredFields()) {
 
-        state.items.createItem(elements.desc.value, elements.borrower.value, elements.owner.value, elements.when.value, elements.whenBack.value);
-        console.log('kom op!');
+        // Create a new ItemList IF there is none yet
+        if (!state.items) state.items = new ItemList();
+        
+        // create new item
+        state.items.createItem(
+            elements.desc.value,
+            elements.borrower.value,
+            elements.owner.value,
+            elements.when.value,
+            elements.whenBack.value,
+        );
+        itemView.clearForm();
+        console.log(state.items);
     }
 
-    // try {
-    //     if (createItemView.checkRequiredFields()) {
-    //         console.log('what: ' + elements.desc.value);
-    //         CreateItem.createItem(elements.desc.value, elements.borrower.value, elements.owner.value, elements.when.value, elements.whenBack.value);
-    //     }
-    // } catch {
-    //     alert('Something went wrong with creating the new item');
-    // } finally {
-    //     console.log('done creating new item');
-    // }
+    // if (!state.overview) state.overview = new Overview();
+    // controlOverview();
+    // state.overview.addItem(itemView.checkRequiredFields());
+    // console.log(itemView.checkRequiredFields());
+    // itemView.clearForm();
 
-    
 });
 
 // TEST FUNCTION
@@ -63,11 +67,27 @@ elements.buttonSaveItem.addEventListener('click', e => {
 
 
  /** 
- * BORROWEDBYME CONTROLLER 
+ * OVERVIEW CONTROLLER 
  */
 
+const controlOverview = () => {
+    
+    // Create a new Overview IF there is none yet
+    if (!state.overview) state.overview = new Overview();
+    
+    console.log(state);
+
+    // state.overview.addItem(item);
+
+    
 
 
- /** 
- * BORROWEDFROMME CONTROLLER 
- */
+    /*
+    // Add each ingredient to the list and UI
+    state.recipe.ingredients.forEach(el => {
+        const item = state.list.addItem(el.count, el.unit, el.ingredient);
+        listView.renderItem(item);
+        // console.log(`state = ${state}`);
+    });
+    */
+}

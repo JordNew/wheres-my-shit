@@ -4,10 +4,9 @@ export default class Overview {
         this.borrowedFromMe = [];
     }
 
-    addItem(id, desc, borrower, owner, when, whenBack) {
-        const item = { id, desc, borrower, owner, when, whenBack };
-    
-        if (borrower === 'me') {
+    addItem(item) {
+            
+        if (item.borrower === 'me') {
             this.borrowedByMe.push(item);
     
             // Persist data in localStorage
@@ -23,9 +22,9 @@ export default class Overview {
         }
     }
 
-    deleteItem(id, borrower) {
+    deleteItem(item) {
         
-        if (borrower === 'me') {
+        if (item.borrower === 'me') {
             const index = this.borrowedByMe.findIndex(el => el.id === id);
             this.borrowedByMe.splice(index, 1);
 

@@ -1,13 +1,14 @@
 import { elements } from '../views/base';
 import uniqid from 'uniqid';
 
-export default class Item {
+
+export default class ItemList {
     constructor() {
         this.items = [];
     }
 
     createItem(desc, borrower, owner, when, whenBack) {
-        console.log('frenkie');
+
         const item = {
             id: uniqid(),
             desc,
