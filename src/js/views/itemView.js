@@ -18,11 +18,11 @@ export const checkRequiredFields = () => {
     if (elements.desc.value === '') {
         alert('The "what" field is required');
         // return check;
-    } else if (elements.borrower.value === '') {
-        alert('The "who" field is required');
+    } else if (!elements.meBorrower.checked && !elements.notMeBorrower.checked) {
+        alert('... but WHO is borrowing??');
         // return check;
-    } else if (elements.owner.value === '') {
-        alert('The "owner" field is required');
+    } else if (!elements.meOwner.checked && !elements.notMeOwner.checked) {
+        alert('... but who OWNS that shit??');
         // return check;
     } else if (elements.when.value === '') {
         alert('The "when" field is required');
@@ -53,6 +53,7 @@ export const clearForm = () => {
     elements.when.value = '';
     elements.whenBack.value = '';
 }
+
 
 
 //     const markup = `

@@ -3,14 +3,24 @@ export const elements = {
     createForm: document.querySelector('.create__form'),
     form: document.querySelector('.form'),
     desc: document.getElementById('what'),
-    borrower: document.getElementById('borrower'),
-    owner: document.getElementById('owner'),
+    meBorrower: document.getElementById('me__borrower'),
+    notMeBorrower: document.getElementById('notMe__borrower'),
+    notMeBorrowerInput: document.getElementById('borrower'),
+    labelMeBorrower: document.getElementById('labelMeBorrower'),
+    labelNotMeBorrower: document.getElementById('labelNotMeBorrower'),
+    meOwner: document.getElementById('me__owner'),
+    notMeOwner: document.getElementById('notMe__owner'),
+    notMeOwnerInput: document.getElementById('owner'),
+    labelMeOwner: document.getElementById('labelMeOwner'),
+    labelNotMeOwner: document.getElementById('labelNotMeOwner'),
     when: document.getElementById('when'),
     whenBack: document.getElementById('whenBack'),
     goBack: document.querySelector('.btn__goback'),
     buttonCreateItem: document.querySelector('.btn__createItem'),
     buttonAddQ: document.querySelector('.btn__addQ'),
-    buttonSaveItem: document.querySelector('.btn__saveItem')
+    buttonSaveItem: document.querySelector('.btn__saveItem'),
+    borrowedByMe: document.querySelector('.borrowedByMe'),
+    borrowedFromMe: document.querySelector('.borrowedFromMe')
 };
 
 export const questions = [

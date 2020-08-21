@@ -1,4 +1,4 @@
-export default class Overview {
+export default class Dashboard {
     constructor() {
         this.borrowedByMe = [];
         this.borrowedFromMe = [];

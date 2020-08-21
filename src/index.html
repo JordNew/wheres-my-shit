@@ -34,33 +34,45 @@
                 <form class="create__form">
                     <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
                     <textarea id="what" rows="4" cols="50"></textarea><br><br>
+                    
                     <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
-                    <textarea id="borrower" rows="4" cols="50"></textarea><br><br>
+                    <input type="radio" class="block" id="me__borrower" name="borrower" value="me">
+                    <label for="me" id="labelMeBorrower">Me</label><br>
+                    <input type="radio" class="block" id="notMe__borrower" name="borrower" value="not me, but:">
+                    <label for="notMe" id="labelNotMeBorrower">Not me, but:</label><br>
+                    <textarea id="borrower" rows="4" cols="50" class="block" style="display: none;"></textarea><br><br>
+                    
                     <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
-                    <textarea id="owner" rows="4" cols="50"></textarea><br><br>
+                    <input type="radio" class="block" id="me__owner" name="owner" value="me">
+                    <label for="me" id="labelMeOwner">Me</label><br>
+                    <input type="radio" class="block" id="notMe__owner" name="owner" value="not me, but:">
+                    <label for="notMe" id="labelNotMeOwner">Not me, but:</label><br>
+                    <textarea id="owner" rows="4" cols="50" class="block" style="display: none;"></textarea><br><br>
+                    
                     <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
                     <textarea id="when" rows="4" cols="50"></textarea><br><br>
+                    
                     <label class="question">When to return it?<span class="required"> *</span></label><br>
                     <textarea id="whenBack" rows="4" cols="50"></textarea><br><br>
                 </form>
             </div>
-            <button class="btn__goback" onclick="location.reload();" style="display: none;">Go Back</button>
+            <button class="btn__goback" onclick="location.reload();" style="display: none;"><< Start Again</button>
             <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button>
         </div>
         <div>
             <ul class="borrowedByMe">
-                <li class="borrowed__item">item1</li>
+                <!-- <li class="borrowed__item">item1</li>
                 <li class="borrowed__item">item2</li>
                 <li class="borrowed__item">item3</li>
-                <li class="borrowed__item"> ... </li>
+                <li class="borrowed__item"> ... </li> -->
             </ul>
         </div>
         <div>
             <ul class="borrowedFromMe">
-                <li class="borrowed__item">item1</li>
+                <!-- <li class="borrowed__item">item1</li>
                 <li class="borrowed__item">item2</li>
                 <li class="borrowed__item">item3</li>
-                <li class="borrowed__item"> ... </li>
+                <li class="borrowed__item"> ... </li> -->
             </ul>
         </div>
         <div>

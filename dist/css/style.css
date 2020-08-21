@@ -222,3 +222,8 @@ textarea {
 .required {
     color: red;
 }
+
+.block {
+  display: block;
+  margin: 1.2em;
+}
