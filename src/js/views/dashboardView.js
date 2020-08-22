@@ -27,7 +27,7 @@ export const renderItem = item => {
     else {
      
         const markup = `
-        <li class="borrowedByMe__item" data-itemid=${item.id}>
+        <li class="borrowedFromMe__item" data-itemid=${item.id}>
             <div class="borrowedByMe__count">
                 <p>Item: ${item.desc}</p>
                 <p>Borrowed by: ${item.borrower}</p>

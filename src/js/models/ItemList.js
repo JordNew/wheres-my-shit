@@ -17,6 +17,7 @@ export default class ItemList {
             whenBack
         }
         this.items.push(item);
+        this.persistData();
         return item;
     }
 
@@ -27,4 +28,14 @@ export default class ItemList {
         this.items.splice(index, 1);
     }
 
+    persistData() {
+        localStorage.setItem('items', JSON.stringify(this.items));
+    }
+
+    readStorage() {
+        const storage = JSON.parse(localStorage.getItem('items'));
+        
+        // Restore borrowed items from the localStorage
+        if (storage) this.items = storage;
+    }
 }

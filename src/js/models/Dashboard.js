@@ -58,5 +58,6 @@ export default class Dashboard {
         if (storage1) this.borrowedByMe = storage1;
         if (storage2) this.borrowedFromMe = storage2;
     }
+
 }
 

@@ -40,10 +40,6 @@ h2 {
     padding: 15px;
   }
 
-label {
-    margin-left: 1.7em;
-}
-
 textarea {
     position: relative;
     margin-left: 2em;
@@ -226,4 +222,19 @@ textarea {
 .block {
   display: block;
   margin: 1.2em;
+}
+
+.label {
+  margin-left: 1.7em;
+}
+
+.radio {
+  float: left;
+  margin: 1em;
+}
+
+.label__radio {
+  float: right;
+  margin: 1em;
+  margin-left: 1.7em;
 }
