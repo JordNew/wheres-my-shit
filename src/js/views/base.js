@@ -1,4 +1,6 @@
 export const elements = {
+    headingByMe: document.getElementById('heading__byMe'),
+    headingFromMe: document.getElementById('heading__fromMe'),
     createItem: document.querySelector('.create__item'),
     createForm: document.querySelector('.create__form'),
     form: document.querySelector('.form'),

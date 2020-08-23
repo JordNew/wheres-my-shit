@@ -31,16 +31,6 @@ export const checkRequiredFields = () => {
         alert('The "whenBack" field is required');
         // return check;
     } else {
-        console.log('all fields were filled in successfully');
-        // const item = new Item(
-        //     elements.desc.value,
-        //     elements.borrower.value,
-        //     elements.owner.value,
-        //     elements.when.value,
-        //     elements.whenBack.value,
-        // );
-        // return item;
-        // console.log(item);
         check = true;
         return check;   
     }

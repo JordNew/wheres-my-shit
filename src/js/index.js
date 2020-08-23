@@ -1,8 +1,10 @@
 import { elements, questions, renderItem, deleteItem } from './views/base';
 import ItemList from './models/ItemList';
 import Dashboard from './models/Dashboard';
+import Heading2 from './models/Heading2';
 import * as itemView from './views/itemView';
 import * as dashboardView from './views/dashboardView';
+import * as heading2View from './views/heading2View';
 
 /** Global state of the app
  * - Add object 
@@ -12,6 +14,7 @@ import * as dashboardView from './views/dashboardView';
 const state = {};
 
 window.state = state;
+
 
 /** 
  * ADD CONTROLLER 
@@ -127,6 +130,10 @@ elements.buttonSaveItem.addEventListener('click', e => {
             
             // Add all items to dashboard
             controlDashboard();
+
+            // Update number of items in UI
+            // heading2View.updateNumItemsByMe();
+            // heading2View.updateNumItemsFromMe();
         }
 
     }
@@ -201,6 +208,9 @@ elements.borrowedByMe.addEventListener('click', e => {
 
         //Delete from UI
         dashboardView.deleteItem(id);
+
+        // Update number of items in UI
+        heading2View.updateNumItemsByMe();
     }
 })
 
@@ -213,8 +223,11 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // Delete from state
         state.dashboard.deleteItem(id);
 
-        //Delete from UI
+        // Delete from UI
         dashboardView.deleteItem(id);
+
+        // Update number of items in UI
+        heading2View.updateNumItemsFromMe();
     }
 })
 
@@ -224,13 +237,11 @@ elements.borrowedFromMe.addEventListener('click', e => {
 window.addEventListener('load', () => {
     state.dashboard = new Dashboard();
 
-    // Restore items
+    // Restore items + numbers
     state.dashboard.readStorage();
+    heading2View.updateNumItemsByMe();
+    heading2View.updateNumItemsFromMe();
 
     // Render all borrowed items to dashboard
     renderDashboard();
 });
-
-
-
-
