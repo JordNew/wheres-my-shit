@@ -11,6 +11,7 @@ import * as dashboardView from './views/dashboardView';
 */
 const state = {};
 
+window.state = state;
 
 /** 
  * ADD CONTROLLER 
@@ -186,8 +187,36 @@ const renderDashboard = () => {
     state.dashboard.borrowedFromMe.forEach(el => {
     dashboardView.renderItem(el);
     });
-
 }
+
+
+// Handle, delete and update borrowedByMe item events
+elements.borrowedByMe.addEventListener('click', e => {
+    const id = e.target.closest('.borrowedByMe__item').dataset.itemid;
+
+    //Handle the delete button
+    if (e.target.matches('.item__delete, .item__delete *')) {
+        // Delete from state
+        state.dashboard.deleteItem(id);
+
+        //Delete from UI
+        dashboardView.deleteItem(id);
+    }
+})
+
+// Handle, delete and update borrowedFromMe item events
+elements.borrowedFromMe.addEventListener('click', e => {
+    const id = e.target.closest('.borrowedFromMe__item').dataset.itemid;
+
+    //Handle the delete button
+    if (e.target.matches('.item__delete, .item__delete *')) {
+        // Delete from state
+        state.dashboard.deleteItem(id);
+
+        //Delete from UI
+        dashboardView.deleteItem(id);
+    }
+})
 
 
 
@@ -200,4 +229,8 @@ window.addEventListener('load', () => {
 
     // Render all borrowed items to dashboard
     renderDashboard();
-})
+});
+
+
+
+

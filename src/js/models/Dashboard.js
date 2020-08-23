@@ -22,22 +22,30 @@ export default class Dashboard {
         }
     }
 
-    deleteItem(item) {
+
+    deleteItem(id) {
+
+        // Delete from borrowedByMe ...
+        this.borrowedByMe.forEach(el => {
+            if (el.id === id) {
+                const index = this.borrowedByMe.findIndex(el => el.id === id);
+                this.borrowedByMe.splice(index, 1);
+            }
+        });
+
+        // ... or delete from borrowedFromMe
+        this.borrowedFromMe.forEach(el => {
+            if (el.id === id) {
+                const index = this.borrowedFromMe.findIndex(el => el.id === id);
+                this.borrowedFromMe.splice(index, 1);
+            }
+        });
         
-        if (item.borrower === 'me') {
-            const index = this.borrowedByMe.findIndex(el => el.id === id);
-            this.borrowedByMe.splice(index, 1);
-
-            // Persist data in localStorage
-            this.persistData();
-        } else {
-            const index = this.borrowedFromMe.findIndex(el => el.id === id);
-            this.borrowedFromMe.splice(index, 1);
-
-            // Persist data in localStorage
-            this.persistData();
-        }
+        // Persist data in localStorage
+        this.persistData();
+        
     }
+    
 
     getNumItems() {
         const numBorrowedByMe = this.borrowedByMe.length;

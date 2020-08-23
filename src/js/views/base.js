@@ -20,7 +20,9 @@ export const elements = {
     buttonAddQ: document.querySelector('.btn__addQ'),
     buttonSaveItem: document.querySelector('.btn__saveItem'),
     borrowedByMe: document.querySelector('.borrowedByMe'),
-    borrowedFromMe: document.querySelector('.borrowedFromMe')
+    borrowedFromMe: document.querySelector('.borrowedFromMe'),
+    borrowedByMeItem: document.querySelector('.borrowedByMe__item'),
+    borrowedFromMeItem: document.querySelector('.borrowedFromMe__item')
 };
 
 export const questions = [
