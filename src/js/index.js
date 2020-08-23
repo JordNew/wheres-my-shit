@@ -5,6 +5,7 @@ import Heading2 from './models/Heading2';
 import * as itemView from './views/itemView';
 import * as dashboardView from './views/dashboardView';
 import * as heading2View from './views/heading2View';
+import moment from 'moment';
 
 /** Global state of the app
  * - Add object 
@@ -30,12 +31,15 @@ elements.buttonCreateItem.addEventListener('click', e => {
 elements.notMeBorrower.addEventListener('click', e => {
     // display borrower text input
     elements.notMeBorrowerInput.style.display = 'block';
-    // show owner radio buttons + text labels 
-    elements.meOwner.style.display = 'block';
-    elements.notMeOwner.style.display = 'block';
-    elements.labelMeOwner.style.display = 'block';
-    elements.labelNotMeOwner.style.display = 'block';
-})
+    
+    if (!elements.meBorrower.checked) { // otherwise the text label jumps down
+        // show owner radio buttons + text labels 
+        elements.meOwner.style.display = 'block';
+        elements.notMeOwner.style.display = 'block';
+        elements.labelMeOwner.style.display = 'block';
+        elements.labelNotMeOwner.style.display = 'block';
+    }
+});
 
 // When radio button BORROWER 'me' is clicked:
 elements.meBorrower.addEventListener('click', e => {
@@ -60,11 +64,14 @@ elements.meBorrower.addEventListener('click', e => {
 elements.notMeOwner.addEventListener('click', e => {
     // display owner text input
     elements.notMeOwnerInput.style.display = 'block';
-    // show borrower radio buttons + text labels 
-    elements.meBorrower.style.display = 'block';
-    elements.notMeBorrower.style.display = 'block';
-    elements.labelMeBorrower.style.display = 'block';
-    elements.labelNotMeBorrower.style.display = 'block';
+    
+    if (!elements.meOwner.checked) { // otherwise the text label jumps down
+        // show borrower radio buttons + text labels
+        elements.meBorrower.style.display = 'block';
+        elements.notMeBorrower.style.display = 'block';
+        elements.labelMeBorrower.style.display = 'block';
+        elements.labelNotMeBorrower.style.display = 'block';
+    }
 })
 
 // When radio button OWNER 'me' is clicked: 
@@ -81,6 +88,31 @@ elements.meOwner.addEventListener('click', e => {
     elements.notMeBorrowerInput.style.display = 'block';
 })
 
+// When radio button WHEN 'borrowed on' is clicked:
+elements.whenCalRadio.addEventListener('click', e => {
+    // Display calendar
+    elements.whenCal.style.display = 'block';
+});
+
+// When radio button WHEN 'not sure' is clicked:
+elements.whenNotSure.addEventListener('click', e => {
+    // Hide calendar
+    elements.whenCal.style.display = 'none';
+});
+
+// When radio button WHENBACK 'return item by' is clicked:
+elements.whenBackCalRadio.addEventListener('click', e => {
+    // Display calendar
+    elements.whenBackCal.style.display = 'block';
+});
+
+// When radio button WHENBACK 'not sure' is clicked:
+elements.whenBackNotSure.addEventListener('click', e => {
+    // Hide calendar
+    elements.whenBackCal.style.display = 'none';
+});
+
+
 
 // When SAVE button is clicked
 elements.buttonSaveItem.addEventListener('click', e => {
@@ -95,7 +127,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
             // Create a new ItemList IF there is none yet
             if (!state.items) state.items = new ItemList();
             
-            // Read borrower value
+            // Read BORROWER value
             const borrowerValue = () => {
                 if (elements.meBorrower.checked) {
                     return 'me';
@@ -104,7 +136,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 }
             }
 
-            // Read owner value
+            // Read OWNER value
             const ownerValue = () => {
                 if (elements.meOwner.checked) {
                     return 'me';
@@ -113,13 +145,36 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 }
             }
 
+            // Read WHEN value
+            const whenValue = () => {
+                if (elements.whenNotSure.checked) {
+                    return 'not sure';
+                } else if (elements.whenCalRadio.checked && elements.whenCal.value === '') {
+                    alert('Please select date or choose "not sure"');
+                } else if (elements.whenCalRadio.checked) {
+                    return elements.whenCal.value;
+                }
+            }
+            
+            // Read WHENBACK value
+            const whenBackValue = () => {
+                if (elements.whenBackNotSure.checked) {
+                    return 'not sure';
+                } else if (elements.whenBackCalRadio.checked && !elements.whenBackCal.value) {
+                    alert('Please select date or choose "not sure"');
+                } else if (elements.whenBackCalRadio.checked) {
+                    return elements.whenBackCal.value;
+                }
+            }
+
+
             // Create new item (and store in ItemList aka state.items)
             const newItem = state.items.createItem(
                 elements.desc.value,
                 borrowerValue(),
                 ownerValue(),
-                elements.when.value,
-                elements.whenBack.value
+                whenValue(),
+                whenBackValue()
             );
 
             // TESTING

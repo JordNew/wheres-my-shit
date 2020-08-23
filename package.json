@@ -17,6 +17,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "moment": "^2.27.0",
     "uniqid": "^5.2.0"
   }
 }
