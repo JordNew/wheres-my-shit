@@ -184,13 +184,11 @@ elements.buttonSaveItem.addEventListener('click', e => {
             // TESTING
             console.log(state);
             
-            // Clear form after submitting item
-            itemView.clearForm();
-            
             // Add all items to dashboard
             controlDashboard();
 
-            // Restore start page (hide form)
+            // Restore start page: feedback, clear & hide form
+            // ToDo: function for feedback at Save Item
             init();
         }
 
@@ -254,7 +252,9 @@ const renderDashboard = () => {
     });
 }
 
+// Init function to reset start page
 const init = () => {
+    itemView.clearForm();
     itemView.hideForm();
 }
 
