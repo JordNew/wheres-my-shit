@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <title>Where's My Shit? - Keep track of borrowed stuff.</title>
+    <title>Where's My Shit? - Keeping track of borrowed stuff.</title>
 </head>
 <body>
     <div class="container">
@@ -26,46 +26,52 @@
         </div>
         <div class="create__item">
             <!-- <a href="#" class="btn btn__addItem">Add new item</a> -->
-            <button class="btn btn__createItem">Add new item</button>
+            <div class="create__item__top">
+                <button class="btn btn__createItem">Add new item</button>
+            </div>
             <div class="form" style="display: none;">
-                <br><br>
-                <label class="question__top">So ... </label><br>
-                <br><br>
-                <form class="create__form">
-                    <label class="question">... what got borrowed?<span class="required"> *</span></label><br>
-                    <textarea id="what" rows="4" cols="50"></textarea><br><br>
-                    
-                    <label class="question">Who is borrowing?<span class="required"> *</span></label><br>
-                    <input type="radio" class="block radio" id="me__borrower" name="borrower" value="me">
-                    <label for="me" class="label__radio" id="label__meBorrower">Me</label><br>
-                    <input type="radio" class="block radio" id="notMe__borrower" name="borrower" value="not_me_ but">
-                    <label for="notMe" class="label__radio" id="label__notMeBorrower">Not me, but:</label><br>
-                    <textarea id="borrower" rows="4" cols="50" class="block" style="display: none;"></textarea><br><br>
-                    
-                    <label class="question">Who owns that shit?<span class="required"> *</span></label><br>
-                    <input type="radio" class="block radio" id="me__owner" name="owner" value="me">
-                    <label for="me" class="label__radio" id="label__meOwner">Me</label><br>
-                    <input type="radio" class="block radio" id="notMe__owner" name="owner" value="not_me_but">
-                    <label for="notMe" class="label__radio" id="label__notMeOwner">Not me, but:</label><br>
-                    <textarea id="owner" rows="4" cols="50" class="block" style="display: none;"></textarea><br><br>
-                    
-                    <label class="question">When was it borrowed?<span class="required"> *</span></label><br>
-                    <input type="radio" class="block radio" id="when_not_sure" name="when" value="not_sure">
-                    <label for="not_sure" class="label__radio" id="label__when_not_sure">Not sure</label><br>
-                    <input type="radio" class="block radio" id="when_cal_radio" name="when" value="when_cal_radio">
-                    <label for="borrowed_on" class="label__radio" id="label__borrowed_on">Borrowed on:</label><br>
-                    <input type="date" class="block" id="when_cal" name="when" style="display: none;">
-                    
-                    <label class="question">When to return it?<span class="required"> *</span></label><br>
-                    <input type="radio" class="block radio" id="whenBack_not_sure" name="whenBack" value="not_sure">
-                    <label for="not_sure" class="label__radio" id="label__whenBack_not_sure">Not sure</label><br>
-                    <input type="radio" class="block radio" id="whenBack_cal_radio" name="whenBack" value="whenBack_cal_radio">
-                    <label for="return_item_by" class="label__radio" id="label__return_item_by">Return item by:</label><br>
-                    <input type="date" class="block" id="whenBack_cal" name="whenBack" style="display: none;">
+                <!-- <h1 class="form__top">So ... </h1> -->
+                <form class="form__body">
+                    <div class="question">
+                        <label class="question__text">What got borrowed?<span class="required"> *</span></label>
+                        <textarea id="what" rows="4" cols="50"></textarea>
+                    </div>
+                    <div class="question">
+                        <label class="question__text">Who is borrowing?<span class="required"> *</span></label>
+                        <input type="radio" class="block radio" id="me__borrower" name="borrower" value="me">
+                        <label for="me" class="label__radio" id="label__meBorrower">Me</label>
+                        <input type="radio" class="block radio" id="notMe__borrower" name="borrower" value="not_me_ but">   
+                        <label for="notMe" class="label__radio" id="label__notMeBorrower">Not me, but:</label>
+                        <textarea id="borrower" rows="4" cols="50" class="block" style="display: none;"></textarea>
+                    </div>
+                    <div class="question">
+                        <label class="question__text">Who owns that shit?<span class="required"> *</span></label>
+                        <input type="radio" class="block radio" id="me__owner" name="owner" value="me">
+                        <label for="me" class="label__radio" id="label__meOwner">Me</label>
+                        <input type="radio" class="block radio" id="notMe__owner" name="owner" value="not_me_but">
+                        <label for="notMe" class="label__radio" id="label__notMeOwner">Not me, but:</label>
+                        <textarea id="owner" rows="4" cols="50" class="block" style="display: none;"></textarea>
+                    </div>
+                    <div class="question">
+                        <label class="question__text">When was it borrowed?<span class="required"> *</span></label>
+                        <input type="radio" class="block radio" id="when_not_sure" name="when" value="not_sure">
+                        <label for="not_sure" class="label__radio" id="label__when_not_sure">Not sure</label>
+                        <input type="radio" class="block radio" id="when_cal_radio" name="when" value="when_cal_radio">
+                        <label for="borrowed_on" class="label__radio" id="label__borrowed_on">Borrowed on:</label>
+                        <input type="date" class="block" id="when_cal" name="when" style="display: none;">
+                    </div>
+                    <div class="question">
+                        <label class="question__text">When to return it?<span class="required"> *</span></label>
+                        <input type="radio" class="block radio" id="whenBack_not_sure" name="whenBack" value="not_sure">
+                        <label for="not_sure" class="label__radio" id="label__whenBack_not_sure">Not sure</label>
+                        <input type="radio" class="block radio" id="whenBack_cal_radio" name="whenBack" value="whenBack_cal_radio">
+                        <label for="return_item_by" class="label__radio" id="label__return_item_by">Return item by:</label>
+                        <input type="date" class="block" id="whenBack_cal" name="whenBack" style="display: none;">
+                    </div>
                 </form>
             </div>
-            <button class="btn__goback" onclick="location.reload();" style="display: none;"><< Start Again</button>
-            <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button>
+            <button type="submit" class="btn btn__saveItem" style="display: none;">Save</button>
+            <button class="btn__erase" onclick="location.reload();" style="display: none;">Erase</button>
             <!-- <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button> -->
         </div>
         <div>

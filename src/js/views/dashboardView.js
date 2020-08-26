@@ -10,7 +10,7 @@ export const renderItem = item => {
             <div class="borrowedByMe__count">
                 <p>Item: ${item.desc}</p>
                 <p>Owner: ${item.owner}</p>
-                <p>Date: ${item.when}</p>
+                <p>Date borrowed: ${item.when}</p>
                 <p>When to return: ${item.whenBack}</p>
             </div>
             <button class="item__delete btn-tiny">
@@ -31,12 +31,17 @@ export const renderItem = item => {
             <div class="borrowedByMe__count">
                 <p>Item: ${item.desc}</p>
                 <p>Borrowed by: ${item.borrower}</p>
-                <p>Date: ${item.when}</p>
+                <p>Date borrowed: ${item.when}</p>
                 <p>When to return: ${item.whenBack}</p>
             </div>
             <button class="item__delete btn-tiny">
                 <svg>
                     <use href="img/icons.svg#icon-circle-with-cross"></use>
+                </svg>
+            </button>
+            <button class="btn-tiny">
+                <svg>
+                    <use href="img/pencil.svg"></use>
                 </svg>
             </button>
         </li>

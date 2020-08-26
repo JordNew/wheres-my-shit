@@ -22,9 +22,14 @@ window.state = state;
  */
 
 
-// Display new empty form
+// When ADD NEW ITEM button is clicked
 elements.buttonCreateItem.addEventListener('click', e => {
+    // Display new empty form
     itemView.displayForm();
+
+    // Grey out and deactivate ADD NEW ITEM BUTTON
+    elements.buttonCreateItem.style.background = '#ccc';
+    elements.buttonCreateItem.style.border = 'none';
 });
 
 // When radio button BORROWER 'not me' is clicked:
@@ -85,7 +90,7 @@ elements.meOwner.addEventListener('click', e => {
     // elements.labelMeBorrower.style.display = 'none';
     
     // show borrower 'not me' text input
-    elements.notMeBorrowerInput.style.display = 'block';
+    // elements.notMeBorrowerInput.style.display = 'block';
 })
 
 // When radio button WHEN 'borrowed on' is clicked:
@@ -167,7 +172,6 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 }
             }
 
-
             // Create new item (and store in ItemList aka state.items)
             const newItem = state.items.createItem(
                 elements.desc.value,
@@ -186,9 +190,8 @@ elements.buttonSaveItem.addEventListener('click', e => {
             // Add all items to dashboard
             controlDashboard();
 
-            // Update number of items in UI
-            // heading2View.updateNumItemsByMe();
-            // heading2View.updateNumItemsFromMe();
+            // Restore start page (hide form)
+            init();
         }
 
     }
@@ -249,6 +252,10 @@ const renderDashboard = () => {
     state.dashboard.borrowedFromMe.forEach(el => {
     dashboardView.renderItem(el);
     });
+}
+
+const init = () => {
+    itemView.hideForm();
 }
 
 

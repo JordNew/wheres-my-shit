@@ -25,7 +25,7 @@ export const elements = {
     whenBackCalRadio: document.getElementById('whenBack_cal_radio'),
     labelReturnItemBy: document.getElementById('label__return_item_by'),
     whenBackCal: document.getElementById('whenBack_cal'),
-    goBack: document.querySelector('.btn__goback')  ,
+    erase: document.querySelector('.btn__erase')  ,
     buttonCreateItem: document.querySelector('.btn__createItem'),
     buttonAddQ: document.querySelector('.btn__addQ'),
     buttonSaveItem: document.querySelector('.btn__saveItem'),
