@@ -7,7 +7,7 @@ export const displayForm = () => {
     // elements.buttonCreateItem.style.display = 'none';
     elements.form.style.display = 'block';
     elements.buttonSaveItem.style.display = 'block';
-    elements.erase.style.display = 'block';
+    elements.buttonErase.style.display = 'block';
 
 }
 
@@ -16,7 +16,7 @@ export const hideForm = () => {
     // elements.buttonCreateItem.style.display = 'none';
     elements.form.style.display = 'none';
     elements.buttonSaveItem.style.display = 'none';
-    elements.erase.style.display = 'none';
+    elements.buttonErase.style.display = 'none';
     elements.buttonCreateItem.style.background = '#44c767';
     elements.buttonCreateItem.style.border = 'block';
 }

@@ -18,6 +18,17 @@ window.state = state;
 
 
 /** 
+ * HEADER CONTROLLER 
+ */
+
+ // When logo is clicked
+ elements.logo.addEventListener('click', e => {
+    // Reload page
+    init();
+ });
+
+
+/** 
  * ADD CONTROLLER 
  */
 
@@ -34,22 +45,31 @@ elements.buttonCreateItem.addEventListener('click', e => {
 
 // When radio button BORROWER 'not me' is clicked:
 elements.notMeBorrower.addEventListener('click', e => {
-    // display borrower text input
-    elements.notMeBorrowerInput.style.display = 'block';
-    
-    if (!elements.meBorrower.checked) { // otherwise the text label jumps down
-        // show owner radio buttons + text labels 
-        elements.meOwner.style.display = 'block';
-        elements.notMeOwner.style.display = 'block';
-        elements.labelMeOwner.style.display = 'block';
-        elements.labelNotMeOwner.style.display = 'block';
-    }
+    // set textarea background-color to white
+    elements.notMeBorrowerInput.style.backgroundColor = '#fff';
+    // activate textarea
+    elements.notMeBorrowerInput.disabled = false;
+    // automatically place cursor at the beginning
+    elements.notMeBorrowerInput.focus();
+
+    // if (!elements.meBorrower.checked) { // otherwise the text label jumps down
+    //     // show owner radio buttons + text labels 
+    //     elements.meOwner.style.display = 'block';
+    //     elements.notMeOwner.style.display = 'block';
+    //     elements.labelMeOwner.style.display = 'block';
+    //     elements.labelNotMeOwner.style.display = 'block';
+    // }
 });
+
 
 // When radio button BORROWER 'me' is clicked:
 elements.meBorrower.addEventListener('click', e => {
-    // hide borrower text input
-    elements.notMeBorrowerInput.style.display = 'none';
+    // set textarea background-color to grey
+    elements.notMeBorrowerInput.style.backgroundColor = 'rgb(221, 213, 213)';
+    // clear textarea
+    elements.notMeBorrowerInput.value = '';
+    // disable textarea
+    elements.notMeBorrowerInput.disabled = true;
 
     /*
     // hide owner radio buttons
@@ -62,28 +82,37 @@ elements.meBorrower.addEventListener('click', e => {
     */
 
     // display owner text input
-    elements.notMeOwnerInput.style.display = 'block';
-})
+    // elements.notMeOwnerInput.style.display = 'block';
+});
+
 
 // When radio button OWNER 'not me' is clicked: 
 elements.notMeOwner.addEventListener('click', e => {
-    // display owner text input
-    elements.notMeOwnerInput.style.display = 'block';
+    // set textarea background-color to white
+    elements.notMeOwnerInput.style.backgroundColor = '#fff';
+    // activate textarea
+    elements.notMeOwnerInput.disabled = false;
+    // automatically place cursor at the beginning
+    elements.notMeOwnerInput.focus();
     
-    if (!elements.meOwner.checked) { // otherwise the text label jumps down
-        // show borrower radio buttons + text labels
-        elements.meBorrower.style.display = 'block';
-        elements.notMeBorrower.style.display = 'block';
-        elements.labelMeBorrower.style.display = 'block';
-        elements.labelNotMeBorrower.style.display = 'block';
-    }
-})
+    // if (!elements.meOwner.checked) { // otherwise the text label jumps down
+    //     // show borrower radio buttons + text labels
+    //     elements.meBorrower.style.display = 'block';
+    //     elements.notMeBorrower.style.display = 'block';
+    //     elements.labelMeBorrower.style.display = 'block';
+    //     elements.labelNotMeBorrower.style.display = 'block';
+    // }
+});
 
 // When radio button OWNER 'me' is clicked: 
 elements.meOwner.addEventListener('click', e => {
     
-    // hide owner text input
-    elements.notMeOwnerInput.style.display = 'none';
+    // set textarea background-color to grey
+    elements.notMeOwnerInput.style.backgroundColor = 'rgb(221, 213, 213)';
+     // clear textarea
+     elements.notMeOwnerInput.value = '';
+     // disable textarea
+     elements.notMeOwnerInput.disabled = true;
     
     // hide borrower 'me' radio button + label (leaving 'not me' as the only option left)
     // elements.meBorrower.style.display = 'none';
@@ -91,7 +120,7 @@ elements.meOwner.addEventListener('click', e => {
     
     // show borrower 'not me' text input
     // elements.notMeBorrowerInput.style.display = 'block';
-})
+});
 
 // When radio button WHEN 'borrowed on' is clicked:
 elements.whenCalRadio.addEventListener('click', e => {
@@ -117,6 +146,11 @@ elements.whenBackNotSure.addEventListener('click', e => {
     elements.whenBackCal.style.display = 'none';
 });
 
+
+// When ERASE button is clicked
+elements.buttonErase.addEventListener('click', e => {
+    init();
+});
 
 
 // When SAVE button is clicked

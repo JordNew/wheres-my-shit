@@ -1,4 +1,5 @@
 export const elements = {
+    logo: document.querySelector('.header__logo'),
     headingByMe: document.getElementById('heading__byMe'),
     headingFromMe: document.getElementById('heading__fromMe'),
     createItem: document.querySelector('.create__item'),
@@ -25,7 +26,7 @@ export const elements = {
     whenBackCalRadio: document.getElementById('whenBack_cal_radio'),
     labelReturnItemBy: document.getElementById('label__return_item_by'),
     whenBackCal: document.getElementById('whenBack_cal'),
-    erase: document.querySelector('.btn__erase')  ,
+    buttonErase: document.querySelector('.btn__erase')  ,
     buttonCreateItem: document.querySelector('.btn__createItem'),
     buttonAddQ: document.querySelector('.btn__addQ'),
     buttonSaveItem: document.querySelector('.btn__saveItem'),

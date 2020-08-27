@@ -42,16 +42,24 @@ h2 {
   }
 
 textarea {
-    position: relative;
-    margin: auto;
-    /* width: 320px; */
-    height: 40px;
+  display: block;
+  position: relative;
+  margin: auto;
+  /* margin-left: 8%; */
+  margin-bottom: 20px;
+  /* width: 320px; */
+  height: 40px;
 }
 
-.form__body {
-  /* width: 80%; */
-  margin: auto;
-  text-align: center;
+.form textarea {
+  display: block;
+  position: relative;
+  margin-top: 42px;
+  margin-left: 22px;
+}
+
+span {
+  margin-left: 3px;
 }
 
 .topleft {
@@ -63,7 +71,7 @@ textarea {
     margin: 4vw auto;
     background-color: #fff;
     border-radius: 6px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 2rem 6rem 0.5rem rgba(101, 90, 86, 0.2);
     display: grid;
     grid-template-rows: 12rem minmax(100rem, auto);
@@ -105,10 +113,10 @@ textarea {
     background-color: #cbeeb9;
 }
 
-.q1 {
+/* .q1 {
   display: block;
   float: left;
-}
+} */
 
 .copyright {
     color: #968B87;
@@ -119,7 +127,7 @@ textarea {
 .create__item {
     position: relative;
     background-color:#f8f5f4;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .create__item__top {
@@ -216,26 +224,180 @@ textarea {
     .btn-tiny:not(:last-child) {
       margin-right: .3rem; }
 
-.question {
-    color: #96906C;
-    /* padding: 0.5em; */
-    margin-top: 10px;
-    font-size: 2em;
-}
 
+
+.form {
+  position: relative;
+  /* width: 80%; */
+  /* margin: auto; */
+  /* text-align: center; */
+}
+    
 .form__top {
-    display: block;
-    color: #96906C;
-    padding: 1em;
-    margin-top: 20px 0;
-    font-size: 2.5em;
+  display: block;
+  color: #96906C;
+  padding: 1em;
+  margin-top: 20px 0;
+  font-size: 2.5em;
 }
 
-.question__text {
+.question1__text, .question2__text {
+  position: relative;
+  float: left;
   display: block;
-  font-size: 24px;
+  color: #96906C;
+  /* padding: 0.5em; */
+  /* margin: auto; */
+  margin-top: 12px;
   margin-bottom: 10px;
+  margin-left: 8%;
+  font-size: 24px;
 }
+
+.question3__text {
+  position: relative;
+  float: left;
+  display: block;
+  color: #96906C;
+  /* padding: 0.5em; */
+  /* margin: auto; */
+  margin-top: 132px;
+  margin-bottom: 10px;
+  margin-left: 8%;
+  font-size: 24px;
+}
+
+#q1 {
+  position: relative;
+  display: block;
+}
+
+#q1__me {
+  position: absolute;
+  display: block;
+  top: 50px;
+}
+
+#q1__notMe {
+  position: absolute;
+  display: block;
+  top: 88px;
+}
+
+#q2 {
+  position: relative;
+  display: block;
+}
+
+#q2__me {
+  position: absolute;
+  display: block;
+  top: 50px;
+}
+
+#q2__notMe {
+  position: absolute;
+  display: block;
+  top: 80px;
+}
+
+#borrower {
+  top: 5px;
+}
+
+#owner {
+  top: 180px;
+}
+
+.required {
+    color: red;
+}
+
+/* .block {
+  display: block;
+  margin: 1em;
+} */
+
+/* .radio__container {
+  position: relative;
+  float: left;
+  margin: 10px;
+  /* display: block;
+  width: auto;
+  margin-left: 10px; 
+}  */
+.radio1 {
+    position: absolute;
+    float: left;
+    display: block;
+    margin-top: 15px;
+    margin-left: 35px; }
+.radio2 {
+    position: absolute;
+    float: left;
+    display: block;
+    margin-top: 15px;
+    margin-left: 35px;
+  }
+.radio3 {
+    position: absolute;
+    float: left;
+    display: block;
+    margin-top: 187px;
+    margin-left: 35px; }
+.radio4 {
+    position: absolute;
+    float: left;
+    display: block;
+    margin-top: 187px;
+    margin-left: 35px;
+  }
+
+.label__radio1 {
+  position: absolute;
+  /* width: 5em; */
+  top: 12px;
+  left: 65px;
+  display: inline;
+  /* overflow: hidden; */
+  font-size: 16px;
+  /* margin-left: 1.7em; */
+}
+
+.label__radio2 {
+  position: absolute;
+  width: 100px;
+  top: 12px;
+  left: 65px;
+  display: block;
+  /* overflow: hidden; */
+  font-size: 16px;
+  /* margin-left: 1.7em; */
+}
+
+.label__radio3 {
+  position: absolute;
+  /* width: 5em; */
+  top: 184px;
+  left: 65px;
+  display: inline;
+  /* overflow: hidden; */
+  font-size: 16px;
+  /* margin-left: 1.7em; */
+}
+
+.label__radio4 {
+  position: absolute;
+  width: 100px;
+  top: 184px;
+  left: 65px;
+  display: block;
+  /* overflow: hidden; */
+  font-size: 16px;
+  /* margin-left: 1.7em; */
+}
+
+
 
 .borrowed__item {
     display: flex;
@@ -251,29 +413,3 @@ textarea {
 .borrowedFromMe {
     background-color: #cbeeb9;
 }
-
-.required {
-    color: red;
-}
-
-/* .block {
-  display: block;
-  margin: 1em;
-} */
-
-.radio {
-  position: absolute;
-  float: left;
-  display: block;
-  width: auto;
-  margin-left: 10px;
-}
-
-.label__radio {
-  width: 10em;
-  display: block;
-  margin: 1em;
-  font-size: 16px;
-  /* margin-left: 1.7em; */
-}
-
