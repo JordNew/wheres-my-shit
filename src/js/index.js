@@ -35,12 +35,14 @@ window.state = state;
 
 // When ADD NEW ITEM button is clicked
 elements.buttonCreateItem.addEventListener('click', e => {
-    // Display new empty form
-    itemView.displayForm();
-
+    
     // Grey out and deactivate ADD NEW ITEM BUTTON
     elements.buttonCreateItem.style.background = '#ccc';
     elements.buttonCreateItem.style.border = 'none';
+    elements.buttonCreateItem.disabled = true;
+    
+    // Display new empty form
+    itemView.displayForm();
 });
 
 // When radio button BORROWER 'not me' is clicked:
@@ -64,6 +66,7 @@ elements.notMeBorrower.addEventListener('click', e => {
 
 // When radio button BORROWER 'me' is clicked:
 elements.meBorrower.addEventListener('click', e => {
+    
     // set textarea background-color to grey
     elements.notMeBorrowerInput.style.backgroundColor = 'rgb(221, 213, 213)';
     // clear textarea
@@ -122,6 +125,7 @@ elements.meOwner.addEventListener('click', e => {
     // elements.notMeBorrowerInput.style.display = 'block';
 });
 
+/*
 // When radio button WHEN 'borrowed on' is clicked:
 elements.whenCalRadio.addEventListener('click', e => {
     // Display calendar
@@ -145,6 +149,7 @@ elements.whenBackNotSure.addEventListener('click', e => {
     // Hide calendar
     elements.whenBackCal.style.display = 'none';
 });
+*/
 
 
 // When ERASE button is clicked

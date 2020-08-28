@@ -29,74 +29,64 @@
             <div class="create__item__top">
                 <button class="btn btn__createItem">Add new item</button>
             </div>
-            <!-- <div class="form" style="display: none;"> -->
             <!-- <h1 class="form__top">So ... </h1> -->
             <form class="form" style="display: none;">
-                <!-- <div class="question"> -->
                 <!-- <button class="item__delete btn-tiny" style="display: block;">
                     <svg>
                         <use href="img/arrow_left.png"></use>
                     </svg>
                 </button> -->
-                <p class="question1__text">What got borrowed?<span class="required">  *</span></p>
-                <textarea id="what" rows="4" cols="50"></textarea>
-                <!-- </div> -->
-                <!-- <div class="question"> -->
-                <p class="question2__text">Who is borrowing?<span class="required">  *</span></p>
-                <!-- <div class="radio__container"> -->
                 <div id="q1">
-                    <div id="q1__me">
-                        <input type="radio" class="radio1" id="me__borrower" name="borrower" value="me">
-                        <!-- </div> -->
-                        <label for="me" class="label__radio1" id="label__meBorrower">Me</label>
-                        <!-- <div class="radio__container"> -->
-                    </div>
-                    <div id="q1__notMe">
-                        <input type="radio" class="radio2" id="notMe__borrower" name="borrower" value="not_me_ but">   
-                        <!-- </div> -->
-                        <label for="notMe" class="label__radio2" id="label__notMeBorrower">Not me, but:</label>
-                        <textarea id="borrower" rows="4" cols="50" style="background-color: rgb(221, 213, 213);" disabled></textarea>
-                    </div>
+                    <p class="question1__text">What got borrowed?<span class="required">  *</span></p>
+                    <textarea id="what" rows="4" cols="50"></textarea>
                 </div>
-                <!-- </div> -->
-                <!-- <div class="question"> -->
-                <p class="question3__text">Who owns that shit?<span class="required">  *</span></p>
                 <div id="q2">
-                    <div id="q2__me">
-                        <input type="radio" class="radio3" id="me__owner" name="owner" value="me">
-                        <label for="me" class="label__radio3" id="label__meOwner">Me</label>
-                    </div>
-                    <div id="q2__notMe">
-                        <input type="radio" class="radio4" id="notMe__owner" name="owner" value="not_me_but">
-                        <label for="notMe" class="label__radio4" id="label__notMeOwner">Not me, but:</label>
-                        <textarea id="owner" rows="4" cols="50" class="block" style="background-color: rgb(221, 213, 213);" disabled></textarea>
-                    </div>
+                    <p class="question2__text">Who is borrowing?<span class="required">  *</span></p>
+                    <!-- <div id="q2__me"> -->
+                    <input type="radio" class="radio1" id="me__borrower" name="borrower" value="me">
+                    <input type="radio" class="radio2" id="notMe__borrower" name="borrower" value="not_me_but">   
+                    <label for="me" class="label__radio1" id="label__meBorrower">Me</label>
+                    <label for="notMe" class="label__radio2" id="label__notMeBorrower">Not me, but:</label>
+                    <!-- </div> -->
+                    <!-- <div id="q2__notMe"> -->
+                    <textarea id="borrower" rows="4" cols="50" style="background-color: rgb(221, 213, 213);" disabled></textarea>
+                    <!-- </div> -->
                 </div>
-                  
-                <!-- </div> -->
-                <!--
-                <div class="question">
-                    <label class="question__text">When was it borrowed?<span class="required">  *</span></label>
-                    <input type="radio" class="radio1" id="when_not_sure" name="when" value="not_sure">
-                    <label for="not_sure" class="label__radio" id="label__when_not_sure">Not sure</label>
-                    <input type="radio" class="radio2" id="when_cal_radio" name="when" value="when_cal_radio">
-                    <label for="borrowed_on" class="label__radio" id="label__borrowed_on">Borrowed on:</label>
-                    <input type="date" class="block" id="when_cal" name="when" style="display: none;">
+                <div id="q3">
+                    <p class="question3__text">Who owns that shit?<span class="required">  *</span></p>
+                    <!-- <div id="q3__me"> -->
+                    <input type="radio" class="radio3" id="me__owner" name="owner" value="me">
+                    <label for="me" class="label__radio3" id="label__meOwner">Me</label>
+                    <!-- </div> -->
+                    <!-- <div id="q3__notMe"> -->
+                    <input type="radio" class="radio4" id="notMe__owner" name="owner" value="not_me_but">
+                    <label for="notMe" class="label__radio4" id="label__notMeOwner">Not me, but:</label>
+                    <textarea id="owner" rows="4" cols="50" class="block" style="background-color: rgb(221, 213, 213);" disabled></textarea>
+                    <!-- </div> -->
                 </div>
-                <div class="question">
-                    <label class="question__text">When to return it?<span class="required">  *</span></label>
-                    <input type="radio" class="radio1" id="whenBack_not_sure" name="whenBack" value="not_sure">
-                    <label for="not_sure" class="label__radio" id="label__whenBack_not_sure">Not sure</label>
-                    <input type="radio" class="radio2" id="whenBack_cal_radio" name="whenBack" value="whenBack_cal_radio">
-                    <label for="return_item_by" class="label__radio" id="label__return_item_by">Return item by:</label>
-                    <input type="date" class="block" id="whenBack_cal" name="whenBack" style="display: none;">
+                <div id="q4">
+                    <p class="question4__text">When was it borrowed?<span class="required">  *</span></p>
+                    <input type="radio" class="radio5" id="when_not_sure" name="when" value="not_sure">
+                    <label for="not_sure" class="label__radio5" id="label__when_not_sure">Not sure</label>
+                    <input type="radio" class="radio6" id="when_cal_radio" name="when" value="when_cal_radio">
+                    <label for="borrowed_on" class="label__radio6" id="label__borrowed_on">Borrowed on:</label>
+                    <input type="date" class="block" id="when_cal" name="when">
+                </div>
+                                            
+                <div id="q5">
+                    <p class="question5__text">When to return it?<span class="required">  *</span></p>
+                    <input type="radio" class="radio7" id="whenBack_not_sure" name="whenBack" value="not_sure">
+                    <label for="not_sure" class="label__radio7" id="label__whenBack_not_sure">Not sure</label>
+                    <input type="radio" class="radio8" id="whenBack_cal_radio" name="whenBack" value="whenBack_cal_radio">
+                    <label for="return_item_by" class="label__radio8" id="label__return_item_by">Return item by:</label>
+                    <input type="date" class="block" id="whenBack_cal" name="whenBack">
                 </div>       
-                -->
+                
             </form>
             <!-- </div> -->
-            <!-- <button type="submit" class="btn btn__saveItem" style="display: none;">Save</button>
-            <button class="btn__erase" style="display: none;">Erase</button> -->
-            <!-- <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button> -->
+            <button type="submit" id="save" class="btn btn__saveItem" style="display: none;">Save >></button>
+            <button id="erase" class="btn__erase" style="display: none;"><< Erase</button>
+            <button type="submit" class="btn btn__saveItem" style="display: none;" />Save</button>
         </div>
         <div>
             <ul class="borrowedByMe">

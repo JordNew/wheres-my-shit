@@ -3,12 +3,21 @@ import ItemList from '../models/ItemList';
 
 export const displayForm = () => {
     
-    elements.buttonCreateItem.disabled = true;
-    // elements.buttonCreateItem.style.display = 'none';
+    // display form
     elements.form.style.display = 'block';
+    
+    // set calender default dates to today
+    elements.whenCal.valueAsDate = new Date();
+    elements.whenBackCal.valueAsDate = new Date();
+    
+    // set minimum value for whenBackCal to today
+    let today = new Date();
+    elements.whenCal.setAttribute('min', today);
+    elements.whenBackCal.setAttribute('min', today);    
+
+    // display Save and Erase buttons
     elements.buttonSaveItem.style.display = 'block';
     elements.buttonErase.style.display = 'block';
-
 }
 
 export const hideForm = () => {
