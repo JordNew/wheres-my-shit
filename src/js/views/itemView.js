@@ -69,10 +69,10 @@ export const clearForm = () => {
     // if they are checked
     if (elements.meBorrower.checked) elements.meBorrower.checked = false;
     if (elements.notMeBorrower.checked) elements.notMeBorrower.checked = false;
-    if (elements.whenNotSure.checked) elements.meBorrower.checked = false;
-    if (elements.whenCalRadio.checked) elements.notMeBorrower.checked = false;
-    if (elements.whenBackNotSure.checked) elements.meBorrower.checked = false;
-    if (elements.whenBackCalRadio.checked) elements.notMeBorrower.checked = false;
+    if (elements.whenNotSure.checked) elements.whenNotSure.checked = false;
+    if (elements.whenCalRadio.checked) elements.whenCalRadio.checked = false;
+    if (elements.whenBackNotSure.checked) elements.whenBackNotSure.checked = false;
+    if (elements.whenBackCalRadio.checked) elements.whenBackCalRadio.checked = false;
 
     // if they exist at all
     if (elements.meOwner) elements.meOwner.checked = false;
