@@ -18,12 +18,12 @@ export const elements = {
     labelNotMeOwner: document.getElementById('label__notMeOwner'),
     whenNotSure: document.getElementById('when_not_sure'),
     labelWhenNotSure: document.getElementById('label__when_not_sure'),
-    whenCalRadio: document.getElementById('when_cal_radio'),
+    whenCalRadio: document.getElementById('borrowed_on'),
     labelBorrowedOn: document.getElementById('label__borrowed_on'),
     whenCal: document.getElementById('when_cal'),
     whenBackNotSure: document.getElementById('whenBack_not_sure'),
     labelWhenBackNotSure: document.getElementById('label__whenBack_not_sure'),
-    whenBackCalRadio: document.getElementById('whenBack_cal_radio'),
+    whenBackCalRadio: document.getElementById('return_item_by'),
     labelReturnItemBy: document.getElementById('label__return_item_by'),
     whenBackCal: document.getElementById('whenBack_cal'),
     buttonErase: document.querySelector('.btn__erase')  ,
@@ -36,29 +36,29 @@ export const elements = {
     borrowedFromMeItem: document.querySelector('.borrowedFromMe__item')
 };
 
-export const questions = [
-        "What got borrowed?",
-        "Who is borrowing?",
-        "Who owns that shit?",
-        "When was this borrowed?",
-        "When to return it?"
-    ];
+// export const questions = [
+//         "What got borrowed?",
+//         "Who is borrowing?",
+//         "Who owns that shit?",
+//         "When was this borrowed?",
+//         "When to return it?"
+//     ];
 
-export const renderItem = item => {
-    const markup = `
-        <li class="question" data-itemid=${item.id}>
-            <p class="item__description">${item.desc}</p>
-            <button class="item__delete btn-tiny">
-                <svg>
-                    <use href="img/icons.svg#icon-circle-with-cross"></use>
-                </svg>
-            </button>
-        </li>
-    `;
-    elements.shopping.insertAdjacentHTML('beforeend', markup);
-};
+// export const renderItem = item => {
+//     const markup = `
+//         <li class="question" data-itemid=${item.id}>
+//             <p class="item__description">${item.desc}</p>
+//             <button class="item__delete btn-tiny">
+//                 <svg>
+//                     <use href="img/icons.svg#icon-circle-with-cross"></use>
+//                 </svg>
+//             </button>
+//         </li>
+//     `;
+//     elements.shopping.insertAdjacentHTML('beforeend', markup);
+// };
 
-export const deleteItem = id => {
-    const item = document.querySelector(`[data-itemid="${id}"]`);
-    if (item) item.parentElement.removeChild(item);
-};
+// export const deleteItem = id => {
+//     const item = document.querySelector(`[data-itemid="${id}"]`);
+//     if (item) item.parentElement.removeChild(item);
+// };

@@ -154,6 +154,7 @@ elements.whenBackNotSure.addEventListener('click', e => {
 
 // When ERASE button is clicked
 elements.buttonErase.addEventListener('click', e => {
+    // Restore start page: clear & hide form, reactivate Add Item Button etc.
     init();
 });
 
@@ -192,6 +193,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
             // Read WHEN value
             const whenValue = () => {
                 if (elements.whenNotSure.checked) {
+                    console.log('whennotsure');
                     return 'not sure';
                 } else if (elements.whenCalRadio.checked && elements.whenCal.value === '') {
                     alert('Please select date or choose "not sure"');
@@ -313,6 +315,15 @@ elements.borrowedByMe.addEventListener('click', e => {
         // Update number of items in UI
         heading2View.updateNumItemsByMe();
     }
+
+    // TESTING
+    else if (e.target.matches('#pencil')) {
+        console.log('pencil button clicked');
+    } 
+
+    else {
+        console.log('clicked somewhere else')
+    }
 })
 
 // Handle, delete and update borrowedFromMe item events
@@ -330,7 +341,14 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // Update number of items in UI
         heading2View.updateNumItemsFromMe();
     }
-})
+    // TESTING
+    else if (e.target.matches('#pencil')) {
+        console.log('pencil button clicked');
+    } 
+    else {
+        console.log('clicked somewhere else')
+    }
+});
 
 
 
