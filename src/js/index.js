@@ -333,28 +333,24 @@ const init = () => {
 //     return year + '-' + month + '-' + day;
 // }
 
-// function to reformat datestrings
+// Function to reformat datestrings
 const dateReformat = calDate => {
 
     const dateArray = calDate.split('');
-    console.log('dateArray: ' + dateArray);
 
     const dd = dateArray[8] + dateArray[9];
-    console.log('dd: ' + dd);
     const mm = dateArray[5] + dateArray[6];
-    console.log('mm: ' + mm);
     const yyyy = dateArray[0] + dateArray[1] + dateArray[2] + dateArray[3];
-    console.log('yyyy: ' + yyyy);
 
+    // Retrieve weekday from given date
     const getDay = date => {
-        const week_of_day_arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const day = week_of_day_arr[new Date(date).getDay()];
-        console.log('day: ' + day);
+        const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const day = weekDays[new Date(date).getDay()];
         return day;
       }
 
     const monthsArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const month = mm => monthsArr[(parseInt(mm) - 1)];
+    const month = monthNumber => monthsArr[(parseInt(monthNumber) - 1)];
     
     const newFormat = getDay(calDate) + ', ' + month(mm) + ' ' + parseInt(dd) + ', ' + yyyy;
     return newFormat;
