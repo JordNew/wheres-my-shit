@@ -17,6 +17,7 @@ const state = {};
 window.state = state;
 
 
+
 /** 
  * HEADER CONTROLLER 
  */
@@ -43,6 +44,9 @@ elements.buttonCreateItem.addEventListener('click', e => {
     
     // Display new empty form
     itemView.displayForm();
+
+    // Focus on description field
+    elements.desc.focus();
 });
 
 // When radio button BORROWER 'not me' is clicked:
@@ -192,22 +196,33 @@ elements.buttonSaveItem.addEventListener('click', e => {
 
             // Read WHEN value
             const whenValue = () => {
-                if (elements.whenNotSure.checked) {
+                if (!elements.whenToday.checked && !elements.whenNotSure.checked && !elements.whenCalRadio.checked || elements.whenCal.value === undefined) {
+                    alert('Please select when the item was borrowed');
+                    return
+                } else if (elements.whenToday.checked) {
+                        const now = moment().format('dddd DD/MM/YYYY');
+                        // console.log(now);
+                        return now;
+                } else if (elements.whenNotSure.checked) {
                     console.log('whennotsure');
                     return 'not sure';
-                } else if (elements.whenCalRadio.checked && elements.whenCal.value === '') {
-                    alert('Please select date or choose "not sure"');
+                } else if (!elements.whenCalRadio.checked && elements.whenCal.value === undefined) {
+                    alert('Please select date');
                 } else if (elements.whenCalRadio.checked) {
                     return elements.whenCal.value;
                 }
             }
             
+            
             // Read WHENBACK value
             const whenBackValue = () => {
                 if (elements.whenBackNotSure.checked) {
                     return 'not sure';
-                } else if (elements.whenBackCalRadio.checked && !elements.whenBackCal.value) {
+                } else if (elements.whenBackCalRadio.checked && elements.whenBackCal.value === undefined) {
                     alert('Please select date or choose "not sure"');
+                    return;
+                } else if (!elements.whenBackCalRadio.checked && elements.whenBackCal.value !== undefined) {
+                    return elements.whenBackCal.value;
                 } else if (elements.whenBackCalRadio.checked) {
                     return elements.whenBackCal.value;
                 }
@@ -227,6 +242,10 @@ elements.buttonSaveItem.addEventListener('click', e => {
             
             // Add all items to dashboard
             controlDashboard();
+
+            // Update number of items in UI
+            heading2View.updateNumItemsByMe();
+            heading2View.updateNumItemsFromMe();
 
             // Restore start page: feedback, clear & hide form
             // ToDo: function for feedback at Save Item

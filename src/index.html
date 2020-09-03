@@ -56,19 +56,21 @@
                 </div>
                 <div id="q4">
                     <p class="question4__text">When was it borrowed?<span class="required">  *</span></p>
-                    <input type="radio" class="radio5" id="when_not_sure" name="when" value="not_sure">
-                    <label for="when_not_sure" class="label__radio5" id="label__when_not_sure">Not sure</label>
-                    <input type="radio" class="radio6" id="borrowed_on" name="when" value="when_cal_radio">
-                    <label for="borrowed_on" class="label__radio6" id="label__borrowed_on">Borrowed on:</label>
-                    <input type="date" class="block" id="when_cal" name="when">
+                    <input type="radio" class="radio5" id="when_today" name="when" value="today">
+                    <label for="when_today" class="label__radio5" id="label__when_today">Today</label>
+                    <input type="radio" class="radio6" id="borrowed_on" name="when" value="not_sure">
+                    <label for="when_not_sure" class="label__radio6" id="label__when_not_sure">Borrowed on:</label>
+                    <input type="radio" class="radio7" id="when_not_sure" name="when" value="when_cal_radio">
+                    <label for="borrowed_on" class="label__radio7" id="label__borrowed_on">Not sure</label>
+                    <input type="date" class="block" id="when_cal" name="when" style="background-color: rgb(221, 213, 213);">
                 </div>                  
                 <div id="q5">
                     <p class="question5__text">When to return it?<span class="required">  *</span></p>
-                    <input type="radio" class="radio7" id="whenBack_not_sure" name="whenBack" value="not_sure">
-                    <label for="whenBack_not_sure" class="label__radio7" id="label__whenBack_not_sure">Not sure</label>
-                    <input type="radio" class="radio8" id="return_item_by" name="whenBack" value="whenBack_cal_radio">
-                    <label for="return_item_by" class="label__radio8" id="label__return_item_by">Return item by:</label>
-                    <input type="date" class="block" id="whenBack_cal" name="whenBack">
+                    <input type="radio" class="radio8" id="whenBack_not_sure" name="whenBack" value="not_sure">
+                    <label for="whenBack_not_sure" class="label__radio8" id="label__whenBack_not_sure">Not sure</label>
+                    <input type="radio" class="radio9" id="return_item_by" name="whenBack" value="whenBack_cal_radio">
+                    <label for="return_item_by" class="label__radio9" id="label__return_item_by">Return item by:</label>
+                    <input type="date" class="block" id="whenBack_cal" name="whenBack" style="background-color: rgb(221, 213, 213);">
                 </div>       
             </form>
             <button type="submit" id="save" class="btn btn__saveItem" style="display: none;">Save >></button>

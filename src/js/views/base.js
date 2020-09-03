@@ -16,6 +16,7 @@ export const elements = {
     notMeOwnerInput: document.getElementById('owner'),
     labelMeOwner: document.getElementById('label__meOwner'),
     labelNotMeOwner: document.getElementById('label__notMeOwner'),
+    whenToday: document.getElementById('when_today'),
     whenNotSure: document.getElementById('when_not_sure'),
     labelWhenNotSure: document.getElementById('label__when_not_sure'),
     whenCalRadio: document.getElementById('borrowed_on'),

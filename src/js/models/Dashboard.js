@@ -45,6 +45,11 @@ export default class Dashboard {
         this.persistData();
         
     }
+
+
+    editItem(id) {
+        // TODO
+    }
     
 
     getNumItems() {

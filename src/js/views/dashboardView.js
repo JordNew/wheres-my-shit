@@ -15,11 +15,11 @@ export const renderItem = item => {
             <button class="btn-tiny">
                 <img src="img/pencil.svg" id="pencil">
             </button>
-            <div class="borrowedByMe__count">
-                <p>Item: ${item.desc}</p>
-                <p>Owner: ${item.owner}</p>
-                <p>Date borrowed: ${item.when}</p>
-                <p>When to return: ${item.whenBack}</p>
+            <div class="borrowedByMe__item__text">
+                <h1 class="item__title">${item.desc}</h1>
+                <p><i>Borrowed from: ${item.owner}</i></p>
+                <p><i>When: ${item.when}</i></p>
+                <p><i>When to return: ${item.whenBack}</i></p>
             </div>
         </li>
     `;
@@ -39,11 +39,11 @@ export const renderItem = item => {
             <button class="btn-tiny">
                 <img src="img/pencil.svg" id="pencil">
             </button>
-            <div class="borrowedByMe__itemCard">
-                <p>Item: ${item.desc}</p>
-                <p>Borrowed by: ${item.borrower}</p>
-                <p>Date borrowed: ${item.when}</p>
-                <p>When to return: ${item.whenBack}</p>
+            <div class="borrowedByMe__item__text">
+                <h1 class="item__title">${item.desc}</h1>
+                <p><i>Borrowed by: ${item.borrower}</i></p>
+                <p><i>When: ${item.when}</i></p>
+                <p><i>When to return: ${item.whenBack}</i></p>
             </div>
         </li>
     `;
@@ -54,5 +54,10 @@ export const renderItem = item => {
 export const deleteItem = id => {
     const item = document.querySelector(`[data-itemid="${id}"]`);
     if (item) item.parentElement.removeChild(item);
+    // if (item) {
+    //     console.log('item to delete')
+    // } else {
+    //     console.log('that did not work')
+    // }
 };
 

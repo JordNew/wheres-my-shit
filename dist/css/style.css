@@ -56,7 +56,7 @@ span {
 }
 
 .topleft {
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .container {
@@ -417,29 +417,35 @@ span {
     margin-top: 205px;
     margin-left: 108px; }
 .radio5 {
-    position: absolute;
-    float: left;
-    display: block;
-    margin-top: 362px;
-    margin-left: 38px; }
+  position: absolute;
+  float: left;
+  display: block;
+  margin-top: 362px;
+  margin-left: 38px; }
 .radio6 {
     position: absolute;
     float: left;
     display: block;
     margin-top: 362px;
-    margin-left: 145px; }
+    margin-left: 148px; }
 .radio7 {
     position: absolute;
     float: left;
     display: block;
-    margin-top: 509px;
-    margin-left: 38px; }
+    margin-top: 362px;
+    margin-left: 304px; }
 .radio8 {
     position: absolute;
     float: left;
     display: block;
     margin-top: 509px;
-    margin-left: 145px; }
+    margin-left: 38px; }
+.radio9 {
+    position: absolute;
+    float: left;
+    display: block;
+    margin-top: 509px;
+    margin-left: 148px; }
 
 .label__radio1 {
   position: absolute;
@@ -498,9 +504,9 @@ span {
 
 .label__radio6 {
   position: absolute;
-  width: 100px;
+  /* width: 5em; */
   margin-top: 357px;
-  margin-left: 170px;
+  margin-left: 172px;
   display: block;
   /* overflow: hidden; */
   font-size: 16px;
@@ -508,6 +514,17 @@ span {
 }
 
 .label__radio7 {
+  position: absolute;
+  width: 100px;
+  margin-top: 357px;
+  margin-left: 326px;
+  display: block;
+  /* overflow: hidden; */
+  font-size: 16px;
+  /* margin-left: 1.7em; */
+}
+
+.label__radio8 {
   position: absolute;
   /* width: 5em; */
   margin-top: 504px;
@@ -518,7 +535,7 @@ span {
   /* margin-left: 1.7em; */
 }
 
-.label__radio8 {
+.label__radio9 {
   position: absolute;
   width: 150px;
   margin-top: 504px;
@@ -546,12 +563,27 @@ span {
 
 .borrowedByMe__item, .borrowedFromMe__item {
   position: relative;
+  display: block;
   background-color: rgb(255, 255, 167);
   border: 1px black dotted;
   border-radius: 10px;
   margin: 10px;
   padding: 5px;
   list-style-type: none;
+}
+
+.borrowedByMe__item__text, .borrowedFromMe__item__text {
+  font-size: 12px;
+}
+
+.item__title {
+  font-size: 22px;
+  position: absolute;
+  float: left;
+  display: inline;
+  text-transform: none;
+  transform: none;
+  margin-top: -28px;
 }
 
 .item__delete {
@@ -562,10 +594,12 @@ span {
 
 #pencil {
   /* background-color: purple; */
-  width: 15px;
+  position: relative;
+  width: 14px;
   margin-left: 23.5em;
 }
 
 #pencil:active {
+  position: relative;
   padding-top: 1px;
 }

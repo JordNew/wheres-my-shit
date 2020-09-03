@@ -6,9 +6,9 @@ export const displayForm = () => {
     // display form
     elements.form.style.display = 'block';
     
-    // set calender default dates to today
-    elements.whenCal.valueAsDate = new Date();
-    elements.whenBackCal.valueAsDate = new Date();
+    // // set calender default dates to today
+    // elements.whenCal.valueAsDate = new Date();
+    // elements.whenBackCal.valueAsDate = new Date();
     
     // set minimum value for whenBackCal to today
     let today = new Date();
@@ -43,14 +43,16 @@ export const checkRequiredFields = () => {
     } else if (!elements.meOwner.checked && !elements.notMeOwner.checked && !elements.meBorrower.checked) {
         alert('... but who OWNS that shit??');
         // return check;
-    } else if (!elements.whenCal.value && !elements.whenNotSure.checked) {
-        alert('When: Please select date or "not sure"');
-        // return check;
-    } else if (!elements.whenBackNotSure.value & !elements.whenBackNotSure.checked) {
-        alert('WhenBack: Please select date or "not sure" "whenBack" field is required');
+    } else if ((!elements.whenToday.checked && !elements.whenCalRadio.checked && !elements.whenNotSure.checked) ||  (elements.whenCal.value === '' && !elements.whenToday.checked && !elements.whenNotSure.checked)) {
+        alert('When: Please select Date of Borrow or choose "Today" / "Not sure"');
+        return;
+    } else if ((!elements.whenBackCalRadio.checked && !elements.whenBackNotSure.checked) || (elements.whenBackCal.value === '' && !elements.whenBackNotSure.checked)) {
+        alert('WhenBack: Please select Return Date or choose "Not sure"');
         // return check;
     } else {
         console.log('all entered values saved successfully');
+        console.log ('whenvalue = ' + elements.whenCal.value);
+        console.log('whenBackvalue = ' + elements.whenBackCal.value);
         check = true;
         return check;   
     }
@@ -69,6 +71,7 @@ export const clearForm = () => {
     // if they are checked
     if (elements.meBorrower.checked) elements.meBorrower.checked = false;
     if (elements.notMeBorrower.checked) elements.notMeBorrower.checked = false;
+    if (elements.whenToday.checked) elements.whenToday.checked = false;
     if (elements.whenNotSure.checked) elements.whenNotSure.checked = false;
     if (elements.whenCalRadio.checked) elements.whenCalRadio.checked = false;
     if (elements.whenBackNotSure.checked) elements.whenBackNotSure.checked = false;
