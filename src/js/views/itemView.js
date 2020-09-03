@@ -51,8 +51,6 @@ export const checkRequiredFields = () => {
         // return check;
     } else {
         console.log('all entered values saved successfully');
-        console.log ('whenvalue = ' + elements.whenCal.value);
-        console.log('whenBackvalue = ' + elements.whenBackCal.value);
         check = true;
         return check;   
     }

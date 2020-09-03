@@ -34,9 +34,10 @@ window.state = state;
  */
 
 
+
 // When ADD NEW ITEM button is clicked
 elements.buttonCreateItem.addEventListener('click', e => {
-    
+
     // Grey out and deactivate ADD NEW ITEM BUTTON
     elements.buttonCreateItem.style.background = '#ccc';
     elements.buttonCreateItem.style.border = 'none';
@@ -163,6 +164,7 @@ elements.buttonErase.addEventListener('click', e => {
 });
 
 
+
 // When SAVE button is clicked
 elements.buttonSaveItem.addEventListener('click', e => {
 
@@ -209,7 +211,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 } else if (!elements.whenCalRadio.checked && elements.whenCal.value === undefined) {
                     alert('Please select date');
                 } else if (elements.whenCalRadio.checked) {
-                    return elements.whenCal.value;
+                    return dateReformat(elements.whenCal.value);
                 }
             }
             
@@ -224,7 +226,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 } else if (!elements.whenBackCalRadio.checked && elements.whenBackCal.value !== undefined) {
                     return elements.whenBackCal.value;
                 } else if (elements.whenBackCalRadio.checked) {
-                    return elements.whenBackCal.value;
+                    return dateReformat(elements.whenBackCal.value);
                 }
             }
 
@@ -316,6 +318,46 @@ const renderDashboard = () => {
 const init = () => {
     itemView.clearForm();
     itemView.hideForm();
+}
+
+
+// // function to convert date to string format
+// const dateToString = calDate => {
+//     console.log('type: ' + typeof calDate);
+    
+//     const stringDate = new Date(`${calDate}`);
+//     const month = toString(stringDate.getMonth() + 1);
+//     const day = toString(stringDate.getDate());
+//     const year = toString(stringDate.getFullYear());
+
+//     return year + '-' + month + '-' + day;
+// }
+
+// function to reformat datestrings
+const dateReformat = calDate => {
+
+    const dateArray = calDate.split('');
+    console.log('dateArray: ' + dateArray);
+
+    const dd = dateArray[8] + dateArray[9];
+    console.log('dd: ' + dd);
+    const mm = dateArray[5] + dateArray[6];
+    console.log('mm: ' + mm);
+    const yyyy = dateArray[0] + dateArray[1] + dateArray[2] + dateArray[3];
+    console.log('yyyy: ' + yyyy);
+
+    const getDay = date => {
+        const week_of_day_arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const day = week_of_day_arr[new Date(date).getDay()];
+        console.log('day: ' + day);
+        return day;
+      }
+
+    const monthsArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const month = mm => monthsArr[(parseInt(mm) - 1)];
+    
+    const newFormat = getDay(calDate) + ', ' + month(mm) + ' ' + parseInt(dd) + ', ' + yyyy;
+    return newFormat;
 }
 
 
