@@ -130,31 +130,19 @@ elements.meOwner.addEventListener('click', e => {
     // elements.notMeBorrowerInput.style.display = 'block';
 });
 
-/*
-// When radio button WHEN 'borrowed on' is clicked:
-elements.whenCalRadio.addEventListener('click', e => {
-    // Display calendar
-    elements.whenCal.style.display = 'block';
+
+// When WHEN calendar is clicked open
+elements.whenCal.addEventListener('click', e => {
+    // check calendar radio button
+    elements.whenCalRadio.checked = true;
 });
 
-// When radio button WHEN 'not sure' is clicked:
-elements.whenNotSure.addEventListener('click', e => {
-    // Hide calendar
-    elements.whenCal.style.display = 'none';
-});
 
-// When radio button WHENBACK 'return item by' is clicked:
-elements.whenBackCalRadio.addEventListener('click', e => {
-    // Display calendar
-    elements.whenBackCal.style.display = 'block';
+// When WHENBACK calendar is clicked open
+elements.whenBackCal.addEventListener('click', e => {
+    // check calendar radio button
+    elements.whenBackCalRadio.checked = true;
 });
-
-// When radio button WHENBACK 'not sure' is clicked:
-elements.whenBackNotSure.addEventListener('click', e => {
-    // Hide calendar
-    elements.whenBackCal.style.display = 'none';
-});
-*/
 
 
 // When ERASE button is clicked

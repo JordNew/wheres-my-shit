@@ -1,20 +1,16 @@
 import { elements } from './base';
 import ItemList from '../models/ItemList';
+import moment from 'moment';
 
 export const displayForm = () => {
     
-    // display form
+    // set minimum value for whenBackCal to today
+    let today = moment().format('YYYY-MM-DD');
+    elements.whenBackCal.min = today;    
+    
+    // Display form
     elements.form.style.display = 'block';
     
-    // // set calender default dates to today
-    // elements.whenCal.valueAsDate = new Date();
-    // elements.whenBackCal.valueAsDate = new Date();
-    
-    // set minimum value for whenBackCal to today
-    let today = new Date();
-    elements.whenCal.setAttribute('min', today);
-    elements.whenBackCal.setAttribute('min', today);    
-
     // display Save and Erase buttons
     elements.buttonSaveItem.style.display = 'block';
     elements.buttonErase.style.display = 'block';
