@@ -34,7 +34,9 @@ export const elements = {
     borrowedByMe: document.querySelector('.borrowedByMe'),
     borrowedFromMe: document.querySelector('.borrowedFromMe'),
     borrowedByMeItem: document.querySelector('.borrowedByMe__item'),
-    borrowedFromMeItem: document.querySelector('.borrowedFromMe__item')
+    borrowedFromMeItem: document.querySelector('.borrowedFromMe__item'),
+    popup: document.querySelector('.popup'),
+    popuptext: document.querySelector('.popuptext')
 };
 
 // export const questions = [

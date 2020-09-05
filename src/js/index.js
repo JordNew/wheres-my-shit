@@ -17,7 +17,6 @@ const state = {};
 window.state = state;
 
 
-
 /** 
  * HEADER CONTROLLER 
  */
@@ -50,95 +49,82 @@ elements.buttonCreateItem.addEventListener('click', e => {
     elements.desc.focus();
 });
 
-// When radio button BORROWER 'not me' is clicked:
-elements.notMeBorrower.addEventListener('click', e => {
-    // set textarea background-color to white
+
+const meOwnerNotBorrower = () => {
+    // set BORROWER 'not me' textarea background-color to white
     elements.notMeBorrowerInput.style.backgroundColor = '#fff';
     // activate textarea
     elements.notMeBorrowerInput.disabled = false;
     // automatically place cursor at the beginning
     elements.notMeBorrowerInput.focus();
+    // automatically check OWNER 'me' radio button
+    elements.meOwner.checked = true;
 
-    // if (!elements.meBorrower.checked) { // otherwise the text label jumps down
-    //     // show owner radio buttons + text labels 
-    //     elements.meOwner.style.display = 'block';
-    //     elements.notMeOwner.style.display = 'block';
-    //     elements.labelMeOwner.style.display = 'block';
-    //     elements.labelNotMeOwner.style.display = 'block';
-    // }
-});
-
-
-// When radio button BORROWER 'me' is clicked:
-elements.meBorrower.addEventListener('click', e => {
-    
-    // set textarea background-color to grey
-    elements.notMeBorrowerInput.style.backgroundColor = 'rgb(221, 213, 213)';
-    // clear textarea
-    elements.notMeBorrowerInput.value = '';
-    // disable textarea
-    elements.notMeBorrowerInput.disabled = true;
-
-    /*
-    // hide owner radio buttons
-    elements.meOwner.style.display = 'none';
-    elements.notMeOwner.style.display = 'none';
-
-    // hide owner text labels
-    elements.labelMeOwner.style.display = 'none';
-    elements.labelNotMeOwner.style.display = 'none';
-    */
-
-    // display owner text input
-    // elements.notMeOwnerInput.style.display = 'block';
-});
-
-
-// When radio button OWNER 'not me' is clicked: 
-elements.notMeOwner.addEventListener('click', e => {
-    // set textarea background-color to white
-    elements.notMeOwnerInput.style.backgroundColor = '#fff';
-    // activate textarea
-    elements.notMeOwnerInput.disabled = false;
-    // automatically place cursor at the beginning
-    elements.notMeOwnerInput.focus();
-    
-    // if (!elements.meOwner.checked) { // otherwise the text label jumps down
-    //     // show borrower radio buttons + text labels
-    //     elements.meBorrower.style.display = 'block';
-    //     elements.notMeBorrower.style.display = 'block';
-    //     elements.labelMeBorrower.style.display = 'block';
-    //     elements.labelNotMeBorrower.style.display = 'block';
-    // }
-});
-
-// When radio button OWNER 'me' is clicked: 
-elements.meOwner.addEventListener('click', e => {
-    
-    // set textarea background-color to grey
+    // set OWNER 'not me' textarea background-color to grey
     elements.notMeOwnerInput.style.backgroundColor = 'rgb(221, 213, 213)';
      // clear textarea
      elements.notMeOwnerInput.value = '';
      // disable textarea
      elements.notMeOwnerInput.disabled = true;
     
-    // hide borrower 'me' radio button + label (leaving 'not me' as the only option left)
-    // elements.meBorrower.style.display = 'none';
-    // elements.labelMeBorrower.style.display = 'none';
+    // automatically check BORROWER 'not me' radio button
+    elements.notMeBorrower.checked = true;
+}
+
+
+const meBorrowerNotOwner = () => {
+    // set OWNER 'not me' textarea background-color to white
+    elements.notMeOwnerInput.style.backgroundColor = '#fff';
+    // activate textarea
+    elements.notMeOwnerInput.disabled = false;
+    // automatically place cursor at the beginning
+    elements.notMeOwnerInput.focus();
+    // automatically check BORROWER 'me' radio button
+    elements.meBorrower.checked = true;
+
+    // set BORROWER 'not me' textarea background-color to grey
+    elements.notMeBorrowerInput.style.backgroundColor = 'rgb(221, 213, 213)';
+    // clear textarea
+    elements.notMeBorrowerInput.value = '';
+    // disable textarea
+    elements.notMeBorrowerInput.disabled = true;
     
-    // show borrower 'not me' text input
-    // elements.notMeBorrowerInput.style.display = 'block';
+    // automatically check OWNER 'not me' radio button
+    elements.notMeOwner.checked = true;
+}
+
+
+// When radio button BORROWER 'not me' is clicked:
+elements.notMeBorrower.addEventListener('click', e => {
+    meOwnerNotBorrower();
 });
 
 
-// When WHEN calendar is clicked open
+// When radio button BORROWER 'me' is clicked:
+elements.meBorrower.addEventListener('click', e => {
+    meBorrowerNotOwner();    
+});
+
+
+// When radio button OWNER 'not me' is clicked: 
+elements.notMeOwner.addEventListener('click', e => {
+    meBorrowerNotOwner();  
+});
+
+// When radio button OWNER 'me' is clicked: 
+elements.meOwner.addEventListener('click', e => {
+    meOwnerNotBorrower();
+});
+
+
+// When WHEN calendar is clicked
 elements.whenCal.addEventListener('click', e => {
     // check calendar radio button
     elements.whenCalRadio.checked = true;
 });
 
 
-// When WHENBACK calendar is clicked open
+// When WHENBACK calendar is clicked
 elements.whenBackCal.addEventListener('click', e => {
     // check calendar radio button
     elements.whenBackCalRadio.checked = true;
@@ -190,9 +176,9 @@ elements.buttonSaveItem.addEventListener('click', e => {
                     alert('Please select when the item was borrowed');
                     return
                 } else if (elements.whenToday.checked) {
-                        const now = moment().format('dddd DD/MM/YYYY');
+                        const now = moment().format('YYYY/MM/DD');
                         // console.log(now);
-                        return now;
+                        return dateReformat(now);
                 } else if (elements.whenNotSure.checked) {
                     console.log('whennotsure');
                     return 'not sure';
@@ -202,7 +188,6 @@ elements.buttonSaveItem.addEventListener('click', e => {
                     return dateReformat(elements.whenCal.value);
                 }
             }
-            
             
             // Read WHENBACK value
             const whenBackValue = () => {
@@ -237,8 +222,13 @@ elements.buttonSaveItem.addEventListener('click', e => {
             heading2View.updateNumItemsByMe();
             heading2View.updateNumItemsFromMe();
 
+            // UI feedback popup: 'Item saved!'
+            const showPopup = () => {
+                elements.popuptext.classList.toggle('show');
+            }  
+            showPopup();
+
             // Restore start page: feedback, clear & hide form
-            // ToDo: function for feedback at Save Item
             init();
         }
 
@@ -321,7 +311,7 @@ const init = () => {
 //     return year + '-' + month + '-' + day;
 // }
 
-// Function to reformat datestrings
+// Function to reformat datestrings (format must be 'YYYY/MM/DD')
 const dateReformat = calDate => {
 
     const dateArray = calDate.split('');
