@@ -623,7 +623,8 @@ span {
   /* visibility: hidden; */
   opacity: 0;
   width: 160px;
-  background-color: #555;
+  background-color: #5cbf2a;
+  border: 3px orange dotted;
   color: #fff;
   text-align: center;
   border-radius: 6px;
