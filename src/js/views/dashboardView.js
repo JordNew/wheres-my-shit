@@ -16,7 +16,8 @@ export const renderItem = item => {
                 <img src="img/pencil.svg" id="pencil">
             </button>
             <div class="borrowedByMe__item__text">
-                <h1 class="item__title">${item.desc}</h1>
+                <h1 class="item__title">${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}<span class="tooltiptext">${item.desc}</span></h1>
+                
                 <p><i>Borrowed from: ${item.owner}</i></p>
                 <p><i>When: ${item.when}</i></p>
                 <p><i>When to return: ${item.whenBack}</i></p>
@@ -40,7 +41,7 @@ export const renderItem = item => {
                 <img src="img/pencil.svg" id="pencil">
             </button>
             <div class="borrowedByMe__item__text">
-                <h1 class="item__title">${item.desc}</h1>
+                <h1 class="item__title">${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}<span class="tooltiptext">${item.desc}</span></h1>
                 <p><i>Borrowed by: ${item.borrower}</i></p>
                 <p><i>When: ${item.when}</i></p>
                 <p><i>When to return: ${item.whenBack}</i></p>

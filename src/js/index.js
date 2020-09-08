@@ -6,6 +6,7 @@ import * as itemView from './views/itemView';
 import * as dashboardView from './views/dashboardView';
 import * as heading2View from './views/heading2View';
 import moment from 'moment';
+import x from 'uniqid';
 
 /** Global state of the app
  * - Add object 
@@ -69,6 +70,10 @@ const meOwnerNotBorrower = () => {
     
     // automatically check BORROWER 'not me' radio button
     elements.notMeBorrower.checked = true;
+
+    // remove any possible red borders from textareas OWNER 'not me', restore original disabled color
+    elements.notMeOwnerInput.style.backgroundColor = '1px rgb(221, 213, 213) solid';
+    elements.notMeOwnerInput.style.border = '1px rgb(170, 170, 170) solid';
 }
 
 
@@ -91,6 +96,10 @@ const meBorrowerNotOwner = () => {
     
     // automatically check OWNER 'not me' radio button
     elements.notMeOwner.checked = true;
+
+    // remove any possible red borders from textareas BORROWER 'not me', restore original disabled color
+    elements.notMeBorrowerInput.style.backgroundColor = '1px rgb(221, 213, 213) solid';
+    elements.notMeBorrowerInput.style.border = '1px rgb(170, 170, 170) solid';
 }
 
 
@@ -142,36 +151,33 @@ elements.buttonErase.addEventListener('click', e => {
 // When SAVE button is clicked
 elements.buttonSaveItem.addEventListener('click', e => {
 
-    if (elements.meBorrower.checked && elements.meOwner.checked) {
-        alert('You can\'t borrow from yourself, silly ... ');
-    } else {
+    // Make sure all required fields are filled in
+    if (itemView.checkRequiredFields()) {
 
-        // Make sure all required fields are filled in
-        if (itemView.checkRequiredFields()) {
-
-            // Create a new ItemList IF there is none yet
-            if (!state.items) state.items = new ItemList();
-            
-            // Read BORROWER value
-            const borrowerValue = () => {
-                if (elements.meBorrower.checked) {
-                    return 'me';
-                } else {
-                    return elements.notMeBorrowerInput.value;
-                }
+        // Create a new ItemList IF there is none yet
+        if (!state.items) state.items = new ItemList();
+        
+        // Read BORROWER value
+        const borrowerValue = () => {
+            if (elements.meBorrower.checked) {
+                return 'me';
+            } else {
+                return elements.notMeBorrowerInput.value;
             }
+        }
 
-            // Read OWNER value
-            const ownerValue = () => {
-                if (elements.meOwner.checked) {
-                    return 'me';
-                } else {
-                    return elements.notMeOwnerInput.value;
-                }
+        // Read OWNER value
+        const ownerValue = () => {
+            if (elements.meOwner.checked) {
+                return 'me';
+            } else {
+                return elements.notMeOwnerInput.value;
             }
+        }
 
-            // Read WHEN value
-            const whenValue = () => {
+        // Read WHEN value
+        const whenValue = () => {
+            try {
                 if (!elements.whenToday.checked && !elements.whenNotSure.checked && !elements.whenCalRadio.checked || elements.whenCal.value === undefined) {
                     alert('Please select when the item was borrowed');
                     return
@@ -186,11 +192,17 @@ elements.buttonSaveItem.addEventListener('click', e => {
                     alert('Please select date');
                 } else if (elements.whenCalRadio.checked) {
                     return dateReformat(elements.whenCal.value);
-                }
+                }    
+            } catch {
+                alert('Something went wrong saving the Date of Borrow');
+            } finally {
+                console.log('done executing the whenValue function');
             }
-            
-            // Read WHENBACK value
-            const whenBackValue = () => {
+        }
+        
+        // Read WHENBACK value
+        const whenBackValue = () => {
+            try {
                 if (elements.whenBackNotSure.checked) {
                     return 'not sure';
                 } else if (elements.whenBackCalRadio.checked && elements.whenBackCal.value === undefined) {
@@ -201,40 +213,41 @@ elements.buttonSaveItem.addEventListener('click', e => {
                 } else if (elements.whenBackCalRadio.checked) {
                     return dateReformat(elements.whenBackCal.value);
                 }
+            } catch {
+                alert('Something went wrong saving the Return date');
+            } finally {
+                console.log('done executing the whenBackValue function');
             }
-
-            // Create new item (and store in ItemList aka state.items)
-            const newItem = state.items.createItem(
-                elements.desc.value,
-                borrowerValue(),
-                ownerValue(),
-                whenValue(),
-                whenBackValue()
-            );
-
-            // TESTING
-            console.log(state);
-            
-            // Add all items to dashboard
-            controlDashboard();
-
-            // Update number of items in UI
-            heading2View.updateNumItemsByMe();
-            heading2View.updateNumItemsFromMe();
-
-            // UI feedback popup: 'Item saved!'
-            const showPopup = () => {
-                elements.popuptext.classList.toggle('show');
-            }  
-            showPopup();
-
-            // Restore start page: feedback, clear & hide form
-            init();
         }
 
-    }
+        // Create new item (and store in ItemList aka state.items)
+        const newItem = state.items.createItem(
+            elements.desc.value,
+            borrowerValue(),
+            ownerValue(),
+            whenValue(),
+            whenBackValue()
+        );
 
-    
+        // TESTING
+        console.log(state);
+        
+        // Add all items to dashboard
+        controlDashboard();
+
+        // Update number of items in UI
+        heading2View.updateNumItemsByMe();
+        heading2View.updateNumItemsFromMe();
+
+        // UI feedback popup: 'Item saved!'
+        const showPopup = () => {
+            elements.popuptext.classList.toggle('show');
+        }  
+        showPopup();
+
+        // Restore start page: feedback, clear & hide form
+        init();
+    }
 });
 
 window.l = new ItemList();
@@ -299,18 +312,6 @@ const init = () => {
 }
 
 
-// // function to convert date to string format
-// const dateToString = calDate => {
-//     console.log('type: ' + typeof calDate);
-    
-//     const stringDate = new Date(`${calDate}`);
-//     const month = toString(stringDate.getMonth() + 1);
-//     const day = toString(stringDate.getDate());
-//     const year = toString(stringDate.getFullYear());
-
-//     return year + '-' + month + '-' + day;
-// }
-
 // Function to reformat datestrings (format must be 'YYYY/MM/DD')
 const dateReformat = calDate => {
 
@@ -353,13 +354,30 @@ elements.borrowedByMe.addEventListener('click', e => {
 
     // TESTING
     else if (e.target.matches('#pencil')) {
-        console.log('pencil button clicked');
+        // determine ID of original item
+        const itemId = e.target.parentNode.parentNode.dataset.itemid;
+       
+        // retrieve item info from dashboard by comparing ID's
+        let itemToEdit;
+        state.dashboard.borrowedByMe.forEach(el => {
+            if (el.id === itemId) {
+                itemToEdit = el;
+                return itemToEdit;
+            }
+        });
+        
+        // display edit from
+        elements.editForm.style.display = 'block';
+        // autopopulate fields with originally entered item values
+        elements.descEdit.value = itemToEdit.desc; // description
+        elements.borrowerEdit.value = itemToEdit.borrower; // borrower
+
     } 
 
     else {
         console.log('clicked somewhere else')
     }
-})
+});
 
 // Handle, delete and update borrowedFromMe item events
 elements.borrowedFromMe.addEventListener('click', e => {
@@ -378,8 +396,26 @@ elements.borrowedFromMe.addEventListener('click', e => {
     }
     // TESTING
     else if (e.target.matches('#pencil')) {
-        console.log('pencil button clicked');
+        // determine ID of original item
+        const itemId = e.target.parentNode.parentNode.dataset.itemid;
+       
+        // retrieve item info from dashboard by comparing ID's
+        let itemToEdit;
+        state.dashboard.borrowedFromMe.forEach(el => {
+            if (el.id === itemId) {
+                itemToEdit = el;
+                return itemToEdit;
+            }
+        });
+        
+        // display edit from
+        elements.editForm.style.display = 'block';
+        // autopopulate fields with originally entered item values
+        elements.descEdit.value = itemToEdit.desc; // description
+        elements.borrowerEdit.value = itemToEdit.borrower; // borrower
+
     } 
+
     else {
         console.log('clicked somewhere else')
     }

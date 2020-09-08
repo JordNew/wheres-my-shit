@@ -59,9 +59,9 @@
                     <input type="radio" class="radio5" id="when_today" name="when" value="today">
                     <label for="when_today" class="label__radio5" id="label__when_today">Today</label>
                     <input type="radio" class="radio6" id="borrowed_on" name="when" value="not_sure">
-                    <label for="when_not_sure" class="label__radio6" id="label__when_not_sure">Borrowed on:</label>
+                    <label for="borrowed_on" class="label__radio6" id="label__borrowed_on">Borrowed on:</label>
                     <input type="radio" class="radio7" id="when_not_sure" name="when" value="when_cal_radio">
-                    <label for="borrowed_on" class="label__radio7" id="label__borrowed_on">Not sure</label>
+                    <label for="when_not_sure" class="label__radio7" id="label__when_not_sure">Not sure</label>
                     <input type="date" class="block" id="when_cal" name="when" style="background-color: rgb(221, 213, 213);">
                 </div>                  
                 <div id="q5">
@@ -85,6 +85,20 @@
                 <li class="borrowed__item">item2</li>
                 <li class="borrowed__item">item3</li>
                 <li class="borrowed__item"> ... </li> -->
+                <div class="form-popup" id="edit-form">
+                    <form action="/action_page.php" class="form-container">
+                        <h2><b>Edit item<b></h2>
+    
+                        <label for="what"><b>What got borrowed?</b></label>
+                        <input type="text" id="desc_edit" name="desc_edit" required>
+    
+                        <label for="who"><b>Who is borrowing?</b></label>
+                        <input type="text" id="borrower_edit" name="borrower_edit" required>
+    
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn cancel">Cancel</button>
+                    </form>
+                </div>
             </ul>
         </div>
         <div class="borrowedFromMe">

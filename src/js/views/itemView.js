@@ -33,10 +33,14 @@ export const checkRequiredFields = () => {
     if (elements.desc.value === '') {
         alert('The "what" field is required');
         // return check;
-    } else if (!elements.meBorrower.checked && !elements.notMeBorrower.checked) {
+    } else if (!elements.meBorrower.checked && !elements.notMeBorrower.checked || elements.notMeBorrower.checked && elements.notMeBorrowerInput.value === '') {
+        elements.notMeBorrowerInput.style = 'border: 2px red solid';
+        elements.notMeBorrowerInput.focus();
         alert('... but WHO is borrowing??');
         // return check;
-    } else if (!elements.meOwner.checked && !elements.notMeOwner.checked && !elements.meBorrower.checked) {
+    } else if (!elements.meOwner.checked && !elements.notMeOwner.checked && !elements.meBorrower.checked || elements.notMeOwner.checked && elements.notMeOwnerInput.value === '') {
+        elements.notMeOwnerInput.style = 'border: 2px red solid';
+        elements.notMeOwnerInput.focus();
         alert('... but who OWNS that shit??');
         // return check;
     } else if ((!elements.whenToday.checked && !elements.whenCalRadio.checked && !elements.whenNotSure.checked) ||  (elements.whenCal.value === '' && !elements.whenToday.checked && !elements.whenNotSure.checked)) {

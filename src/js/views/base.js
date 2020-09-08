@@ -36,7 +36,10 @@ export const elements = {
     borrowedByMeItem: document.querySelector('.borrowedByMe__item'),
     borrowedFromMeItem: document.querySelector('.borrowedFromMe__item'),
     popup: document.querySelector('.popup'),
-    popuptext: document.querySelector('.popuptext')
+    popuptext: document.querySelector('.popuptext'),
+    editForm: document.getElementById('edit-form'),
+    descEdit: document.getElementById('desc_edit'),
+    borrowerEdit: document.getElementById('borrower_edit')
 };
 
 // export const questions = [
