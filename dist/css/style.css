@@ -713,7 +713,7 @@ span {
 
 /* The popup form - hidden by default */
 .form-popup {
-  display: none;
+  display: block;
   position: fixed;
   bottom: 0;
   right: 15px;

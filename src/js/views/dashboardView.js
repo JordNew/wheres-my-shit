@@ -62,3 +62,60 @@ export const deleteItem = id => {
     // }
 };
 
+export const renderEditForm = item => {
+    
+    if (item.borrower === 'me') {
+
+        let itemFormRendered = false;
+        const markup = `
+                <div class="form-popup" id="edit-form">
+                    <form action="/action_page.php" class="form-container">
+                        <h2><b>Edit item<b></h2>
+    
+                        <label for="what"><b>What got borrowed?</b></label>
+                        <input type="text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+    
+                        <label for="who"><b>Who owns that shit?</b></label>
+                        <input type="text" id="borrower_edit" name="borrower_edit" value="${item.owner}" required>
+    
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn cancel">Cancel</button>
+                    </form>
+                </div>
+    `;
+        elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+        itemFormRendered = true;
+        return itemFormRendered;
+
+    } else {
+        
+        let itemFormRendered = false;
+        const markup = `
+                <div class="form-popup" id="edit-form">
+                    <form action="/action_page.php" class="form-container">
+                        <h2>Edit item</h2>
+    
+                        <label for="what">What got borrowed?</label>
+                        <input type="text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+    
+                        <label for="who">Who is borrowing?</label>
+                        <input type="text" id="borrower_edit" name="borrower_edit" value="${item.borrower}" required>
+
+                        <label for="owner">Who owns that shit?</label>
+                        <select name="owner" id="owner_edit">
+                          <option value="me">Me</option>
+                          <option value="not_me_but">Not me, but:</option>
+                        </select>
+
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn cancel">Cancel</button>
+                    </form>
+                </div>
+    `;
+        elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
+        itemFormRendered = true;
+        return itemFormRendered;
+
+    }
+};
+

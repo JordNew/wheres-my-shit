@@ -234,6 +234,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
         
         // Add all items to dashboard
         controlDashboard();
+        // console.log('number of list items: ' + elements.borrowedFromMe.childElementCount);
 
         // Update number of items in UI
         heading2View.updateNumItemsByMe();
@@ -366,7 +367,7 @@ elements.borrowedByMe.addEventListener('click', e => {
             }
         });
         
-        // display edit from
+        // display edit form
         elements.editForm.style.display = 'block';
         // autopopulate fields with originally entered item values
         elements.descEdit.value = itemToEdit.desc; // description
@@ -381,6 +382,7 @@ elements.borrowedByMe.addEventListener('click', e => {
 
 // Handle, delete and update borrowedFromMe item events
 elements.borrowedFromMe.addEventListener('click', e => {
+    
     const id = e.target.closest('.borrowedFromMe__item').dataset.itemid;
 
     //Handle the delete button
@@ -399,7 +401,7 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // determine ID of original item
         const itemId = e.target.parentNode.parentNode.dataset.itemid;
        
-        // retrieve item info from dashboard by comparing ID's
+        // find relevant item in dashboard items
         let itemToEdit;
         state.dashboard.borrowedFromMe.forEach(el => {
             if (el.id === itemId) {
@@ -408,17 +410,14 @@ elements.borrowedFromMe.addEventListener('click', e => {
             }
         });
         
-        // display edit from
-        elements.editForm.style.display = 'block';
-        // autopopulate fields with originally entered item values
-        elements.descEdit.value = itemToEdit.desc; // description
-        elements.borrowerEdit.value = itemToEdit.borrower; // borrower
+        // display edit form
+        dashboardView.renderEditForm(itemToEdit);
+        elements.descEdit.focus();
 
-    } 
-
-    else {
+    } else {
         console.log('clicked somewhere else')
     }
+
 });
 
 

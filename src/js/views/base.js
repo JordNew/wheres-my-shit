@@ -39,7 +39,9 @@ export const elements = {
     popuptext: document.querySelector('.popuptext'),
     editForm: document.getElementById('edit-form'),
     descEdit: document.getElementById('desc_edit'),
-    borrowerEdit: document.getElementById('borrower_edit')
+    borrowerEdit: document.getElementById('borrower_edit'),
+    borrowedByMeList: document.getElementById('borrowed_by_me_list'),
+    borrowedFromMeList: document.getElementById('borrowed_from_me_list')
 };
 
 // export const questions = [

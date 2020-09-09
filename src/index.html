@@ -80,29 +80,15 @@
             <button id="erase" class="btn__erase" style="display: none;"><< Erase</button>
         </div>
         <div class="borrowedByMe">
-            <ul>
+            <ul id="borrowed_by_me_list">
                 <!-- <li class="borrowed__item">item1</li>
                 <li class="borrowed__item">item2</li>
                 <li class="borrowed__item">item3</li>
                 <li class="borrowed__item"> ... </li> -->
-                <div class="form-popup" id="edit-form">
-                    <form action="/action_page.php" class="form-container">
-                        <h2><b>Edit item<b></h2>
-    
-                        <label for="what"><b>What got borrowed?</b></label>
-                        <input type="text" id="desc_edit" name="desc_edit" required>
-    
-                        <label for="who"><b>Who is borrowing?</b></label>
-                        <input type="text" id="borrower_edit" name="borrower_edit" required>
-    
-                        <button type="submit" class="btn">Save Changes</button>
-                        <button type="button" class="btn cancel">Cancel</button>
-                    </form>
-                </div>
             </ul>
         </div>
         <div class="borrowedFromMe">
-            <ul>
+            <ul id="borrowed_from_me_list">
                 <!-- <li class="borrowed__item">item1</li>
                 <li class="borrowed__item">item2</li>
                 <li class="borrowed__item">item3</li>
