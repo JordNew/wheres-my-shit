@@ -38,10 +38,15 @@ export const elements = {
     popup: document.querySelector('.popup'),
     popuptext: document.querySelector('.popuptext'),
     editForm: document.getElementById('edit-form'),
+    editFormContainer: document.getElementById('form-container'),
     descEdit: document.getElementById('desc_edit'),
     borrowerEdit: document.getElementById('borrower_edit'),
     borrowedByMeList: document.getElementById('borrowed_by_me_list'),
-    borrowedFromMeList: document.getElementById('borrowed_from_me_list')
+    borrowedFromMeList: document.getElementById('borrowed_from_me_list'),
+    whenEditDropdown: document.getElementById('when_edit_dropdown'),
+    editBorrowedOn: document.getElementById('edit_borrowed_on'),
+    editWhenNotSure: document.getElementById('edit_when_not_sure'),
+    editCancel: document.querySelector('.cancel')
 };
 
 // export const questions = [

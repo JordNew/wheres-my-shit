@@ -55,11 +55,6 @@ export const renderItem = item => {
 export const deleteItem = id => {
     const item = document.querySelector(`[data-itemid="${id}"]`);
     if (item) item.parentElement.removeChild(item);
-    // if (item) {
-    //     console.log('item to delete')
-    // } else {
-    //     console.log('that did not work')
-    // }
 };
 
 export const renderEditForm = item => {
@@ -69,21 +64,47 @@ export const renderEditForm = item => {
         let itemFormRendered = false;
         const markup = `
                 <div class="form-popup" id="edit-form">
-                    <form action="/action_page.php" class="form-container">
-                        <h2><b>Edit item<b></h2>
+                    <form class="form-container">
+                        <h2 id="edit_top">Edit item</h2>
     
-                        <label for="what"><b>What got borrowed?</b></label>
-                        <input type="text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+                        <label for="what" class="edit_item_text_label">What got borrowed?</label>
+                        <input type="text" class="edit_item_text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
     
-                        <label for="who"><b>Who owns that shit?</b></label>
-                        <input type="text" id="borrower_edit" name="borrower_edit" value="${item.owner}" required>
+                        <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
+                        <select name="borrower" id="borrower_edit_dropdown">
+                          <option value="me" id="borrower_edit_me">Me</option>
+                          <option value="not_me_but" id="borrower_edit_not_me_but">Not me, but:</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" disabled>
     
-                        <button type="submit" class="btn">Save Changes</button>
+                        <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
+                        <select name="owner" id="owner_edit_dropdown">
+                          <option value="me">Me</option>
+                          <option value="not_me_but">Not me, but:</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? '' : item.owner}">
+
+                        <label for="when" class="edit_item_text_label">When was it borrowed?</label>
+                        <select name="when" id="when_edit_dropdown">
+                          <option value="borrowed_on" id="edit_borrowed_on">Borrowed on:</option>
+                          <option value="not_sure" id="edit_when_not_sure">Not sure</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="when_text_edit" name="when_edit" value="${item.when}">
+
+                        <label for="whenBack" class="edit_item_text_label">When to return it?</label>
+                        <select name="whenBack" id="whenBack_edit_dropdown">
+                          <option value="return_by" id="edit_return_by">Return by:</option>
+                          <option value="not_sure" id="edit_whenBack_not_sure">Not sure</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="whenBack_text_edit" name="whenBack_edit" value="${item.whenBack === 'not sure' ? 'Not sure' : item.whenBack}">
+
+                        <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
                         <button type="button" class="btn cancel">Cancel</button>
                     </form>
                 </div>
     `;
         elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+        
         itemFormRendered = true;
         return itemFormRendered;
 
@@ -92,22 +113,43 @@ export const renderEditForm = item => {
         let itemFormRendered = false;
         const markup = `
                 <div class="form-popup" id="edit-form">
-                    <form action="/action_page.php" class="form-container">
-                        <h2>Edit item</h2>
+                    <form class="form-container">
+                        <h2 id="edit_top">Edit item</h2>
     
-                        <label for="what">What got borrowed?</label>
-                        <input type="text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+                        <label for="what" class="edit_item_text_label">What got borrowed?</label>
+                        <input type="text" class="edit_item_text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
     
-                        <label for="who">Who is borrowing?</label>
-                        <input type="text" id="borrower_edit" name="borrower_edit" value="${item.borrower}" required>
-
-                        <label for="owner">Who owns that shit?</label>
-                        <select name="owner" id="owner_edit">
+                        <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
+                        <select name="borrower" id="borrower_edit_dropdown">
                           <option value="me">Me</option>
                           <option value="not_me_but">Not me, but:</option>
                         </select>
+                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? '' : item.borrower}">
 
-                        <button type="submit" class="btn">Save Changes</button>
+                        <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
+                        <select name="owner" id="owner_edit_dropdown">
+                          <option value="me">Me</option>
+                          <option value="not_me_but">Not me, but:</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? '' : item.owner}">
+
+                        <label for="when" class="edit_item_text_label">When was it borrowed?</label>
+                        <select name="when" id="when_edit">
+                          <option value="today">Today</option>
+                          <option value="borrowed_on">Borrowed on:</option>
+                          <option value="not_sure">Not sure</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="when_edit" name="when_edit" value="${item.when}">
+
+                        <label for="whenBack" class="edit_item_text_label">When to return it?</label>
+                        <select name="whenBack" id="whenBack_edit">
+                          <option value="today">Today</option>
+                          <option value="return_by">Return by:</option>
+                          <option value="not_sure">Not sure</option>
+                        </select>
+                        <input type="text" class="edit_item_text" id="whenBack_edit" name="whenBack_edit" value="${item.whenBack}">
+
+                        <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
                         <button type="button" class="btn cancel">Cancel</button>
                     </form>
                 </div>

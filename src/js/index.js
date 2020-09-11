@@ -337,12 +337,41 @@ const dateReformat = calDate => {
 }
 
 
+// Function to delete any existing edit form
+const removeExistingEditForm = () => {
+
+    // check if edit form is currently present
+    const editFormPresent = (parent, child) => {
+        if (parent.contains(child)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // if already present, remove existing edit form
+    const formParent1 = document.querySelector('.borrowedByMe');
+    const formParent2 = document.querySelector('.borrowedFromMe');
+    const form = document.getElementById('edit-form');
+    
+    if (editFormPresent(formParent1, form) || editFormPresent(formParent2, form)) {
+        const deleteForm = () => { 
+            form.parentNode.removeChild(form);
+        }
+        deleteForm();
+    } else {
+        console.log('no prior edit form was detected');
+    }
+}
+
+
 // Handle, delete and update borrowedByMe item events
 elements.borrowedByMe.addEventListener('click', e => {
-    const id = e.target.closest('.borrowedByMe__item').dataset.itemid;
-
+    
     //Handle the delete button
     if (e.target.matches('.item__delete, .item__delete *')) {
+        
+        const id = e.target.closest('.borrowedByMe__item').dataset.itemid;
         // Delete from state
         state.dashboard.deleteItem(id);
 
@@ -355,10 +384,14 @@ elements.borrowedByMe.addEventListener('click', e => {
 
     // TESTING
     else if (e.target.matches('#pencil')) {
+
+        // remove any existing edit form
+        removeExistingEditForm();
+
         // determine ID of original item
         const itemId = e.target.parentNode.parentNode.dataset.itemid;
        
-        // retrieve item info from dashboard by comparing ID's
+        // find relevant item in dashboard items
         let itemToEdit;
         state.dashboard.borrowedByMe.forEach(el => {
             if (el.id === itemId) {
@@ -368,25 +401,34 @@ elements.borrowedByMe.addEventListener('click', e => {
         });
         
         // display edit form
-        elements.editForm.style.display = 'block';
-        // autopopulate fields with originally entered item values
-        elements.descEdit.value = itemToEdit.desc; // description
-        elements.borrowerEdit.value = itemToEdit.borrower; // borrower
+        dashboardView.renderEditForm(itemToEdit);
+
+        // handle Cancel button
+        document.querySelector('.cancel').addEventListener('click', e => {
+            removeExistingEditForm();
+            console.log('clicked Cancel button, removed edit form');
+        });
+
+        // handle Save button
+        document.getElementById('save_edit_btn').addEventListener('click', e => {
+            console.log('Save Edit button clicked');
+        });
 
     } 
-
     else {
         console.log('clicked somewhere else')
     }
 });
 
+
 // Handle, delete and update borrowedFromMe item events
 elements.borrowedFromMe.addEventListener('click', e => {
     
-    const id = e.target.closest('.borrowedFromMe__item').dataset.itemid;
-
-    //Handle the delete button
+    
+    // Handle the delete button
     if (e.target.matches('.item__delete, .item__delete *')) {
+        
+        const id = e.target.closest('.borrowedFromMe__item').dataset.itemid;
         // Delete from state
         state.dashboard.deleteItem(id);
 
@@ -398,6 +440,10 @@ elements.borrowedFromMe.addEventListener('click', e => {
     }
     // TESTING
     else if (e.target.matches('#pencil')) {
+
+        // remove any existing edit form
+        removeExistingEditForm();
+
         // determine ID of original item
         const itemId = e.target.parentNode.parentNode.dataset.itemid;
        
@@ -412,9 +458,30 @@ elements.borrowedFromMe.addEventListener('click', e => {
         
         // display edit form
         dashboardView.renderEditForm(itemToEdit);
-        elements.descEdit.focus();
 
-    } else {
+        /*
+        // prefill existing form values (previously saved)
+        const whenValue = item => {
+            if (item.when === 'not sure') {
+                console.log('editWhenNotSure');
+                document.getElementById('edit_when_not_sure').selected = true;
+            } else {
+                console.log('editBorrowedOn');
+                document.getElementById('edit_borrowed_on').selected = true;
+            }
+        };
+        console.log('itemToEdit is: ' + itemToEdit.desc);
+        whenValue(itemToEdit);
+        */
+
+        // handle Cancel button
+        document.querySelector('.cancel').addEventListener('click', e => {
+            removeExistingEditForm();
+            console.log('clicked Cancel button, removed edit form');
+        });
+
+    } 
+    else {
         console.log('clicked somewhere else')
     }
 

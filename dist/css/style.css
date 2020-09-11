@@ -555,7 +555,12 @@ span {
 
 .borrowedByMe {
     background-color: #f7ddd6;
+    z-index: 5;
 }
+
+.borrowedByMe #edit-form {
+  z-index: 1  ;
+} 
 
 .borrowedFromMe {
     background-color: #cbeeb9;
@@ -730,7 +735,7 @@ span {
 
 /* Full-width input fields */
 .form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
+  width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
@@ -763,5 +768,19 @@ span {
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+#edit_top {
+  font-size: 24px;
+  margin: -30px 0 14px -30px;
+}
+
+.edit_item_text {
+  padding: 5px;
+  height: 5px;
+}
+
+.edit_item_text_label {
+  font-size: 16px;
 }
 
