@@ -161,3 +161,52 @@ export const renderEditForm = item => {
     }
 };
 
+export const renderAreYouSure = item => {
+
+    if (item.borrower === 'me') {
+
+        const markup = `
+        <div class="form-popup" id="edit-form_are_you_sure">
+            <p id="delete_item_desc">Delete "${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}"</p>
+            <p id="edit_top_are_you_sure"><< Are you sure? >></p>
+            <button type="submit" class="are_you_sure_button" id="save_edit_btn">YES<br>(archive item)</button>
+            <button type="button" class="are_you_sure_button" id="cancel_edit_btn">NO<br>(keep item)</button>
+        </div>
+    `;
+    elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
+    deleteAreYouSure();
+    }
+    else {
+
+        const markup = `
+        <div class="form-popup" id="edit-form_are_you_sure">
+            <p id="delete_item_desc">Delete "${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}"</p>
+            <p id="edit_top_are_you_sure"><< Are you sure? >></p>
+            <button type="submit" class="are_you_sure_button" id="save_edit_btn">YES<br>(archive item)</button>
+            <button type="button" class="are_you_sure_button" id="cancel_edit_btn">NO<br>(keep item)</button>
+        </div>
+    `;
+    elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+    deleteAreYouSure();
+    }    
+};
+
+
+const deleteAreYouSure = () => {
+    // locate item
+    const item = document.getElementById('edit-form_are_you_sure');
+    
+    // when 'YES (archive item)' button is clicked ...
+    document.getElementById('save_edit_btn').addEventListener('click', e => {
+        // remove the 'Are You Sure?' popup window
+        item.parentElement.removeChild(item); 
+        // ToDo: show "Item Archived" popup
+    });
+// ... or 'NO (keep item)' button is clicked
+    document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+        // remove the 'Are You Sure?' popup window
+        item.parentElement.removeChild(item);     
+    });
+    // NOTE: no need to check for presence; popup window is ALWAYS present as both the YES and NO buttons are part of it
+};
+

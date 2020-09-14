@@ -775,6 +775,30 @@ span {
   margin: -30px 0 14px -30px;
 }
 
+#edit-form_are_you_sure {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 370px;
+  height: 180px;
+  /* height: 160px; */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #ccc;
+  border: 3px black solid;
+  padding-top: 10px;
+  border-radius: 10px;
+}
+
+#edit_top_are_you_sure {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  margin-left: -15px;
+  font-size: 24px;
+  color: black;
+}
+
 .edit_item_text {
   padding: 5px;
   height: 5px;
@@ -784,3 +808,40 @@ span {
   font-size: 16px;
 }
 
+#save_edit_btn {
+  position: absolute;
+  display: inline-block;
+  background-color: rgb(0, 255, 0);
+  font: bold 20px 'Nunito Sans', sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  width: 150px;
+  height: 70px;
+  margin: 50px 0 0 15px;
+}
+
+#save_edit_btn:active {
+  background-color: rgb(0, 204, 0);
+  margin: 52px 0 0 15px;
+}
+
+#cancel_edit_btn {
+  background-color: rgb(255, 0, 0);
+  font: bold 20px 'Nunito Sans', sans-serif;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  width: 150px;
+  height: 70px;
+  margin: 50px 15px 0 170px;
+}
+
+#cancel_edit_btn:active {
+  background-color: rgb(199, 0, 0);
+  margin: 52px 15px 0 170px;
+}
+
+#delete_item_desc {
+  font-size: 20px;
+  color: black;
+}

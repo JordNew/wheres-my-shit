@@ -337,7 +337,7 @@ const dateReformat = calDate => {
 }
 
 
-// Function to delete any existing edit form
+// Function to delete any existing EDIT form
 const removeExistingEditForm = () => {
 
     // check if edit form is currently present
@@ -365,27 +365,90 @@ const removeExistingEditForm = () => {
 }
 
 
+// Function to delete any existing ARE YOU SURE? popup
+const removeExistingAreYouSure = () => {
+
+    // check if edit form is currently present
+    const areYouSurePresent = (parent, child) => {
+        if (parent.contains(child)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // if already present, remove existing edit form
+    const formParent1 = document.querySelector('.borrowedByMe');
+    const formParent2 = document.querySelector('.borrowedFromMe');
+    const popup = document.getElementById('edit-form_are_you_sure');
+    
+    if (areYouSurePresent(formParent1, popup) || areYouSurePresent(formParent2, popup)) {
+        const deletePopup = () => { 
+            popup.parentNode.removeChild(popup);
+        }
+        deletePopup();
+    } else {
+        console.log('no prior ARE YOU SURE popup was detected');
+    }
+}
+
+
+// Function to identify item (when delete button is clicked)
+const identifyItem = id => {
+    state.dashboard.borrowedByMe.forEach(el => {
+        if (el.id === id) {
+            const index = state.dashboard.borrowedByMe.findIndex(el => el.id === id);
+            this.borrowedByMe.splice(index, 1);
+        }
+    });
+}
+
 // Handle, delete and update borrowedByMe item events
 elements.borrowedByMe.addEventListener('click', e => {
     
-    //Handle the delete button
+    // Handle the delete button
     if (e.target.matches('.item__delete, .item__delete *')) {
         
+        let itemToDelete;
         const id = e.target.closest('.borrowedByMe__item').dataset.itemid;
-        // Delete from state
-        state.dashboard.deleteItem(id);
+        const checkItem = itemId => {
+            state.dashboard.borrowedByMe.forEach(el => {
+                if (el.id === itemId) {
+                    itemToDelete = el;
+                }
+            });
+            return itemToDelete;
+        };
+        // remove any existing ARE YOU SURE popup
+        removeExistingAreYouSure();
+        // render 'Are you sure?' popup
+        dashboardView.renderAreYouSure(checkItem(id));
+        console.log('itemToDelete: ' + itemToDelete);
 
-        //Delete from UI
-        dashboardView.deleteItem(id);
+        // if button 'Yes (Archive item)' is clicked
+        document.getElementById('save_edit_btn').addEventListener('click', e => {
+            
+            console.log('item (fictionally?) archived');
 
-        // Update number of items in UI
-        heading2View.updateNumItemsByMe();
-    }
+            // Delete from state
+            state.dashboard.deleteItem(id);
 
-    // TESTING
-    else if (e.target.matches('#pencil')) {
+            // Delete from UI
+            dashboardView.deleteItem(id);
 
-        // remove any existing edit form
+            // Update number of items in UI
+            heading2View.updateNumItemsFromMe();
+        });
+
+        // if button 'No (Keep item)' is clicked
+        document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+            console.log('Item NOT deleted');
+        });
+
+    // handle the pencil button
+    } else if (e.target.matches('#pencil')) {
+
+        // remove any existing EDIT form
         removeExistingEditForm();
 
         // determine ID of original item
@@ -403,18 +466,16 @@ elements.borrowedByMe.addEventListener('click', e => {
         // display edit form
         dashboardView.renderEditForm(itemToEdit);
 
-        // handle Cancel button
-        document.querySelector('.cancel').addEventListener('click', e => {
-            removeExistingEditForm();
-            console.log('clicked Cancel button, removed edit form');
-        });
-
-        // handle Save button
-        document.getElementById('save_edit_btn').addEventListener('click', e => {
-            console.log('Save Edit button clicked');
-        });
-
     } 
+    // handle Cancel button
+    else if (e.target.matches('.cancel')) {
+        removeExistingEditForm();
+        console.log('clicked Cancel button, removed edit form');
+    }
+    // handle Save button
+    else if (e.target.matches('#save_edit_btn')) {
+        console.log('Save Edit button clicked');
+    }
     else {
         console.log('clicked somewhere else')
     }
@@ -428,20 +489,47 @@ elements.borrowedFromMe.addEventListener('click', e => {
     // Handle the delete button
     if (e.target.matches('.item__delete, .item__delete *')) {
         
+        let itemToDelete;
         const id = e.target.closest('.borrowedFromMe__item').dataset.itemid;
-        // Delete from state
-        state.dashboard.deleteItem(id);
+        const checkItem = itemId => {
+            state.dashboard.borrowedFromMe.forEach(el => {
+                if (el.id === itemId) {
+                    itemToDelete = el;
+                }
+            });
+            return itemToDelete;
+        };
+        // remove any existing ARE YOU SURE popup
+        removeExistingAreYouSure();
+        // render 'Are you sure?' popup
+        dashboardView.renderAreYouSure(checkItem(id));
 
-        // Delete from UI
-        dashboardView.deleteItem(id);
+        // if button 'Yes (Archive item)' is clicked
+        document.getElementById('save_edit_btn').addEventListener('click', e => {
+            
+            console.log('item (fictionally?) archived');
 
-        // Update number of items in UI
-        heading2View.updateNumItemsFromMe();
+            // Delete from state
+            state.dashboard.deleteItem(id);
+
+            // Delete from UI
+            dashboardView.deleteItem(id);
+
+            // Update number of items in UI
+            heading2View.updateNumItemsFromMe();
+        });
+
+        // if button 'No (Keep item)' is clicked
+        document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+            console.log('Item NOT deleted');
+        });
+
+        
     }
-    // TESTING
+    // handle the pencil button
     else if (e.target.matches('#pencil')) {
 
-        // remove any existing edit form
+        // remove any existing EDIT form
         removeExistingEditForm();
 
         // determine ID of original item
@@ -474,13 +562,16 @@ elements.borrowedFromMe.addEventListener('click', e => {
         whenValue(itemToEdit);
         */
 
-        // handle Cancel button
-        document.querySelector('.cancel').addEventListener('click', e => {
-            removeExistingEditForm();
-            console.log('clicked Cancel button, removed edit form');
-        });
-
     } 
+    // handle Cancel button
+    else if (e.target.matches('.cancel')) {
+        removeExistingEditForm();
+        console.log('clicked Cancel button, removed edit form');
+    }
+    // handle Save button
+    else if (e.target.matches('#save_edit_btn')) {
+        console.log('Save Edit button clicked');
+    }
     else {
         console.log('clicked somewhere else')
     }
