@@ -47,7 +47,7 @@ elements.buttonCreateItem.addEventListener('click', e => {
     itemView.displayForm();
 
     // Focus on description field
-    elements.desc.focus();
+    elements.description.focus();
 });
 
 
@@ -222,7 +222,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
 
         // Create new item (and store in ItemList aka state.items)
         const newItem = state.items.createItem(
-            elements.desc.value,
+            elements.description.value,
             borrowerValue(),
             ownerValue(),
             whenValue(),
@@ -242,7 +242,7 @@ elements.buttonSaveItem.addEventListener('click', e => {
 
         // UI feedback popup: 'Item saved!'
         const showPopup = () => {
-            elements.popuptext.classList.toggle('show');
+            document.querySelector('.popuptext').classList.toggle('show');
         }  
         showPopup();
 
@@ -392,7 +392,20 @@ const removeExistingAreYouSure = () => {
     }
 }
 
+// Function UI feedback when user confirms to delete item
+const feedbackArchiveItem = item => {
+    // UI feedback popup: 'Item archived!':
+    // 1. render popup
+    dashboardView.renderItemArchivedPopup(item);
+    // 2. apply animation to popup    
+    const showPopup = () => {
+        document.querySelector('.item_archived').classList.toggle('show');
+    }  
+    showPopup();
+};
 
+
+/*
 // Function to identify item (when delete button is clicked)
 const identifyItem = id => {
     state.dashboard.borrowedByMe.forEach(el => {
@@ -402,6 +415,7 @@ const identifyItem = id => {
         }
     });
 }
+*/
 
 // Handle, delete and update borrowedByMe item events
 elements.borrowedByMe.addEventListener('click', e => {
@@ -419,16 +433,18 @@ elements.borrowedByMe.addEventListener('click', e => {
             });
             return itemToDelete;
         };
+
         // remove any existing ARE YOU SURE popup
         removeExistingAreYouSure();
         // render 'Are you sure?' popup
         dashboardView.renderAreYouSure(checkItem(id));
-        console.log('itemToDelete: ' + itemToDelete);
 
-        // if button 'Yes (Archive item)' is clicked
-        document.getElementById('save_edit_btn').addEventListener('click', e => {
-            
-            console.log('item (fictionally?) archived');
+        // when button 'YES (archive item)' is clicked
+        document.getElementById('save_delete_btn').addEventListener('click', e => {
+
+            // UI feedback
+            feedbackArchiveItem(JSON.parse(JSON.stringify(itemToDelete)));
+            console.log('archived item, stringified: ' + JSON.stringify(itemToDelete));
 
             // Delete from state
             state.dashboard.deleteItem(id);
@@ -437,11 +453,11 @@ elements.borrowedByMe.addEventListener('click', e => {
             dashboardView.deleteItem(id);
 
             // Update number of items in UI
-            heading2View.updateNumItemsFromMe();
+            heading2View.updateNumItemsByMe();
         });
 
-        // if button 'No (Keep item)' is clicked
-        document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+        // when button 'NO (keep item)' is clicked
+        document.getElementById('cancel_delete_btn').addEventListener('click', e => {
             console.log('Item NOT deleted');
         });
 
@@ -465,6 +481,10 @@ elements.borrowedByMe.addEventListener('click', e => {
         
         // display edit form
         dashboardView.renderEditForm(itemToEdit);
+
+        // set opacity entire website (except form-popup div) to 0.5
+        // document.querySelector('body').classList.toggle(':not(.edit-form)');
+        // document.getElementById('edit-form').style.opacity = '0.4';
 
     } 
     // handle Cancel button
@@ -499,15 +519,18 @@ elements.borrowedFromMe.addEventListener('click', e => {
             });
             return itemToDelete;
         };
+
         // remove any existing ARE YOU SURE popup
         removeExistingAreYouSure();
         // render 'Are you sure?' popup
         dashboardView.renderAreYouSure(checkItem(id));
 
-        // if button 'Yes (Archive item)' is clicked
-        document.getElementById('save_edit_btn').addEventListener('click', e => {
-            
-            console.log('item (fictionally?) archived');
+        // when button 'YES (archive item)' is clicked
+        document.getElementById('save_delete_btn').addEventListener('click', e => {
+
+            // UI feedback
+            feedbackArchiveItem(JSON.parse(JSON.stringify(itemToDelete)));
+            console.log('archived item, stringified: ' + JSON.stringify(itemToDelete));
 
             // Delete from state
             state.dashboard.deleteItem(id);
@@ -519,8 +542,8 @@ elements.borrowedFromMe.addEventListener('click', e => {
             heading2View.updateNumItemsFromMe();
         });
 
-        // if button 'No (Keep item)' is clicked
-        document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+        // when button 'NO (keep item)' is clicked
+        document.getElementById('cancel_delete_btn').addEventListener('click', e => {
             console.log('Item NOT deleted');
         });
 

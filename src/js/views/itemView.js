@@ -30,7 +30,7 @@ export const checkRequiredFields = () => {
 
     let check = false;
 
-    if (elements.desc.value === '') {
+    if (elements.description.value === '') {
         alert('The "what" field is required');
         // return check;
     } else if (!elements.meBorrower.checked && !elements.notMeBorrower.checked || elements.notMeBorrower.checked && elements.notMeBorrowerInput.value === '') {
@@ -59,7 +59,7 @@ export const checkRequiredFields = () => {
 export const clearForm = () => {
 
     // Clear any current input values
-    elements.desc.value = '';
+    elements.description.value = '';
     elements.notMeBorrowerInput.value = '';
     elements.notMeOwnerInput.value = '';
     elements.whenCal.value = '';

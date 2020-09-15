@@ -61,7 +61,6 @@ export const renderEditForm = item => {
     
     if (item.borrower === 'me') {
 
-        let itemFormRendered = false;
         const markup = `
                 <div class="form-popup" id="edit-form">
                     <form class="form-container">
@@ -99,18 +98,15 @@ export const renderEditForm = item => {
                         <input type="text" class="edit_item_text" id="whenBack_text_edit" name="whenBack_edit" value="${item.whenBack === 'not sure' ? 'Not sure' : item.whenBack}">
 
                         <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
-                        <button type="button" class="btn cancel">Cancel</button>
+                        <button type="button" class="btn cancel" id="cancel_edit_btn">Cancel</button>
                     </form>
                 </div>
     `;
         elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
-        
-        itemFormRendered = true;
-        return itemFormRendered;
+        return true;
 
     } else {
         
-        let itemFormRendered = false;
         const markup = `
                 <div class="form-popup" id="edit-form">
                     <form class="form-container">
@@ -150,63 +146,69 @@ export const renderEditForm = item => {
                         <input type="text" class="edit_item_text" id="whenBack_edit" name="whenBack_edit" value="${item.whenBack}">
 
                         <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
-                        <button type="button" class="btn cancel">Cancel</button>
+                        <button type="button" class="btn cancel" id="cancel_edit_btn">Cancel</button>
                     </form>
                 </div>
     `;
         elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
-        itemFormRendered = true;
-        return itemFormRendered;
-
+        return true;
     }
 };
 
 export const renderAreYouSure = item => {
 
+    const markup = `
+        <div class="form-popup" id="edit-form_are_you_sure">
+            <p id="delete_item_desc">Delete "${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}"</p>
+            <p id="edit_top_are_you_sure"><< Are you sure? >></p>
+            <button type="submit" class="are_you_sure_button" id="save_delete_btn">YES<br>(archive item)</button>
+            <button type="button" class="are_you_sure_button" id="cancel_delete_btn">NO<br>(keep item)</button>
+        </div>
+    `;
+
     if (item.borrower === 'me') {
-
-        const markup = `
-        <div class="form-popup" id="edit-form_are_you_sure">
-            <p id="delete_item_desc">Delete "${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}"</p>
-            <p id="edit_top_are_you_sure"><< Are you sure? >></p>
-            <button type="submit" class="are_you_sure_button" id="save_edit_btn">YES<br>(archive item)</button>
-            <button type="button" class="are_you_sure_button" id="cancel_edit_btn">NO<br>(keep item)</button>
-        </div>
-    `;
-    elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
-    deleteAreYouSure();
+        elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+    } else {
+        elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
     }
-    else {
-
-        const markup = `
-        <div class="form-popup" id="edit-form_are_you_sure">
-            <p id="delete_item_desc">Delete "${item.desc.length > 27 ? item.desc.slice(0, 23) + ' ... ' : item.desc}"</p>
-            <p id="edit_top_are_you_sure"><< Are you sure? >></p>
-            <button type="submit" class="are_you_sure_button" id="save_edit_btn">YES<br>(archive item)</button>
-            <button type="button" class="are_you_sure_button" id="cancel_edit_btn">NO<br>(keep item)</button>
-        </div>
-    `;
-    elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+    // clean up ARE YOU SURE popup after usage
     deleteAreYouSure();
-    }    
 };
 
 
 const deleteAreYouSure = () => {
-    // locate item
+    
     const item = document.getElementById('edit-form_are_you_sure');
     
     // when 'YES (archive item)' button is clicked ...
-    document.getElementById('save_edit_btn').addEventListener('click', e => {
+    document.getElementById('save_delete_btn').addEventListener('click', e => {
         // remove the 'Are You Sure?' popup window
         item.parentElement.removeChild(item); 
-        // ToDo: show "Item Archived" popup
+        // briefly show "Item Archived" popup
+        renderItemArchivedPopup();
     });
 // ... or 'NO (keep item)' button is clicked
-    document.getElementById('cancel_edit_btn').addEventListener('click', e => {
+    document.getElementById('cancel_delete_btn').addEventListener('click', e => {
         // remove the 'Are You Sure?' popup window
         item.parentElement.removeChild(item);     
     });
     // NOTE: no need to check for presence; popup window is ALWAYS present as both the YES and NO buttons are part of it
 };
+
+export const renderItemArchivedPopup = item => {
+
+    console.log('this item\'s description length is: ' + item.desc.length);
+
+    const markup = `
+        <div class="popup">
+            <span class="item_archived">"${item.desc.length > 27 ? (item.desc.slice(0, 23) + ' ... ') : item.desc}" was succesfully archived!</span>
+        </div>
+    `;
+
+    if (item.borrower === 'me') {
+        elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+    } else {
+        elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
+    }
+}
 
