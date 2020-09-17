@@ -21,11 +21,32 @@ export default class ItemList {
         return item;
     }
 
-    deleteItem (id) {
+    deleteItem(id) {
         const index = this.items.findIndex(el => el.id === id);
         // [2,4,8] splice(1,2) -> returns [4,8], original array is [2]
         // [2,4,8] slice(1,2) -> returns 4, original array is [2,4,8]
         this.items.splice(index, 1);
+        this.persistData();
+    }
+
+    editItem(id, desc, borrower, owner, when, whenBack) {
+
+        const newItem = {
+            id,
+            desc,
+            borrower,
+            owner,
+            when,
+            whenBack
+        }
+
+        const originalItemIndex = this.items.forEach(el => {
+            if (el.id === id) return this.items.findIndex(el);
+        });
+
+        this.items.splice(originalItemIndex, 1, newItem)
+        this.persistData();
+        return newItem;
     }
 
     persistData() {

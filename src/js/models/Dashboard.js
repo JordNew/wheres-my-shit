@@ -48,7 +48,26 @@ export default class Dashboard {
 
 
     editItem(id) {
-        // TODO
+            
+        if (item.borrower === 'me') {
+            // this.borrowedByMe.push(item);
+    
+            // TODO
+
+            // Persist data in localStorage
+            this.persistData();
+            return item;
+    
+        } else {
+            // this.borrowedFromMe.push(item);
+    
+
+            // TODO
+
+            // Persist data in localStorage
+            this.persistData();
+            return item;
+        }
     }
     
 

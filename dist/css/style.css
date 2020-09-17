@@ -76,6 +76,25 @@ span {
         margin: 0;
         border-radius: 0; } }
     
+.blur:not(.form-popup) {
+  /* animation: filter-animation 3s; */
+  opacity: 0.3;
+}
+
+@keyframes filter-animation {
+  0% {
+  -webkit-filter: blur(10px);filter: blur(10px);
+  }
+  
+  33% {
+  -webkit-filter: blur(15px);filter: blur(15px);
+  }
+  
+  100% {
+  -webkit-filter: blur(10px);filter: blur(10px);
+  }
+  }
+
 .header {
     position: relative;
     grid-area: head;
@@ -765,7 +784,7 @@ span {
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: red;
-  
+
 }
 
 /* Add some hover effects to buttons */

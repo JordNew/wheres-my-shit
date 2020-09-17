@@ -58,11 +58,11 @@ export const deleteItem = id => {
 };
 
 export const renderEditForm = item => {
-    
+
     if (item.borrower === 'me') {
 
         const markup = `
-                <div class="form-popup" id="edit-form">
+                <div class="form-popup" id="edit-form" data-itemid=${item.id}>
                     <form class="form-container">
                         <h2 id="edit_top">Edit item</h2>
     
@@ -103,12 +103,16 @@ export const renderEditForm = item => {
                 </div>
     `;
         elements.borrowedByMe.insertAdjacentHTML('afterbegin', markup);
+        const blurPage = () => {
+            document.querySelector('.body').classList.toggle('.blur:not(.form-popup)');
+        }  
+        blurPage();
         return true;
 
     } else {
         
         const markup = `
-                <div class="form-popup" id="edit-form">
+                <div class="form-popup" id="edit-form" data-itemid=${item.id}>
                     <form class="form-container">
                         <h2 id="edit_top">Edit item</h2>
     
@@ -210,5 +214,9 @@ export const renderItemArchivedPopup = item => {
     } else {
         elements.borrowedFromMe.insertAdjacentHTML('afterbegin', markup);
     }
+}
+
+export const updateItem = editedItem => {
+    console.log('item props fictionally updated');
 }
 

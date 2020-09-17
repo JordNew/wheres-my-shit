@@ -34,7 +34,6 @@ window.state = state;
  */
 
 
-
 // When ADD NEW ITEM button is clicked
 elements.buttonCreateItem.addEventListener('click', e => {
 
@@ -147,8 +146,9 @@ elements.buttonErase.addEventListener('click', e => {
 });
 
 
-
-// When SAVE button is clicked
+//      # # # # # # #
+// When #  S A V E  # button is clicked
+//      # # # # # # #
 elements.buttonSaveItem.addEventListener('click', e => {
 
     // Make sure all required fields are filled in
@@ -313,7 +313,7 @@ const init = () => {
 }
 
 
-// Function to reformat datestrings (format must be 'YYYY/MM/DD')
+// Function to reformat calendar datestrings (input format must be 'YYYY/MM/DD')
 const dateReformat = calDate => {
 
     const dateArray = calDate.split('');
@@ -417,10 +417,12 @@ const identifyItem = id => {
 }
 */
 
-// Handle, delete and update borrowedByMe item events
+//                           ################                            
+// Handle, delete and update # borrowedByMe # item events
+//                           ################
 elements.borrowedByMe.addEventListener('click', e => {
     
-    // Handle the delete button
+    // Handle DELETE button
     if (e.target.matches('.item__delete, .item__delete *')) {
         
         let itemToDelete;
@@ -448,6 +450,7 @@ elements.borrowedByMe.addEventListener('click', e => {
 
             // Delete from state
             state.dashboard.deleteItem(id);
+            state.items.deleteItem(id);
 
             // Delete from UI
             dashboardView.deleteItem(id);
@@ -461,7 +464,7 @@ elements.borrowedByMe.addEventListener('click', e => {
             console.log('Item NOT deleted');
         });
 
-    // handle the pencil button
+    // handle PENCIL (edit) button
     } else if (e.target.matches('#pencil')) {
 
         // remove any existing EDIT form
@@ -479,22 +482,55 @@ elements.borrowedByMe.addEventListener('click', e => {
             }
         });
         
-        // display edit form
+        // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
 
-        // set opacity entire website (except form-popup div) to 0.5
-        // document.querySelector('body').classList.toggle(':not(.edit-form)');
-        // document.getElementById('edit-form').style.opacity = '0.4';
-
     } 
-    // handle Cancel button
+    // handle CANCEL button
     else if (e.target.matches('.cancel')) {
         removeExistingEditForm();
         console.log('clicked Cancel button, removed edit form');
     }
-    // handle Save button
+    // handle SAVE button
     else if (e.target.matches('#save_edit_btn')) {
+        
+        // determine ID of original item
+        const itemId = e.target.parentNode.parentNode.dataset.itemid;
+       
+        // find relevant item in dashboard items
+        let itemToEdit;
+        state.dashboard.borrowedByMe.forEach(el => {
+            if (el.id === itemId) {
+                itemToEdit = el;
+                return itemToEdit;
+            }
+        });
+        
+        // Create a new ItemList IF there is none yet
+        if (!state.items) {
+            state.items = new ItemList();  
+            state.items.readStorage();
+            console.log('state.items.items: ' + JSON.stringify(state.items.items));
+            alert('check state');
+            return state.items;
+        } 
+
+        console.log('itemToEdit ID: ' + itemToEdit.id);
+        console.log(state);
         console.log('Save Edit button clicked');
+        alert('alert!');
+
+        // save edited item
+        state.items.items.editItem(
+            itemToEdit.id,
+            'this',
+            'is',
+            'the',
+            'edited',
+            'item!!'
+        )
+        
+    
     }
     else {
         console.log('clicked somewhere else')
@@ -502,11 +538,12 @@ elements.borrowedByMe.addEventListener('click', e => {
 });
 
 
-// Handle, delete and update borrowedFromMe item events
+//                           ##################
+// Handle, delete and update # borrowedFromMe # item events
+//                           ##################
 elements.borrowedFromMe.addEventListener('click', e => {
     
-    
-    // Handle the delete button
+    // Handle DELETE button
     if (e.target.matches('.item__delete, .item__delete *')) {
         
         let itemToDelete;
@@ -534,6 +571,7 @@ elements.borrowedFromMe.addEventListener('click', e => {
 
             // Delete from state
             state.dashboard.deleteItem(id);
+            state.items.deleteItem(id);
 
             // Delete from UI
             dashboardView.deleteItem(id);
@@ -545,11 +583,9 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // when button 'NO (keep item)' is clicked
         document.getElementById('cancel_delete_btn').addEventListener('click', e => {
             console.log('Item NOT deleted');
-        });
-
-        
+        });  
     }
-    // handle the pencil button
+    // handle PENCIL (edit) button
     else if (e.target.matches('#pencil')) {
 
         // remove any existing EDIT form
@@ -567,7 +603,7 @@ elements.borrowedFromMe.addEventListener('click', e => {
             }
         });
         
-        // display edit form
+        // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
 
         /*
@@ -586,12 +622,12 @@ elements.borrowedFromMe.addEventListener('click', e => {
         */
 
     } 
-    // handle Cancel button
+    // handle CANCEL button
     else if (e.target.matches('.cancel')) {
         removeExistingEditForm();
         console.log('clicked Cancel button, removed edit form');
     }
-    // handle Save button
+    // handle SAVE button
     else if (e.target.matches('#save_edit_btn')) {
         console.log('Save Edit button clicked');
     }
@@ -602,12 +638,13 @@ elements.borrowedFromMe.addEventListener('click', e => {
 });
 
 
-
 // Restore saved items from localStorage on page load
 window.addEventListener('load', () => {
     state.dashboard = new Dashboard();
+    state.items = new ItemList();
 
     // Restore items + numbers
+    state.items.readStorage();
     state.dashboard.readStorage();
     heading2View.updateNumItemsByMe();
     heading2View.updateNumItemsFromMe();
