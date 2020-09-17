@@ -521,15 +521,20 @@ elements.borrowedByMe.addEventListener('click', e => {
         alert('alert!');
 
         // save edited item
-        state.items.items.editItem(
+        state.items.editItem(
             itemToEdit.id,
             'this',
-            'is',
+            'me',
             'the',
             'edited',
             'item!!'
         )
         
+        // Clear current dashboard (previously rendered)
+        clearDashboard();
+
+        // refresh dashboard including edited item
+        controlDashboard();
     
     }
     else {

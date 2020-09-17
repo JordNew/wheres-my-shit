@@ -40,9 +40,7 @@ export default class ItemList {
             whenBack
         }
 
-        const originalItemIndex = this.items.forEach(el => {
-            if (el.id === id) return this.items.findIndex(el);
-        });
+        const originalItemIndex = this.items.findIndex(el => el.id === id);
 
         this.items.splice(originalItemIndex, 1, newItem)
         this.persistData();
