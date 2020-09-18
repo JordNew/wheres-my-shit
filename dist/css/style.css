@@ -596,7 +596,7 @@ span {
 }
 
 .borrowedByMe__item__text, .borrowedFromMe__item__text {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .item__title {
@@ -607,6 +607,7 @@ span {
   text-transform: none;
   transform: none;
   margin-top: -28px;
+  margin-bottom: 20px;
 }
 
 .item__delete {
@@ -826,6 +827,10 @@ span {
   height: 5px;
 }
 
+#borrower_edit  {
+  border: 1px solid #ccc;
+}
+
 .edit_item_text_label {
   font-size: 16px;
 }
@@ -889,3 +894,6 @@ span {
   opacity: 0.5;
 } */
 
+.dropdown {
+  margin-left: 5px;
+}

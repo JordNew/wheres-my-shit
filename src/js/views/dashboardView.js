@@ -70,28 +70,28 @@ export const renderEditForm = item => {
                         <input type="text" class="edit_item_text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
     
                         <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
-                        <select name="borrower" id="borrower_edit_dropdown">
+                        <select name="borrower" class="dropdown" id="borrower_edit_dropdown">
                           <option value="me" id="borrower_edit_me">Me</option>
                           <option value="not_me_but" id="borrower_edit_not_me_but">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" disabled>
+                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}" disabled>
     
                         <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
-                        <select name="owner" id="owner_edit_dropdown">
+                        <select name="owner" class="dropdown" id="owner_edit_dropdown">
                           <option value="me">Me</option>
                           <option value="not_me_but">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? '' : item.owner}">
+                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? 'Me' : item.owner}">
 
                         <label for="when" class="edit_item_text_label">When was it borrowed?</label>
-                        <select name="when" id="when_edit_dropdown">
+                        <select name="when" class="dropdown" id="when_edit_dropdown">
                           <option value="borrowed_on" id="edit_borrowed_on">Borrowed on:</option>
                           <option value="not_sure" id="edit_when_not_sure">Not sure</option>
                         </select>
                         <input type="text" class="edit_item_text" id="when_text_edit" name="when_edit" value="${item.when}">
 
                         <label for="whenBack" class="edit_item_text_label">When to return it?</label>
-                        <select name="whenBack" id="whenBack_edit_dropdown">
+                        <select name="whenBack" class="dropdown" id="whenBack_edit_dropdown">
                           <option value="return_by" id="edit_return_by">Return by:</option>
                           <option value="not_sure" id="edit_whenBack_not_sure">Not sure</option>
                         </select>
@@ -121,10 +121,10 @@ export const renderEditForm = item => {
     
                         <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
                         <select name="borrower" id="borrower_edit_dropdown">
-                          <option value="me">Me</option>
-                          <option value="not_me_but">Not me, but:</option>
+                          <option value="me" id="borrower_edit_me">Me</option>
+                          <option value="not_me_but" id="borrower_edit_not_me_but">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? '' : item.borrower}">
+                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}">
 
                         <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
                         <select name="owner" id="owner_edit_dropdown">

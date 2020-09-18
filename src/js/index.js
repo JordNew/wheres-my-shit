@@ -266,28 +266,35 @@ const controlDashboard = () => {
     // Add each item to the dashboard and UI
     state.items.items.forEach(el => {
         
-        // Check if it already exists (to prevent from rendering the same thing twice)
-        if (state.dashboard.borrowedByMe.includes(el) || state.dashboard.borrowedFromMe.includes(el) ) {
-            return
-        // If it did not yet exist: add to dashboard    
+        // Check if an item with the same ID already exists (identical or edited),
+        // to prevent from rendering the same thing twice
+
+        const identicalID1 = state.dashboard.borrowedByMe.filter(elem => elem.id === el.id);
+        const identicalID2 = state.dashboard.borrowedFromMe.filter(elem => elem.id === el.id);
+
+        if (identicalID1 || identicalID2) {
+            state.dashboard.deleteItem(el.id);
         } else {            
-            state.dashboard.addItem(el);
+            console.log('that itemID did not exist before');
         }
+        // freshly add item to dashboard
+        state.dashboard.addItem(el);
 
-        // Clear current dashboard (previously rendered)
-        clearDashboard();
-
-        // Render updated dashboard including the newly added item
-        renderDashboard();
     });
+
+    // Clear current dashboard UI (previously rendered)
+    clearDashboard();
+
+    // Render updated dashboard including the newly added item
+    renderDashboard();
 }
 
 const clearDashboard = () => {
-    // Remove current borrowedByMe items from dashboard
+    // Remove current borrowedByMe items from dashboard UI
     while (elements.borrowedByMe.firstChild) {
         elements.borrowedByMe.removeChild(elements.borrowedByMe.lastChild);
     }
-    // Remove current borrowedFromMe items from dashboard
+    // Remove current borrowedFromMe items from dashboard UI
     while (elements.borrowedFromMe.firstChild) {
         elements.borrowedFromMe.removeChild(elements.borrowedFromMe.lastChild);
     }
@@ -485,7 +492,33 @@ elements.borrowedByMe.addEventListener('click', e => {
         // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
 
+
+    /** 
+     * EDIT FORM CONTROLLER 
+     */
+
+        // Handle BORROWER dropdown / input field
+        document.getElementById('borrower_edit_dropdown').addEventListener('change', e => {
+            if (document.getElementById('borrower_edit_me').selected) {
+               
+                document.getElementById('borrower_edit').value = 'Me';
+                document.getElementById('borrower_edit').disabled = true;
+
+            } else if (document.getElementById('borrower_edit_not_me_but').selected) {
+
+                document.getElementById('borrower_edit').disabled = false;
+                document.getElementById('borrower_edit').value = '';
+                document.getElementById('borrower_edit').focus();
+            }
+        });
+
+        // Handle OWNER dropdown / input field
+        // TODO
+
+
+    
     } 
+    
     // handle CANCEL button
     else if (e.target.matches('.cancel')) {
         removeExistingEditForm();
@@ -505,26 +538,84 @@ elements.borrowedByMe.addEventListener('click', e => {
                 return itemToEdit;
             }
         });
+
+        console.log(state);        
+
+
+    /**
+    *  EDIT ITEM CONTROLLER
+    */
+
+        // Read BORROWER value
+        const editBorrowerValue = () => {
+            if (document.getElementById('borrower_edit_me').selected) {
+                return 'me';
+            } else {
+                return document.getElementById('borrower_edit').value;
+            }
+        }
+
+        // Read OWNER value
+        const editOwnerValue = () => {
+            if (elements.meOwner.checked) {
+                return 'me';
+            } else {
+                return elements.notMeOwnerInput.value;
+            }
+        }
+
+        // Read WHEN value
+        const editWhenValue = () => {
+            try {
+                if (!elements.whenToday.checked && !elements.whenNotSure.checked && !elements.whenCalRadio.checked || elements.whenCal.value === undefined) {
+                    alert('Please select when the item was borrowed');
+                    return
+                } else if (elements.whenToday.checked) {
+                        const now = moment().format('YYYY/MM/DD');
+                        // console.log(now);
+                        return dateReformat(now);
+                } else if (elements.whenNotSure.checked) {
+                    console.log('whennotsure');
+                    return 'not sure';
+                } else if (!elements.whenCalRadio.checked && elements.whenCal.value === undefined) {
+                    alert('Please select date');
+                } else if (elements.whenCalRadio.checked) {
+                    return dateReformat(elements.whenCal.value);
+                }    
+            } catch {
+                alert('Something went wrong saving the Date of Borrow');
+            } finally {
+                console.log('done executing the whenValue function');
+            }
+        }
         
-        // Create a new ItemList IF there is none yet
-        if (!state.items) {
-            state.items = new ItemList();  
-            state.items.readStorage();
-            console.log('state.items.items: ' + JSON.stringify(state.items.items));
-            alert('check state');
-            return state.items;
-        } 
+        // Read WHENBACK value
+        const editWhenBackValue = () => {
+            try {
+                if (elements.whenBackNotSure.checked) {
+                    return 'not sure';
+                } else if (elements.whenBackCalRadio.checked && elements.whenBackCal.value === undefined) {
+                    alert('Please select date or choose "not sure"');
+                    return;
+                } else if (!elements.whenBackCalRadio.checked && elements.whenBackCal.value !== undefined) {
+                    return elements.whenBackCal.value;
+                } else if (elements.whenBackCalRadio.checked) {
+                    return dateReformat(elements.whenBackCal.value);
+                }
+            } catch {
+                alert('Something went wrong saving the Return date');
+            } finally {
+                console.log('done executing the whenBackValue function');
+            }
+        }
 
-        console.log('itemToEdit ID: ' + itemToEdit.id);
-        console.log(state);
-        console.log('Save Edit button clicked');
-        alert('alert!');
-
-        // save edited item
+        // ########
+        //   SAVE   edited item
+        // ########
         state.items.editItem(
             itemToEdit.id,
-            'this',
-            'me',
+            document.getElementById('desc_edit').value,
+            editBorrowerValue(),
             'the',
             'edited',
             'item!!'
@@ -534,8 +625,7 @@ elements.borrowedByMe.addEventListener('click', e => {
         clearDashboard();
 
         // refresh dashboard including edited item
-        controlDashboard();
-    
+        controlDashboard();  
     }
     else {
         console.log('clicked somewhere else')
@@ -611,20 +701,28 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
 
-        /*
-        // prefill existing form values (previously saved)
-        const whenValue = item => {
-            if (item.when === 'not sure') {
-                console.log('editWhenNotSure');
-                document.getElementById('edit_when_not_sure').selected = true;
-            } else {
-                console.log('editBorrowedOn');
-                document.getElementById('edit_borrowed_on').selected = true;
+        /** 
+     * EDIT FORM CONTROLLER 
+     */
+
+        // Handle BORROWER dropdown / input field
+        document.getElementById('borrower_edit_dropdown').addEventListener('change', e => {
+            if (document.getElementById('borrower_edit_me').selected) {
+               
+                document.getElementById('borrower_edit').value = 'Me';
+                document.getElementById('borrower_edit').disabled = true;
+
+            } else if (document.getElementById('borrower_edit_not_me_but').selected) {
+
+                document.getElementById('borrower_edit').disabled = false;
+                document.getElementById('borrower_edit').value = '';
+                document.getElementById('borrower_edit').focus();
             }
-        };
-        console.log('itemToEdit is: ' + itemToEdit.desc);
-        whenValue(itemToEdit);
-        */
+        });
+
+        // Handle OWNER dropdown / input field
+        // TODO
+
 
     } 
     // handle CANCEL button
@@ -634,7 +732,106 @@ elements.borrowedFromMe.addEventListener('click', e => {
     }
     // handle SAVE button
     else if (e.target.matches('#save_edit_btn')) {
-        console.log('Save Edit button clicked');
+        
+        // determine ID of original item
+        const itemId = e.target.parentNode.parentNode.dataset.itemid;
+       
+        // find relevant item in dashboard items
+        let itemToEdit;
+        state.dashboard.borrowedFromMe.forEach(el => {
+            if (el.id === itemId) {
+                itemToEdit = el;
+                return itemToEdit;
+            }
+        });
+
+        console.log(state);        
+
+
+    /**
+    *  EDIT ITEM CONTROLLER
+    */
+
+        // Read BORROWER value
+        const editBorrowerValue = () => {
+            if (document.getElementById('borrower_edit_me').selected) {
+                return 'me';
+            } else {
+                return document.getElementById('borrower_edit').value;
+            }
+        }
+
+        // Read OWNER value
+        const editOwnerValue = () => {
+            if (elements.meOwner.checked) {
+                return 'me';
+            } else {
+                return elements.notMeOwnerInput.value;
+            }
+        }
+
+        // Read WHEN value
+        const editWhenValue = () => {
+            try {
+                if (!elements.whenToday.checked && !elements.whenNotSure.checked && !elements.whenCalRadio.checked || elements.whenCal.value === undefined) {
+                    alert('Please select when the item was borrowed');
+                    return
+                } else if (elements.whenToday.checked) {
+                        const now = moment().format('YYYY/MM/DD');
+                        // console.log(now);
+                        return dateReformat(now);
+                } else if (elements.whenNotSure.checked) {
+                    console.log('whennotsure');
+                    return 'not sure';
+                } else if (!elements.whenCalRadio.checked && elements.whenCal.value === undefined) {
+                    alert('Please select date');
+                } else if (elements.whenCalRadio.checked) {
+                    return dateReformat(elements.whenCal.value);
+                }    
+            } catch {
+                alert('Something went wrong saving the Date of Borrow');
+            } finally {
+                console.log('done executing the whenValue function');
+            }
+        }
+        
+        // Read WHENBACK value
+        const editWhenBackValue = () => {
+            try {
+                if (elements.whenBackNotSure.checked) {
+                    return 'not sure';
+                } else if (elements.whenBackCalRadio.checked && elements.whenBackCal.value === undefined) {
+                    alert('Please select date or choose "not sure"');
+                    return;
+                } else if (!elements.whenBackCalRadio.checked && elements.whenBackCal.value !== undefined) {
+                    return elements.whenBackCal.value;
+                } else if (elements.whenBackCalRadio.checked) {
+                    return dateReformat(elements.whenBackCal.value);
+                }
+            } catch {
+                alert('Something went wrong saving the Return date');
+            } finally {
+                console.log('done executing the whenBackValue function');
+            }
+        }
+
+        // ########
+        //   SAVE   edited item
+        // ########
+        state.items.editItem(
+            itemToEdit.id,
+            document.getElementById('desc_edit').value,
+            editBorrowerValue(),
+            'the',
+            'edited',
+            'item!!'
+        )
+        
+        // Clear current dashboard (previously rendered)
+        clearDashboard();
+
+        // refresh dashboard including edited item
+        controlDashboard();  
     }
     else {
         console.log('clicked somewhere else')
@@ -657,3 +854,5 @@ window.addEventListener('load', () => {
     // Render all borrowed items to dashboard
     renderDashboard();
 });
+
+
