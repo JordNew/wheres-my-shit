@@ -577,8 +577,8 @@ span {
 }
 
 .borrowedByMe #edit-form {
-  z-index: 1  ;
-} 
+  z-index: 1;
+}
 
 .borrowedFromMe {
     background-color: #cbeeb9;
@@ -825,6 +825,12 @@ span {
 .edit_item_text {
   padding: 5px;
   height: 5px;
+  z-index: 10;
+}
+
+#when_cal_edit_byMe, #whenBack_cal_edit_byMe, #when_cal_edit_fromMe, #whenBack_cal_edit_fromMe {
+  padding-left: 5px;
+  margin: 10px 0 20px 150px;
 }
 
 #borrower_edit  {
@@ -894,6 +900,19 @@ span {
   opacity: 0.5;
 } */
 
-.dropdown {
-  margin-left: 5px;
+
+#borrower_edit_dropdown_byMe, #borrower_edit_dropdown_fromMe {
+  margin-left: 63px;
+}
+
+#owner_edit_dropdown_byMe, #owner_edit_dropdown_fromMe {
+  margin-left: 50px;
+}
+
+#when_edit_dropdown_byMe, #when_edit_dropdown_fromMe {
+  margin-left: 20px;
+}
+
+#whenBack_edit_dropdown_byMe, #whenBack_edit_dropdown_fromMe {
+  margin-left: 80px;
 }

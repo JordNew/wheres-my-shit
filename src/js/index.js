@@ -183,7 +183,6 @@ elements.buttonSaveItem.addEventListener('click', e => {
                     return
                 } else if (elements.whenToday.checked) {
                         const now = moment().format('YYYY/MM/DD');
-                        // console.log(now);
                         return dateReformat(now);
                 } else if (elements.whenNotSure.checked) {
                     console.log('whennotsure');
@@ -412,17 +411,6 @@ const feedbackArchiveItem = item => {
 };
 
 
-/*
-// Function to identify item (when delete button is clicked)
-const identifyItem = id => {
-    state.dashboard.borrowedByMe.forEach(el => {
-        if (el.id === id) {
-            const index = state.dashboard.borrowedByMe.findIndex(el => el.id === id);
-            this.borrowedByMe.splice(index, 1);
-        }
-    });
-}
-*/
 
 //                           ################                            
 // Handle, delete and update # borrowedByMe # item events
@@ -493,32 +481,141 @@ elements.borrowedByMe.addEventListener('click', e => {
         dashboardView.renderEditForm(itemToEdit);
 
 
+    // functions to set dropdown / field values for BORROWER/OWNER (depending on itemToEdit values and clicks) 
+    const meBorrowerNotOwnerEdit = () => {    
+            document.getElementById('borrower_edit_me_byMe').selected = true;
+            document.getElementById('borrower_edit_byMe').value = '';
+            document.getElementById('owner_edit_not_me_but_byMe').selected = true;
+            document.getElementById('borrower_edit_byMe').disabled = true;
+            document.getElementById('owner_edit_byMe').disabled = false;
+            document.getElementById('owner_edit_byMe').value = `${itemToEdit.owner === 'me' ? '' : itemToEdit.owner}`;
+        } 
+
+    const meOwnerNotBorrowerEdit = () => {
+            document.getElementById('borrower_edit_not_me_but_byMe').selected = true;
+            document.getElementById('owner_edit_byMe').value = '';
+            document.getElementById('owner_edit_me_byMe').selected = true;
+            document.getElementById('owner_edit_byMe').disabled = true;
+            document.getElementById('borrower_edit_byMe').disabled = false;
+            document.getElementById('borrower_edit_byMe').value = `${itemToEdit.borrower === 'me' ? '' : itemToEdit.borrower}`;
+        }
+
+    // function to read WHEN value, en set edit WHEN calendar to that value
+    const dateOldFormat = calDate => {
+        
+        const dateParts = calDate.split(' ');
+        let monthNumber;
+
+        const yearNumber = arr => {
+            return arr[3];
+        }
+
+        const monthCalc = arr => {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const monthDigits = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+            const itemMonth = arr[1];
+            monthNames.forEach(el => {
+                if (el === itemMonth) {
+                   const index = monthNames.indexOf(el);
+                   monthNumber = monthDigits[index];
+                }   
+            });
+            return monthNumber;
+        }
+
+        const dayNumber = arr => {
+            return arr[2].substr(0, 2);
+        }
+
+        // OUTPUT format: YYYY-MM-DD (= readable by HTML calendar, to set existing default date)
+        // note: do not confuse OUTPUT format with DISPLAY format YYYY/MM/DD
+        const oldFormat = `${yearNumber(dateParts)}-${monthCalc(dateParts)}-${dayNumber(dateParts)}`;
+        return oldFormat;
+    }
+
     /** 
      * EDIT FORM CONTROLLER 
      */
 
+        // select default dropdown option for BORROWER / OWNER (depending on itemToEdit.borrower value)
+        if (itemToEdit.borrower === 'me') {
+            meBorrowerNotOwnerEdit();
+        } else {
+            meOwnerNotBorrowerEdit();
+        }
+
+        // select default date and dropdown option for WHEN (depending on itemToEdit.when value)
+        if (itemToEdit.when === 'not sure') {
+            document.getElementById('edit_when_not_sure_byMe').selected = true;
+        } else {
+            document.getElementById('edit_borrowed_on_byMe').selected = true;
+            document.getElementById('when_cal_edit_byMe').disabled = false;
+            document.getElementById('when_cal_edit_byMe').defaultValue = dateOldFormat(itemToEdit.when);
+        }
+
+        // select default dropdown option for WHENBACK (depending on itemToEdit.whenBack value)
+        if (itemToEdit.whenBack === 'not sure') {
+            document.getElementById('edit_whenBack_not_sure_byMe').selected = true;
+        } else {
+            document.getElementById('edit_return_by_byMe').selected = true;
+            document.getElementById('whenBack_cal_edit_byMe').disabled = false;
+            document.getElementById('whenBack_cal_edit_byMe').defaultValue = dateOldFormat(itemToEdit.whenBack);
+        }
+
         // Handle BORROWER dropdown / input field
-        document.getElementById('borrower_edit_dropdown').addEventListener('change', e => {
-            if (document.getElementById('borrower_edit_me').selected) {
+        document.getElementById('borrower_edit_dropdown_byMe').addEventListener('change', e => {
+            
+            if (document.getElementById('borrower_edit_me_byMe').selected) {
                
-                document.getElementById('borrower_edit').value = 'Me';
-                document.getElementById('borrower_edit').disabled = true;
+                meBorrowerNotOwnerEdit();
+                document.getElementById('owner_edit_byMe').focus();
 
-            } else if (document.getElementById('borrower_edit_not_me_but').selected) {
+            } else if (document.getElementById('borrower_edit_not_me_but_byMe').selected) {
 
-                document.getElementById('borrower_edit').disabled = false;
-                document.getElementById('borrower_edit').value = '';
-                document.getElementById('borrower_edit').focus();
+                meOwnerNotBorrowerEdit();
+                document.getElementById('borrower_edit_byMe').focus();
             }
         });
 
         // Handle OWNER dropdown / input field
-        // TODO
+        document.getElementById('owner_edit_dropdown_byMe').addEventListener('change', e => {
+            if (document.getElementById('owner_edit_me_byMe').selected) {
+               
+                meOwnerNotBorrowerEdit();
+                document.getElementById('borrower_edit_byMe').focus();
 
+            } else if (document.getElementById('owner_edit_not_me_but_byMe').selected) {
 
-    
+                meBorrowerNotOwnerEdit();
+                document.getElementById('owner_edit_byMe').focus();
+            }
+        });
+
+        // Handle WHEN dropdown / input field
+        document.getElementById('when_edit_dropdown_byMe').addEventListener('change', e => {
+            if (document.getElementById('edit_when_not_sure_byMe').selected) {
+                document.getElementById('when_cal_edit_byMe').value = '';
+                document.getElementById('when_cal_edit_byMe').disabled = true;
+            } else if (document.getElementById('edit_borrowed_on_byMe').selected) {
+                document.getElementById('when_cal_edit_byMe').value = dateOldFormat(itemToEdit.when);
+                document.getElementById('when_cal_edit_byMe').disabled = false;
+            }
+        });
+        
+        // Handle WHEN dropdown / input field
+        document.getElementById('whenBack_edit_dropdown_byMe').addEventListener('change', e => {
+            if (document.getElementById('edit_whenBack_not_sure_byMe').selected) {
+                document.getElementById('whenBack_cal_edit_byMe').value = '';
+                document.getElementById('whenBack_cal_edit_byMe').disabled = true;
+            } else if (document.getElementById('edit_return_by_byMe').selected) {
+                document.getElementById('whenBack_cal_edit_byMe').value = dateOldFormat(itemToEdit.when);
+                document.getElementById('whenBack_cal_edit_byMe').disabled = false;
+            }
+        });
+
     } 
     
+
     // handle CANCEL button
     else if (e.target.matches('.cancel')) {
         removeExistingEditForm();
@@ -548,46 +645,47 @@ elements.borrowedByMe.addEventListener('click', e => {
 
         // Read BORROWER value
         const editBorrowerValue = () => {
-            if (document.getElementById('borrower_edit_me').selected) {
+            if (document.getElementById('borrower_edit_me_byMe').selected) {
                 return 'me';
             } else {
-                return document.getElementById('borrower_edit').value;
+                return document.getElementById('borrower_edit_byMe').value;
             }
         }
 
         // Read OWNER value
         const editOwnerValue = () => {
-            if (elements.meOwner.checked) {
+            if (document.getElementById('owner_edit_me_byMe').selected) {
                 return 'me';
             } else {
-                return elements.notMeOwnerInput.value;
+                return document.getElementById('owner_edit_byMe').value;
             }
         }
 
         // Read WHEN value
-        const editWhenValue = () => {
-            try {
-                if (!elements.whenToday.checked && !elements.whenNotSure.checked && !elements.whenCalRadio.checked || elements.whenCal.value === undefined) {
-                    alert('Please select when the item was borrowed');
-                    return
-                } else if (elements.whenToday.checked) {
-                        const now = moment().format('YYYY/MM/DD');
-                        // console.log(now);
-                        return dateReformat(now);
-                } else if (elements.whenNotSure.checked) {
-                    console.log('whennotsure');
-                    return 'not sure';
-                } else if (!elements.whenCalRadio.checked && elements.whenCal.value === undefined) {
-                    alert('Please select date');
-                } else if (elements.whenCalRadio.checked) {
-                    return dateReformat(elements.whenCal.value);
-                }    
-            } catch {
-                alert('Something went wrong saving the Date of Borrow');
-            } finally {
-                console.log('done executing the whenValue function');
+        const editWhenValue = calDate => {
+            
+            const x = calDate;
+            const restoreOldDateFormat = x => {
+
+                const dateParts = x.split(' ');
+                const monthNumber = arr => {
+                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    const monthNumbers = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+                    const itemMonth = arr[1];
+                    monthNames.forEach(el => {
+                        if (el === itemMonth) {
+                            const number = monthNumbers[monthNames[el]];
+                            return number;
+                        }   
+                });
+             }
+             const number = monthNumber(dateParts);
+             return restoreOldDateFormat(number);
             }
         }
+
+    
+
         
         // Read WHENBACK value
         const editWhenBackValue = () => {
@@ -603,9 +701,9 @@ elements.borrowedByMe.addEventListener('click', e => {
                     return dateReformat(elements.whenBackCal.value);
                 }
             } catch {
-                alert('Something went wrong saving the Return date');
+                alert('Something went wrong editing the Return date');
             } finally {
-                console.log('done executing the whenBackValue function');
+                console.log('done editing the whenBack value');
             }
         }
 
@@ -614,10 +712,10 @@ elements.borrowedByMe.addEventListener('click', e => {
         // ########
         state.items.editItem(
             itemToEdit.id,
-            document.getElementById('desc_edit').value,
+            document.getElementById('desc_edit_byMe').value,
             editBorrowerValue(),
-            'the',
-            'edited',
+            editOwnerValue(),
+            'yep!',
             'item!!'
         )
         
@@ -701,27 +799,49 @@ elements.borrowedFromMe.addEventListener('click', e => {
         // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
 
-        /** 
+
+     /** 
      * EDIT FORM CONTROLLER 
      */
 
+
+        // select appropriate dropdown option by default (depending on itemToEdit.borrower value)
+        if (itemToEdit.borrower === 'me') {
+            document.getElementById('borrower_edit_me_fromMe').selected = true;
+        } else {
+            document.getElementById('borrower_edit_not_me_but_fromMe').selected = true;
+        }
+
         // Handle BORROWER dropdown / input field
-        document.getElementById('borrower_edit_dropdown').addEventListener('change', e => {
-            if (document.getElementById('borrower_edit_me').selected) {
+        document.getElementById('borrower_edit_dropdown_fromMe').addEventListener('change', e => {
+            
+            if (document.getElementById('borrower_edit_me_fromMe').selected) {
                
-                document.getElementById('borrower_edit').value = 'Me';
-                document.getElementById('borrower_edit').disabled = true;
+                document.getElementById('borrower_edit_fromMe').value = 'Me';
+                document.getElementById('borrower_edit_fromMe').disabled = true;
 
-            } else if (document.getElementById('borrower_edit_not_me_but').selected) {
+            } else if (document.getElementById('borrower_edit_not_me_but_fromMe').selected) {
 
-                document.getElementById('borrower_edit').disabled = false;
-                document.getElementById('borrower_edit').value = '';
-                document.getElementById('borrower_edit').focus();
+                document.getElementById('borrower_edit_fromMe').disabled = false;
+                document.getElementById('borrower_edit_fromMe').value = `${itemToEdit.borrower}`;
+                document.getElementById('borrower_edit_fromMe').focus();
             }
         });
 
         // Handle OWNER dropdown / input field
-        // TODO
+        document.getElementById('owner_edit_dropdown_fromMe').addEventListener('change', e => {
+            if (document.getElementById('owner_edit_me_fromMe').selected) {
+               
+                document.getElementById('owner_edit_fromMe').value = 'Me';
+                document.getElementById('owner_edit_fromMe').disabled = true;
+
+            } else if (document.getElementById('owner_edit_not_me_but_fromMe').selected) {
+
+                document.getElementById('owner_edit_fromMe').disabled = false;
+                document.getElementById('owner_edit_fromMe').value = '';
+                document.getElementById('owner_edit_fromMe').focus();
+            }
+        });
 
 
     } 
@@ -778,7 +898,6 @@ elements.borrowedFromMe.addEventListener('click', e => {
                     return
                 } else if (elements.whenToday.checked) {
                         const now = moment().format('YYYY/MM/DD');
-                        // console.log(now);
                         return dateReformat(now);
                 } else if (elements.whenNotSure.checked) {
                     console.log('whennotsure');

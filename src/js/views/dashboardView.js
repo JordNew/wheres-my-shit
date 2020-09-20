@@ -63,39 +63,39 @@ export const renderEditForm = item => {
 
         const markup = `
                 <div class="form-popup" id="edit-form" data-itemid=${item.id}>
-                    <form class="form-container">
+                    <form class="form-container" id="form">
                         <h2 id="edit_top">Edit item</h2>
     
                         <label for="what" class="edit_item_text_label">What got borrowed?</label>
-                        <input type="text" class="edit_item_text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+                        <input type="text" class="edit_item_text" id="desc_edit_byMe" name="desc_edit" value="${item.desc}" required>
     
-                        <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
-                        <select name="borrower" class="dropdown" id="borrower_edit_dropdown">
-                          <option value="me" id="borrower_edit_me">Me</option>
-                          <option value="not_me_but" id="borrower_edit_not_me_but">Not me, but:</option>
+                        <label for="borrower" class="edit_item_text_label">Who is borrowing?</label>
+                        <select name="borrower" class="dropdown" id="borrower_edit_dropdown_byMe">
+                          <option value="me" id="borrower_edit_me_byMe">Me</option>
+                          <option value="not_me_but" id="borrower_edit_not_me_but_byMe">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}" disabled>
+                        <input type="text" class="edit_item_text" id="borrower_edit_byMe" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}">
     
                         <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
-                        <select name="owner" class="dropdown" id="owner_edit_dropdown">
-                          <option value="me">Me</option>
-                          <option value="not_me_but">Not me, but:</option>
+                        <select name="owner" class="dropdown" id="owner_edit_dropdown_byMe">
+                          <option value="me" id="owner_edit_me_byMe">Me</option>
+                          <option value="not_me_but" id="owner_edit_not_me_but_byMe">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? 'Me' : item.owner}">
+                        <input type="text" class="edit_item_text" id="owner_edit_byMe" name="owner_edit" value="${item.owner === 'me' ? 'Me' : item.owner}">
 
                         <label for="when" class="edit_item_text_label">When was it borrowed?</label>
-                        <select name="when" class="dropdown" id="when_edit_dropdown">
-                          <option value="borrowed_on" id="edit_borrowed_on">Borrowed on:</option>
-                          <option value="not_sure" id="edit_when_not_sure">Not sure</option>
+                        <select name="when" class="dropdown" id="when_edit_dropdown_byMe">
+                          <option value="borrowed_on" id="edit_borrowed_on_byMe">Borrowed on:</option>
+                          <option value="not_sure" id="edit_when_not_sure_byMe">Not sure</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="when_text_edit" name="when_edit" value="${item.when}">
+                        <input type="date" class="edit_item_cal" id="when_cal_edit_byMe" name="when_edit" disabled>
 
                         <label for="whenBack" class="edit_item_text_label">When to return it?</label>
-                        <select name="whenBack" class="dropdown" id="whenBack_edit_dropdown">
-                          <option value="return_by" id="edit_return_by">Return by:</option>
-                          <option value="not_sure" id="edit_whenBack_not_sure">Not sure</option>
+                        <select name="whenBack" class="dropdown" id="whenBack_edit_dropdown_byMe">
+                          <option value="return_by" id="edit_return_by_byMe">Return by:</option>
+                          <option value="not_sure" id="edit_whenBack_not_sure_byMe">Not sure</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="whenBack_text_edit" name="whenBack_edit" value="${item.whenBack === 'not sure' ? 'Not sure' : item.whenBack}">
+                        <input type="date" class="edit_item_cal" id="whenBack_cal_edit_byMe" name="when_edit" disabled>
 
                         <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
                         <button type="button" class="btn cancel" id="cancel_edit_btn">Cancel</button>
@@ -117,37 +117,36 @@ export const renderEditForm = item => {
                         <h2 id="edit_top">Edit item</h2>
     
                         <label for="what" class="edit_item_text_label">What got borrowed?</label>
-                        <input type="text" class="edit_item_text" id="desc_edit" name="desc_edit" value="${item.desc}" required>
+                        <input type="text" class="edit_item_text" id="desc_edit_fromMe" name="desc_edit" value="${item.desc}" required>
     
-                        <label for="owner" class="edit_item_text_label">Who is borrowing?</label>
-                        <select name="borrower" id="borrower_edit_dropdown">
-                          <option value="me" id="borrower_edit_me">Me</option>
-                          <option value="not_me_but" id="borrower_edit_not_me_but">Not me, but:</option>
+                        <label for="borrower" class="edit_item_text_label">Who is borrowing?</label>
+                        <select name="borrower" id="borrower_edit_dropdown_fromMe">
+                          <option value="me" id="borrower_edit_me_fromMe">Me</option>
+                          <option value="not_me_but" id="borrower_edit_not_me_but_fromMe">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="borrower_edit" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}">
+                        <input type="text" class="edit_item_text" id="borrower_edit_fromMe" name="owner_edit" value="${item.borrower === 'me' ? 'Me' : item.borrower}">
 
                         <label for="owner" class="edit_item_text_label">Who owns that shit?</label>
-                        <select name="owner" id="owner_edit_dropdown">
-                          <option value="me">Me</option>
-                          <option value="not_me_but">Not me, but:</option>
+                        <select name="owner" id="owner_edit_dropdown_fromMe">
+                          <option value="me" id="owner_edit_me_fromMe">Me</option>
+                          <option value="not_me_but" id="owner_edit_not_me_but_fromMe">Not me, but:</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="owner_edit" name="owner_edit" value="${item.owner === 'me' ? '' : item.owner}">
+                        <input type="text" class="edit_item_text" id="owner_edit_fromMe" name="owner_edit" value="${item.owner === 'me' ? 'Me' : item.owner}">
 
                         <label for="when" class="edit_item_text_label">When was it borrowed?</label>
-                        <select name="when" id="when_edit">
-                          <option value="today">Today</option>
-                          <option value="borrowed_on">Borrowed on:</option>
-                          <option value="not_sure">Not sure</option>
+                        <select name="when" id="when_edit_dropdown_fromMe">
+                          <option id="edit_borrowed_today__fromMe" value="today">Today</option>
+                          <option id="edit_borrowed_on_fromMe" value="borrowed_on">Borrowed on:</option>
+                          <option id="edit_borrowed_not_sure_fromMe" value="not_sure">Not sure</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="when_edit" name="when_edit" value="${item.when}">
+                        <input type="date" class="edit_item_cal" id="when_cal_edit_fromMe" name="when_edit" disabled>
 
                         <label for="whenBack" class="edit_item_text_label">When to return it?</label>
-                        <select name="whenBack" id="whenBack_edit">
-                          <option value="today">Today</option>
-                          <option value="return_by">Return by:</option>
-                          <option value="not_sure">Not sure</option>
+                        <select name="whenBack" id="whenBack_edit_dropdown_fromMe">
+                          <option id="edit_return_by_fromMe" value="return_by">Return by:</option>
+                          <option id="edit_return_by_not_sure_fromMe" value="not_sure">Not sure</option>
                         </select>
-                        <input type="text" class="edit_item_text" id="whenBack_edit" name="whenBack_edit" value="${item.whenBack}">
+                        <input type="date" class="edit_item_cal" id="whenBack_cal_edit_fromMe" name="when_edit" disabled>
 
                         <button type="submit" class="btn" id="save_edit_btn">Save Changes</button>
                         <button type="button" class="btn cancel" id="cancel_edit_btn">Cancel</button>
