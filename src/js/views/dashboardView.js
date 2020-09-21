@@ -135,9 +135,8 @@ export const renderEditForm = item => {
 
                         <label for="when" class="edit_item_text_label">When was it borrowed?</label>
                         <select name="when" id="when_edit_dropdown_fromMe">
-                          <option id="edit_borrowed_today__fromMe" value="today">Today</option>
                           <option id="edit_borrowed_on_fromMe" value="borrowed_on">Borrowed on:</option>
-                          <option id="edit_borrowed_not_sure_fromMe" value="not_sure">Not sure</option>
+                          <option id="edit_when_not_sure_fromMe" value="not_sure">Not sure</option>
                         </select>
                         <input type="date" class="edit_item_cal" id="when_cal_edit_fromMe" name="when_edit" disabled>
 
