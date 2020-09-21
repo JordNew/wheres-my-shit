@@ -319,7 +319,7 @@ const init = () => {
 }
 
 
-// Function to reformat calendar datestrings (input format must be 'YYYY/MM/DD')
+// Function to reformat calendar datestrings (input format must be 'YYYY/MM/DD' (backslashes may be replaced, e.g. by '-'))
 const dateReformat = calDate => {
 
     const dateArray = calDate.split('');
@@ -479,7 +479,12 @@ elements.borrowedByMe.addEventListener('click', e => {
         
         // display EDIT form
         dashboardView.renderEditForm(itemToEdit);
-
+        // focus on description field
+        document.getElementById('desc_edit_byMe').focus();    
+        // set cursor at end of existing input content
+        const endPos = document.getElementById('desc_edit_byMe').value.length;
+        document.getElementById('desc_edit_byMe').setSelectionRange(endPos, endPos); // startPos = endPos
+        
 
     // functions to set dropdown / field values for BORROWER/OWNER (depending on itemToEdit values and clicks) 
     const meBorrowerNotOwnerEdit = () => {    
@@ -500,9 +505,11 @@ elements.borrowedByMe.addEventListener('click', e => {
             document.getElementById('borrower_edit_byMe').value = `${itemToEdit.borrower === 'me' ? '' : itemToEdit.borrower}`;
         }
 
-    // function to read WHEN value, en set edit WHEN calendar to that value
+    // function to read WHEN/WHENBACK value, en set the edit calendar to that value
     const dateOldFormat = calDate => {
         
+        console.log('dateOldFormat: ' + calDate);
+
         const dateParts = calDate.split(' ');
         let monthNumber;
 
@@ -550,7 +557,7 @@ elements.borrowedByMe.addEventListener('click', e => {
         } else {
             document.getElementById('edit_borrowed_on_byMe').selected = true;
             document.getElementById('when_cal_edit_byMe').disabled = false;
-            document.getElementById('when_cal_edit_byMe').defaultValue = dateOldFormat(itemToEdit.when);
+            document.getElementById('when_cal_edit_byMe').defaultValue = `${itemToEdit.when === 'not sure' ? '' : dateOldFormat(itemToEdit.when)}`;
         }
 
         // select default dropdown option for WHENBACK (depending on itemToEdit.whenBack value)
@@ -559,7 +566,7 @@ elements.borrowedByMe.addEventListener('click', e => {
         } else {
             document.getElementById('edit_return_by_byMe').selected = true;
             document.getElementById('whenBack_cal_edit_byMe').disabled = false;
-            document.getElementById('whenBack_cal_edit_byMe').defaultValue = dateOldFormat(itemToEdit.whenBack);
+            document.getElementById('whenBack_cal_edit_byMe').defaultValue = `${itemToEdit.whenBack === 'not sure' ? '' : dateOldFormat(itemToEdit.whenBack)}`;
         }
 
         // Handle BORROWER dropdown / input field
@@ -574,6 +581,7 @@ elements.borrowedByMe.addEventListener('click', e => {
 
                 meOwnerNotBorrowerEdit();
                 document.getElementById('borrower_edit_byMe').focus();
+
             }
         });
 
@@ -602,13 +610,13 @@ elements.borrowedByMe.addEventListener('click', e => {
             }
         });
         
-        // Handle WHEN dropdown / input field
+        // Handle WHENBACK dropdown / input field
         document.getElementById('whenBack_edit_dropdown_byMe').addEventListener('change', e => {
             if (document.getElementById('edit_whenBack_not_sure_byMe').selected) {
                 document.getElementById('whenBack_cal_edit_byMe').value = '';
                 document.getElementById('whenBack_cal_edit_byMe').disabled = true;
             } else if (document.getElementById('edit_return_by_byMe').selected) {
-                document.getElementById('whenBack_cal_edit_byMe').value = dateOldFormat(itemToEdit.when);
+                document.getElementById('whenBack_cal_edit_byMe').value = `${itemToEdit.whenBack === 'not sure' ? '' : dateOldFormat(itemToEdit.whenBack)}`;
                 document.getElementById('whenBack_cal_edit_byMe').disabled = false;
             }
         });
@@ -662,48 +670,22 @@ elements.borrowedByMe.addEventListener('click', e => {
         }
 
         // Read WHEN value
-        const editWhenValue = calDate => {
-            
-            const x = calDate;
-            const restoreOldDateFormat = x => {
-
-                const dateParts = x.split(' ');
-                const monthNumber = arr => {
-                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                    const monthNumbers = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-                    const itemMonth = arr[1];
-                    monthNames.forEach(el => {
-                        if (el === itemMonth) {
-                            const number = monthNumbers[monthNames[el]];
-                            return number;
-                        }   
-                });
-             }
-             const number = monthNumber(dateParts);
-             return restoreOldDateFormat(number);
+        const editWhenValue = () => {
+            if (document.getElementById('edit_when_not_sure_byMe').selected) {
+                return 'not sure';
+            } else {
+                // convert date back to UI format
+                return dateReformat(document.getElementById('when_cal_edit_byMe').value);
             }
         }
-
-    
-
         
         // Read WHENBACK value
         const editWhenBackValue = () => {
-            try {
-                if (elements.whenBackNotSure.checked) {
-                    return 'not sure';
-                } else if (elements.whenBackCalRadio.checked && elements.whenBackCal.value === undefined) {
-                    alert('Please select date or choose "not sure"');
-                    return;
-                } else if (!elements.whenBackCalRadio.checked && elements.whenBackCal.value !== undefined) {
-                    return elements.whenBackCal.value;
-                } else if (elements.whenBackCalRadio.checked) {
-                    return dateReformat(elements.whenBackCal.value);
-                }
-            } catch {
-                alert('Something went wrong editing the Return date');
-            } finally {
-                console.log('done editing the whenBack value');
+            if (document.getElementById('edit_whenBack_not_sure_byMe').selected) {
+                return 'not sure';
+            } else {
+                // convert date back to UI format 
+                return dateReformat(document.getElementById('whenBack_cal_edit_byMe').value);
             }
         }
 
@@ -715,8 +697,8 @@ elements.borrowedByMe.addEventListener('click', e => {
             document.getElementById('desc_edit_byMe').value,
             editBorrowerValue(),
             editOwnerValue(),
-            'yep!',
-            'item!!'
+            editWhenValue(),
+            editWhenBackValue()
         )
         
         // Clear current dashboard (previously rendered)
