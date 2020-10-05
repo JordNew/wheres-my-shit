@@ -11,13 +11,16 @@
   "author": "Jordi Nieuwenburg",
   "license": "ISC",
   "devDependencies": {
+    "dom-serializer": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "websocket": "^1.0.32"
   },
   "dependencies": {
     "moment": "^2.27.0",
+    "optimizer": "^1.8.4",
     "uniqid": "^5.2.0"
   }
 }

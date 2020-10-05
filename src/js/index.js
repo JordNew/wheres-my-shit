@@ -926,13 +926,10 @@ elements.borrowedFromMe.addEventListener('click', e => {
     else if (e.target.matches('.cancel')) {
         removeExistingEditForm();
         console.log('clicked Cancel button, removed edit form');
-    }
-    // handle SAVE button
-    else if (e.target.matches('#save_edit_btn')) {
-        
+        // TESTING
         // determine ID of original item
         const itemId = e.target.parentNode.parentNode.dataset.itemid;
-
+        
         // find relevant item in dashboard items
         let itemToEdit;
         state.dashboard.borrowedFromMe.forEach(el => {
@@ -941,8 +938,17 @@ elements.borrowedFromMe.addEventListener('click', e => {
                 return itemToEdit;
             }
         });
-
-        console.log(state);        
+       
+        console.log('muha');
+        console.log(itemToEdit.when);
+        
+        console.log(state); 
+    }
+    // handle SAVE button
+    else if (e.target.matches('#save_edit_btn')) {
+        
+        
+        
 
 
     /**

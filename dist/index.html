@@ -1,23 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <title>Where's My Shit? - Keep track of borrowed stuff.</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <div>
-                <img src="img/12-poop-emoji.png" alt="Logo" class="header__logo">
-            </div>
-            <h1>Where's my shiiiaaaat?!?</h1>
-        </header>
-
-    </div>
-<script src="js/bundle.js"></script></body>
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: Cannot find module './optimizer/level-0/optimize'
+  Require stack:
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\clean-css\lib\clean.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\clean-css\index.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\html-minifier-terser\src\htmlminifier.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\html-webpack-plugin\index.js
+  - C:\Users\jnieuwe1\wheres my shit\webpack.config.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\webpack-cli\bin\utils\convert-argv.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\webpack-cli\bin\cli.js
+  - C:\Users\jnieuwe1\wheres my shit\node_modules\webpack\bin\webpack.js
+  
+  - loader.js:965 Function.Module._resolveFilename
+    internal/modules/cjs/loader.js:965:15
+  
+  - loader.js:841 Function.Module._load
+    internal/modules/cjs/loader.js:841:27
+  
+  - loader.js:1025 Module.require
+    internal/modules/cjs/loader.js:1025:19
+  
+  - v8-compile-cache.js:161 require
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:161:20
+  
+  - clean.js:8 Object.<anonymous>
+    [wheres my shit]/[clean-css]/lib/clean.js:8:22
+  
+  - v8-compile-cache.js:194 Module._compile
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:194:30
+  
+  - loader.js:1157 Object.Module._extensions..js
+    internal/modules/cjs/loader.js:1157:10
+  
+  - loader.js:985 Module.load
+    internal/modules/cjs/loader.js:985:32
+  
+  - loader.js:878 Function.Module._load
+    internal/modules/cjs/loader.js:878:14
+  
+  - loader.js:1025 Module.require
+    internal/modules/cjs/loader.js:1025:19
+  
+  - v8-compile-cache.js:161 require
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:161:20
+  
+  - index.js:1 Object.<anonymous>
+    [wheres my shit]/[clean-css]/index.js:1:80
+  
+  - v8-compile-cache.js:194 Module._compile
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:194:30
+  
+  - loader.js:1157 Object.Module._extensions..js
+    internal/modules/cjs/loader.js:1157:10
+  
+  - loader.js:985 Module.load
+    internal/modules/cjs/loader.js:985:32
+  
+  - loader.js:878 Function.Module._load
+    internal/modules/cjs/loader.js:878:14
+  
+  - loader.js:1025 Module.require
+    internal/modules/cjs/loader.js:1025:19
+  
+  - v8-compile-cache.js:161 require
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:161:20
+  
+  - htmlminifier.js:3 Object.<anonymous>
+    [wheres my shit]/[html-minifier-terser]/src/htmlminifier.js:3:16
+  
+  - v8-compile-cache.js:194 Module._compile
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:194:30
+  
+  - loader.js:1157 Object.Module._extensions..js
+    internal/modules/cjs/loader.js:1157:10
+  
+  - loader.js:985 Module.load
+    internal/modules/cjs/loader.js:985:32
+  
+  - loader.js:878 Function.Module._load
+    internal/modules/cjs/loader.js:878:14
+  
+  - loader.js:1025 Module.require
+    internal/modules/cjs/loader.js:1025:19
+  
+  - v8-compile-cache.js:161 require
+    [wheres my shit]/[v8-compile-cache]/v8-compile-cache.js:161:20
+  
+  - index.js:993 HtmlWebpackPlugin.minifyHtml
+    [wheres my shit]/[html-webpack-plugin]/index.js:993:14
+  
+  - index.js:422 HtmlWebpackPlugin.postProcessHtml
+    [wheres my shit]/[html-webpack-plugin]/index.js:422:40
+  
+  - index.js:247 
+    [wheres my shit]/[html-webpack-plugin]/index.js:247:25
+  
+</pre>
